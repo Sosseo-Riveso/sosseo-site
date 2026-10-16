@@ -1,5 +1,5 @@
 // SOSSEO CRM - Engine Comercial para Agência (Sites, Tráfego & CRM)
-const STORAGE_KEY = 'sosseo_agency_crm_v2';
+const STORAGE_KEY = 'sosseo_agency_crm_v3_clean';
 const SESSION_KEY = 'sosseo_user_session';
 const COLUMNS = ['novo', 'respondido', 'reuniao', 'proposta', 'rejeitou', 'ganho'];
 
@@ -12,163 +12,8 @@ const STATUS_LABELS = {
   ganho: '6. Contrato Fechado'
 };
 
-// Leads de demonstração da SOSSEO
-const SEED_DATA = [
-  {
-    id: 'lead-1',
-    company: 'Indústria Metalúrgica Aliança',
-    contact: 'Carlos Eduardo (Diretor Comercial)',
-    phone: '(11) 98122-3344',
-    email: 'carlos@metalurgicaalianca.com.br',
-    service: 'Solução Completa',
-    value: 6500,
-    status: 'proposta',
-    source: 'WhatsApp',
-    notes: 'Quer reformular o site industrial da fábrica com foco em SEO e rodar tráfego no Google Ads para atrair cotações de usinagem.',
-    createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-    history: [
-      {
-        id: 'hist-1-1',
-        timestamp: new Date(Date.now() - 86400000 * 2).toISOString(),
-        user: 'Sistema',
-        type: 'created',
-        text: 'Lead cadastrado via Botão do WhatsApp no site SOSSEO.'
-      },
-      {
-        id: 'hist-1-2',
-        timestamp: new Date(Date.now() - 86400000 * 1.5).toISOString(),
-        user: 'admin',
-        type: 'status',
-        text: "Moveu de '1. Novo Lead' para '2. Respondido'. Primeiro contato efetuado com Carlos."
-      },
-      {
-        id: 'hist-1-3',
-        timestamp: new Date(Date.now() - 86400000 * 1).toISOString(),
-        user: 'admin',
-        type: 'note',
-        text: 'Reunião de diagnóstico realizada com Carlos e engenharia. Apresentada estratégia de posicionamento técnico B2B.'
-      },
-      {
-        id: 'hist-1-4',
-        timestamp: new Date(Date.now() - 86400000 * 0.5).toISOString(),
-        user: 'admin',
-        type: 'status',
-        text: "Moveu de '3. Reunião / Diagnóstico' para '4. Proposta Enviada'. Proposta comercial de R$ 6.500 entregue."
-      }
-    ]
-  },
-  {
-    id: 'lead-2',
-    company: 'DermatoClean Estética & Saúde',
-    contact: 'Dra. Vanessa Meirelles',
-    phone: '(19) 99234-5566',
-    email: 'contato@dermatoclean.com.br',
-    service: 'Gestão de Tráfego & SEO',
-    value: 2800,
-    status: 'reuniao',
-    source: 'Site',
-    notes: 'Reunião de diagnóstico marcada para amanhã às 14h via Google Meet. Foco em campanhas locais de alta conversão.',
-    createdAt: new Date(Date.now() - 86400000 * 3).toISOString(),
-    history: [
-      {
-        id: 'hist-2-1',
-        timestamp: new Date(Date.now() - 86400000 * 3).toISOString(),
-        user: 'Sistema',
-        type: 'created',
-        text: 'Lead cadastrado via formulário de contato do site.'
-      },
-      {
-        id: 'hist-2-2',
-        timestamp: new Date(Date.now() - 86400000 * 2).toISOString(),
-        user: 'admin',
-        type: 'status',
-        text: "Moveu para '3. Reunião / Diagnóstico'. Agendada reunião de diagnóstico estratégico."
-      }
-    ]
-  },
-  {
-    id: 'lead-3',
-    company: 'Distribuidora LogiFast SP',
-    contact: 'Marcos Aurélio',
-    phone: '(11) 97788-9900',
-    email: 'marcos@logifastsp.com.br',
-    service: 'Implantação de CRM',
-    value: 3500,
-    status: 'novo',
-    source: 'WhatsApp',
-    notes: 'Entrou pelo botão do WhatsApp perguntando como organizar os orçamentos que chegam da equipe comercial.',
-    createdAt: new Date(Date.now() - 86400000 * 1).toISOString(),
-    history: [
-      {
-        id: 'hist-3-1',
-        timestamp: new Date(Date.now() - 86400000 * 1).toISOString(),
-        user: 'Sistema',
-        type: 'created',
-        text: 'Lead cadastrado via WhatsApp solicitando implantação de CRM.'
-      }
-    ]
-  },
-  {
-    id: 'lead-4',
-    company: 'Engenharia & Obras Paulistana',
-    contact: 'Eng. Fernando Souza',
-    phone: '(11) 99111-2233',
-    email: 'diretoria@paulistanaeng.com.br',
-    service: 'Criação de Site',
-    value: 4200,
-    status: 'ganho',
-    source: 'Indicação',
-    notes: 'Contrato assinado! Criação de site institucional moderno e veloz em WordPress com otimização Core Web Vitals.',
-    createdAt: new Date(Date.now() - 86400000 * 7).toISOString(),
-    history: [
-      {
-        id: 'hist-4-1',
-        timestamp: new Date(Date.now() - 86400000 * 7).toISOString(),
-        user: 'admin',
-        type: 'created',
-        text: 'Lead criado por indicação de parceiro.'
-      },
-      {
-        id: 'hist-4-2',
-        timestamp: new Date(Date.now() - 86400000 * 3).toISOString(),
-        user: 'admin',
-        type: 'status',
-        text: "Moveu para '6. Contrato Fechado 🚀'. Assinatura de contrato confirmada e entrada paga!"
-      }
-    ]
-  },
-  {
-    id: 'lead-5',
-    company: 'Usinagem Precision Parts',
-    contact: 'Márcio Silveira (Gerente Industrial)',
-    phone: '(19) 98877-6655',
-    email: 'marcio@precisionparts.ind.br',
-    service: 'Solução Completa',
-    value: 5500,
-    status: 'rejeitou',
-    source: 'Site',
-    notes: 'Empresa procurou solução completa mas adiou investimento até o fechamento do orçamento fiscal do próximo ano.',
-    lossReason: 'Projeto Adiado / Sem Previsão',
-    lossDetail: 'Diretoria congelou investimentos até o 1º trimestre de 2027.',
-    createdAt: new Date(Date.now() - 86400000 * 5).toISOString(),
-    history: [
-      {
-        id: 'hist-5-1',
-        timestamp: new Date(Date.now() - 86400000 * 5).toISOString(),
-        user: 'Sistema',
-        type: 'created',
-        text: 'Lead cadastrado via formulário técnico do site SOSSEO.'
-      },
-      {
-        id: 'hist-5-2',
-        timestamp: new Date(Date.now() - 86400000 * 2).toISOString(),
-        user: 'admin',
-        type: 'loss',
-        text: 'Lead movido para 5. Rejeitou. Motivo: Projeto Adiado / Sem Previsão (Diretoria congelou investimentos até o 1º trimestre de 2027).'
-      }
-    ]
-  }
-];
+// Sem leads fictícios de demonstração (100% limpo para produção)
+const SEED_DATA = [];
 
 let leads = [];
 let currentUser = null;
@@ -555,35 +400,14 @@ async function syncWithServer(forceRender = false) {
     const res = await fetch('https://sosseo-crm.sosseosites.workers.dev/api/leads');
     if (res.ok) {
       const data = await res.json();
-      if (Array.isArray(data.leads) && data.leads.length > 0) {
-        const normalizedServerLeads = data.leads.map(normalizeLead);
-        let hasChanges = false;
-
-        normalizedServerLeads.forEach(serverLead => {
-          const localIdx = leads.findIndex(l => l.id === serverLead.id);
-          if (localIdx === -1) {
-            leads.unshift(serverLead);
-            hasChanges = true;
-          } else {
-            const serverHistLen = Array.isArray(serverLead.history) ? serverLead.history.length : 0;
-            const localHistLen = Array.isArray(leads[localIdx].history) ? leads[localIdx].history.length : 0;
-            if (serverLead.updatedAt !== leads[localIdx].updatedAt || serverHistLen > localHistLen) {
-              leads[localIdx] = serverLead;
-              hasChanges = true;
-            }
-          }
-        });
-
-        if (hasChanges || forceRender) {
+      if (Array.isArray(data.leads)) {
+        const serverJson = JSON.stringify(data.leads);
+        const localJson = JSON.stringify(leads);
+        if (serverJson !== localJson || forceRender) {
+          leads = data.leads.map(normalizeLead);
           localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
           renderBoard();
         }
-      } else if (leads.length > 0) {
-        fetch('https://sosseo-crm.sosseosites.workers.dev/api/leads', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ leads })
-        }).catch(() => {});
       }
     }
   } catch (err) {}
