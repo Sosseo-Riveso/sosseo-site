@@ -1,0 +1,6 @@
+.git
+.git/**
+.gitignore
+.nojekyll
+wrangler.json
+publicar-artigo.mjs
