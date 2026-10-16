@@ -8,3 +8,9 @@
 
 /wp-includes/*
   Cache-Control: public, max-age=31536000, immutable
+
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+
+https://*.sosseo-site.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
