@@ -3,5 +3,15 @@
   "compatibility_date": "2025-01-01",
   "assets": {
     "directory": "."
-  }
+  },
+  "routes": [
+    {
+      "pattern": "sosseo.com.br",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.sosseo.com.br",
+      "custom_domain": true
+    }
+  ]
 }
