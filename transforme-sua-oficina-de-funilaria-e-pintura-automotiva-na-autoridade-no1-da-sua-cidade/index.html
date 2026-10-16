@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<script id="sosseo-canonical-domain-guard">
+(function(){
+  if (window.location.hostname.indexOf('github.io') !== -1) {
+    var m = document.createElement('meta');
+    m.name = 'robots';
+    m.content = 'noindex, nofollow';
+    document.head.appendChild(m);
+    var cleanPath = window.location.pathname.replace(/^\/sosseo-site(\/|$)/, '/');
+    window.location.replace('https://sosseo.com.br' + cleanPath + window.location.search + window.location.hash);
+  }
+})();
+</script>
 <meta charset="UTF-8">
 <!-- Google Tag Manager (SOSSEO) -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -486,9 +498,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div
 class="hfeed site" id="page">
-			<header
+						<header
 		class="site-header header-main-layout-1 ast-primary-menu-enabled ast-logo-title-inline ast-hide-custom-menu-mobile ast-builder-menu-toggle-icon ast-mobile-header-inline" id="masthead"   itemid="#masthead"		>
 			<div id="ast-desktop-header" data-toggle-type="dropdown">
+		<button type="button" class="ast-dummy-toggle" style="display:none !important;" aria-hidden="true" tabindex="-1"></button>
 		<div class="ast-above-header-wrap  ">
 		<div class="ast-above-header-bar ast-above-header  site-header-focus-item" data-section="section-above-header-builder">
 						<div class="site-above-header-wrap ast-builder-grid-row-container site-header-focus-item ast-container" data-section="section-above-header-builder">
@@ -497,13 +510,13 @@ class="hfeed site" id="page">
 									<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
 							<div
 				class="site-branding ast-site-identity"  				>
-					<span class="site-logo-img"><a href="../" class="custom-logo-link" rel="home"><img width="182" height="46" src="../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-182x46.png" class="custom-logo" alt="CriaÃ§Ã£o de Sites em Osasco" decoding="async" srcset="../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-182x46.png 182w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-300x77.png 300w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-768x196.png 768w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2.png 862w" sizes="(max-width: 182px) 100vw, 182px" /></a></span>				</div>
+					<span class="site-logo-img"><a href="https://sosseo.com.br/" class="custom-logo-link" rel="home"><img width="182" height="46" src="../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-182x46.png" class="custom-logo" alt="Criação de Sites em Osasco" decoding="async" srcset="../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-182x46.png 182w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-300x77.png 300w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-768x196.png 768w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2.png 862w" sizes="(max-width: 182px) 100vw, 182px" /></a></span>				</div>
 			<!-- .site-branding -->
 					</div>
 								</div>
 																									<div class="site-header-above-section-right site-header-section ast-flex ast-grid-right-section">
 										<div class="ast-header-html-1 ast-builder-html-element site-header-focus-item ast-header-html-inner-limits" data-section="section-hb-html-1">
-				<div class="ast-builder-html-element"><p><strong><span style="color: #ff9900; font-size: 18pt;">CriaÃ§Ã£o de Sites Especializado em Oficina de Funilaria e Pintura em Osasco e RegiÃ£o</span></strong></p>
+				<div class="ast-builder-html-element"><p><strong><span style="color: #ff9900; font-size: 18pt;">Criação de Sites Especializado em Oficina de Funilaria e Pintura em Osasco e Região</span></strong></p>
 </div>			</div>
 											<div class="ast-builder-layout-element ast-flex site-header-focus-item ast-header-button-1" data-section="section-hb-button-1">
 				<div class="ast-builder-button-wrap ast-builder-button-size-"><a class="ast-custom-button-link" href="https://wa.me/5511974695663" target="_blank" role="button" aria-label="(11) 97469-5663"><div class=ast-custom-button>(11) 97469-5663</div></a><a class="menu-link" href="https://wa.me/5511974695663" target="_blank" >(11) 97469-5663</a></div>			</div>
@@ -519,12 +532,12 @@ class="hfeed site" id="page">
 											<div class="site-header-primary-section-left site-header-section ast-flex site-header-section-left">
 									<div class="ast-builder-menu-1 ast-builder-menu ast-flex ast-builder-menu-1-focus-item ast-builder-layout-element site-header-focus-item" data-section="section-hb-menu-1">
 			<div class="ast-main-header-bar-alignment"><div class="main-header-bar-navigation"><nav class="site-navigation ast-flex-grow-1 navigation-accessibility site-header-focus-item" id="primary-site-navigation-desktop" aria-label="Primary Site Navigation"  ><div class="main-navigation ast-inline-flex"><ul id="ast-hf-menu-1" class="main-header-menu ast-menu-shadow ast-nav-menu ast-flex  submenu-with-border astra-menu-animation-slide-down  stack-on-mobile">
-<li id="menu-item-lp-1" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#visao" class="menu-link">VisÃ£o</a></li>
+<li id="menu-item-lp-1" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#visao" class="menu-link">Visão</a></li>
 <li id="menu-item-lp-2" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#simular-lucro" class="menu-link">Simular Lucro</a></li>
-<li id="menu-item-lp-3" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#estrategia" class="menu-link">EstratÃ©gia</a></li>
-<li id="menu-item-lp-4" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#especializacao" class="menu-link">EspecializaÃ§Ã£o</a></li>
-<li id="menu-item-lp-5" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#beneficios" class="menu-link">BenefÃ­cios</a></li>
-<li id="menu-item-lp-6" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#duvidas" class="menu-link">DÃºvidas</a></li>
+<li id="menu-item-lp-3" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#estrategia" class="menu-link">Estratégia</a></li>
+<li id="menu-item-lp-4" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#especializacao" class="menu-link">Especialização</a></li>
+<li id="menu-item-lp-5" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#beneficios" class="menu-link">Benefícios</a></li>
+<li id="menu-item-lp-6" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#duvidas" class="menu-link">Dúvidas</a></li>
 <li id="menu-item-lp-7" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#plano" class="menu-link">Plano</a></li>
 <li id="menu-item-lp-8" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#contato" class="menu-link">Contato</a></li>
 </ul></div></nav></div></div>		</div>
@@ -544,7 +557,7 @@ class="hfeed site" id="page">
 										<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
 							<div
 				class="site-branding ast-site-identity"  				>
-					<span class="site-logo-img"><a href="../" class="custom-logo-link" rel="home"><img width="182" height="46" src="../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-182x46.png" class="custom-logo" alt="CriaÃ§Ã£o de Sites em Osasco" decoding="async" srcset="../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-182x46.png 182w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-300x77.png 300w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-768x196.png 768w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2.png 862w" sizes="(max-width: 182px) 100vw, 182px" /></a></span>				</div>
+					<span class="site-logo-img"><a href="https://sosseo.com.br/" class="custom-logo-link" rel="home"><img width="182" height="46" src="../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-182x46.png" class="custom-logo" alt="Criação de Sites em Osasco" decoding="async" srcset="../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-182x46.png 182w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-300x77.png 300w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-768x196.png 768w, ../wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2.png 862w" sizes="(max-width: 182px) 100vw, 182px" /></a></span>				</div>
 			<!-- .site-branding -->
 					</div>
 									</div>
@@ -569,12 +582,12 @@ class="hfeed site" id="page">
 				<div class="ast-mobile-header-content content-align-flex-start ">
 						<div class="ast-builder-menu-1 ast-builder-menu ast-flex ast-builder-menu-1-focus-item ast-builder-layout-element site-header-focus-item" data-section="section-hb-menu-1">
 			<div class="ast-main-header-bar-alignment"><div class="main-header-bar-navigation"><nav class="site-navigation ast-flex-grow-1 navigation-accessibility site-header-focus-item" id="primary-site-navigation-mobile" aria-label="Primary Site Navigation"  ><div class="main-navigation ast-inline-flex"><ul id="ast-hf-menu-1-mobile" class="main-header-menu ast-menu-shadow ast-nav-menu ast-flex  submenu-with-border astra-menu-animation-slide-down  stack-on-mobile">
-<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#visao" class="menu-link">VisÃ£o</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#visao" class="menu-link">Visão</a></li>
 <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#simular-lucro" class="menu-link">Simular Lucro</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#estrategia" class="menu-link">EstratÃ©gia</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#especializacao" class="menu-link">EspecializaÃ§Ã£o</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#beneficios" class="menu-link">BenefÃ­cios</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#duvidas" class="menu-link">DÃºvidas</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#estrategia" class="menu-link">Estratégia</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#especializacao" class="menu-link">Especialização</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#beneficios" class="menu-link">Benefícios</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#duvidas" class="menu-link">Dúvidas</a></li>
 <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#plano" class="menu-link">Plano</a></li>
 <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="#contato" class="menu-link">Contato</a></li>
 </ul></div></nav></div></div>		</div>
@@ -1909,17 +1922,50 @@ Array
             </script>
             	<script id="sosseo-lp-menu-helper">
 document.addEventListener('DOMContentLoaded', function() {
+  var logos = document.querySelectorAll('#masthead a.custom-logo-link');
+  logos.forEach(function(logo) {
+    logo.setAttribute('href', 'https://sosseo.com.br/');
+    logo.onclick = null;
+    logo.addEventListener('click', function(e) {
+      e.stopImmediatePropagation();
+      window.location.href = 'https://sosseo.com.br/';
+    }, true);
+  });
+
+  var toggleBtns = document.querySelectorAll('#ast-mobile-header .menu-toggle');
+  var content = document.querySelector('#ast-mobile-header .ast-mobile-header-content');
+  var nav = document.querySelector('#ast-mobile-header .main-header-bar-navigation');
+
+  toggleBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setTimeout(function() {
+        var isOpen = btn.classList.contains('toggled');
+        if (isOpen) {
+          document.body.classList.add('ast-main-header-nav-open');
+          if (content) content.style.display = 'block';
+          if (nav) nav.style.display = 'block';
+        } else {
+          document.body.classList.remove('ast-main-header-nav-open');
+          if (content) content.style.display = '';
+          if (nav) nav.style.display = 'none';
+        }
+      }, 0);
+    });
+  });
+
   var mobileLinks = document.querySelectorAll('#ast-mobile-header a[href^="#"]');
   mobileLinks.forEach(function(link) {
     link.addEventListener('click', function() {
-      var toggleBtn = document.querySelector('#ast-mobile-header .menu-toggle.toggled');
-      if (toggleBtn) {
-        toggleBtn.click();
-      } else {
+      setTimeout(function() {
+        toggleBtns.forEach(function(btn) {
+          btn.classList.remove('toggled');
+          btn.setAttribute('aria-expanded', 'false');
+        });
         document.body.classList.remove('ast-main-header-nav-open');
-        var content = document.querySelector('#ast-mobile-header .ast-mobile-header-content');
-        if (content) content.style.display = 'none';
-      }
+        document.documentElement.classList.remove('ast-main-header-nav-open');
+        if (content) content.style.display = '';
+        if (nav) nav.style.display = 'none';
+      }, 15);
     });
   });
 });

@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<script id="sosseo-canonical-domain-guard">
+(function(){
+  if (window.location.hostname.indexOf('github.io') !== -1) {
+    var m = document.createElement('meta');
+    m.name = 'robots';
+    m.content = 'noindex, nofollow';
+    document.head.appendChild(m);
+    var cleanPath = window.location.pathname.replace(/^\/sosseo-site(\/|$)/, '/');
+    window.location.replace('https://sosseo.com.br' + cleanPath + window.location.search + window.location.hash);
+  }
+})();
+</script>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora de Desperdício no Google Ads | SOSSEO</title>
