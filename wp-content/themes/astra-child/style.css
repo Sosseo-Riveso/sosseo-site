@@ -41,3 +41,20 @@ Version: 1.0.0
     border-radius: 0 0 5px 5px;
     margin-bottom: 10px;
 }
+
+/* Alinhar topo e margens da barra lateral com o banner do título */
+@media (min-width: 922px) {
+    .ast-right-sidebar #secondary {
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    .ast-right-sidebar #secondary #block-5 {
+        padding-left: 12px !important;
+    }
+}
+.kb-row-layout-idblock-7_7d4eb7-b3 > .kt-row-column-wrap {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
