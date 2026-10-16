@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+  <title>SOSSEO CRM - Gestão Comercial de Leads</title>
+  <link rel="icon" type="image/png" href="/painel-leads/favicon.png?v=3">
+  <link rel="apple-touch-icon" href="/painel-leads/favicon.png?v=3">
+  <link rel="stylesheet" href="/painel-leads/style.css">
+</head>
+<body>
+
+  <!-- Top Header Compacto -->
+  <header class="crm-header">
+    <div class="brand-container">
+      <img src="/painel-leads/logo-sosseo.png?v=2" alt="SOSSEO" class="brand-logo">
+      <span class="brand-title-badge">CRM</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-secondary" onclick="openIntegrationModal()" title="Código de conexão com WordPress">
+        🔌 Conectar
+      </button>
+      <button class="btn btn-secondary" onclick="openWhatsAppModal()" title="Configurar Alertas Instantâneos no WhatsApp">
+        🔔 WhatsApp
+      </button>
+      <button class="btn btn-secondary" onclick="exportToCSV()" title="Exportar leads em planilha CSV">
+        📥 CSV
+      </button>
+      <button class="btn btn-secondary" onclick="openLogsModal()" title="Auditoria Geral: Log cronológico de todas as ações de todos os leads (Últimos 30 dias)">
+        📋 Auditoria Geral (30d)
+      </button>
+      <button class="btn btn-secondary" id="btn-manage-users" onclick="openUsersModal()" style="display: none;" title="Apenas Administrador">
+        👥 Usuários
+      </button>
+      <button class="btn btn-secondary" onclick="clearCacheAndSync()" title="Limpar cache local e sincronizar com o banco">
+        🔄 Sincronizar
+      </button>
+      <button class="btn btn-primary" onclick="openNewLeadModal()">
+        + Novo Lead
+      </button>
+      
+      <!-- ID do usuário sempre visível à direita do botão + Novo Lead -->
+      <div class="user-badge" id="current-user-badge">
+        <span class="user-role-badge" id="badge-role">ADMIN</span>
+        <span class="user-id-info">ID: <strong id="badge-user-id">admin</strong></span>
+        <button class="btn-logout" onclick="logout()" title="Sair do CRM">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Metrics Bar (2ª Linha Compacta) -->
+  <section class="metrics-bar">
+    <div class="metric-pill">
+      <span class="metric-icon">📈</span>
+      <span class="metric-label">Total de Leads:</span>
+      <span class="metric-val" id="metric-total">0</span>
+    </div>
+    <div class="metric-pill">
+      <span class="metric-icon">💼</span>
+      <span class="metric-label">Propostas:</span>
+      <span class="metric-val" id="metric-propostas">R$ 0,00</span>
+    </div>
+    <div class="metric-pill">
+      <span class="metric-icon">⏳</span>
+      <span class="metric-label">Reuniões e Propostas:</span>
+      <span class="metric-val" id="metric-reunioes">0</span>
+    </div>
+    <div class="metric-pill">
+      <span class="metric-icon">🏆</span>
+      <span class="metric-label">Contratos Fechados:</span>
+      <span class="metric-val" id="metric-fechados">0</span>
+    </div>
+    <div class="metric-pill">
+      <span class="metric-icon">❌</span>
+      <span class="metric-label">Rejeitados:</span>
+      <span class="metric-val" id="metric-rejeitados">0</span>
+    </div>
+  </section>
+
+  <!-- Controls Bar -->
+  <section class="controls-bar">
+    <input type="text" id="search-input" class="search-input" placeholder="Buscar por empresa ou contato..." oninput="filterCards()">
+    <select id="filter-service" class="filter-select" onchange="filterCards()">
+      <option value="all">Todos os Serviços SOSSEO</option>
+      <option value="Criação de Site">Criação de Site</option>
+      <option value="Gestão de Tráfego & SEO">Gestão de Tráfego & SEO</option>
+      <option value="Implantação de CRM">Implantação de CRM</option>
+      <option value="Solução Completa">Solução Completa (Site + Tráfego + CRM)</option>
+    </select>
+  </section>
+
+  <!-- Kanban Board -->
+  <main class="kanban-container" id="kanban-board">
+    
+    <!-- Coluna 1: Novos Leads -->
+    <div class="kanban-column" data-status="novo">
+      <div class="column-header">
+        <div class="column-title-wrap">
+          <div class="column-dot" style="background-color: var(--accent-blue)"></div>
+          <div class="column-title">1. Novo Lead (WhatsApp/Site)</div>
+        </div>
+        <div class="column-count" id="count-novo">0</div>
+      </div>
+      <div class="column-cards" id="cards-novo"></div>
+    </div>
+
+    <!-- Coluna 2: Respondido -->
+    <div class="kanban-column" data-status="respondido">
+      <div class="column-header">
+        <div class="column-title-wrap">
+          <div class="column-dot" style="background-color: #0284c7"></div>
+          <div class="column-title">2. Respondido</div>
+        </div>
+        <div class="column-count" id="count-respondido">0</div>
+      </div>
+      <div class="column-cards" id="cards-respondido"></div>
+    </div>
+
+    <!-- Coluna 3: Reunião / Diagnóstico -->
+    <div class="kanban-column" data-status="reuniao">
+      <div class="column-header">
+        <div class="column-title-wrap">
+          <div class="column-dot" style="background-color: var(--accent-amber)"></div>
+          <div class="column-title">3. Reunião / Diagnóstico</div>
+        </div>
+        <div class="column-count" id="count-reuniao">0</div>
+      </div>
+      <div class="column-cards" id="cards-reuniao"></div>
+    </div>
+
+    <!-- Coluna 4: Proposta Enviada -->
+    <div class="kanban-column" data-status="proposta">
+      <div class="column-header">
+        <div class="column-title-wrap">
+          <div class="column-dot" style="background-color: var(--accent-purple)"></div>
+          <div class="column-title">4. Proposta Enviada</div>
+        </div>
+        <div class="column-count" id="count-proposta">0</div>
+      </div>
+      <div class="column-cards" id="cards-proposta"></div>
+    </div>
+
+    <!-- Coluna 5: Rejeitou -->
+    <div class="kanban-column" data-status="rejeitou">
+      <div class="column-header">
+        <div class="column-title-wrap">
+          <div class="column-dot" style="background-color: var(--accent-rose)"></div>
+          <div class="column-title">5. Rejeitou</div>
+        </div>
+        <div class="column-count" id="count-rejeitou">0</div>
+      </div>
+      <div class="column-cards" id="cards-rejeitou"></div>
+    </div>
+
+    <!-- Coluna 6: Fechado / Ganho -->
+    <div class="kanban-column" data-status="ganho">
+      <div class="column-header">
+        <div class="column-title-wrap">
+          <div class="column-dot" style="background-color: var(--accent-green)"></div>
+          <div class="column-title">6. Contrato Fechado 🚀</div>
+        </div>
+        <div class="column-count" id="count-ganho">0</div>
+      </div>
+      <div class="column-cards" id="cards-ganho"></div>
+    </div>
+
+  </main>
+
+  <!-- Modal Lead Form (Novo / Editar com Botão de Excluir) -->
+  <div class="modal-overlay" id="lead-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-lead-title">Novo Lead Comercial</div>
+        <button class="btn-close" onclick="closeModal('lead-modal')">&times;</button>
+      </div>
+      <form id="lead-form" onsubmit="saveLead(event)">
+        <input type="hidden" id="lead-id">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome da Empresa / Cliente *</label>
+            <input type="text" id="lead-company" class="form-control" required placeholder="Ex: Indústria Alfa ou Clínica Beta">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nome do Contato / Decisor *</label>
+            <input type="text" id="lead-contact" class="form-control" required placeholder="Ex: Roberto Diretor ou Carlos">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">WhatsApp *</label>
+            <input type="text" id="lead-phone" class="form-control" required placeholder="Ex: (11) 98765-4321">
+          </div>
+          <div class="form-group">
+            <label class="form-label">E-mail</label>
+            <input type="email" id="lead-email" class="form-control" placeholder="Ex: contato@cliente.com.br">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Serviço de Interesse *</label>
+            <select id="lead-service" class="form-control" required>
+              <option value="Criação de Site">Criação de Site</option>
+              <option value="Gestão de Tráfego & SEO">Gestão de Tráfego & SEO</option>
+              <option value="Implantação de CRM">Implantação de CRM</option>
+              <option value="Solução Completa">Solução Completa (Site + Tráfego + CRM)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Valor Estimado / Proposta (R$)</label>
+            <input type="number" id="lead-value" class="form-control" placeholder="Ex: 3500" step="50">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Etapa do Pipeline</label>
+            <select id="lead-status" class="form-control">
+              <option value="novo">1. Novo Lead (WhatsApp/Site)</option>
+              <option value="respondido">2. Respondido</option>
+              <option value="reuniao">3. Reunião / Diagnóstico</option>
+              <option value="proposta">4. Proposta Enviada</option>
+              <option value="rejeitou">5. Rejeitou</option>
+              <option value="ganho">6. Contrato Fechado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Origem do Contato</label>
+            <select id="lead-source" class="form-control">
+              <option value="WhatsApp">Botão WhatsApp (Site)</option>
+              <option value="Site">Formulário (Site SOSSEO)</option>
+              <option value="Indicação">Indicação</option>
+              <option value="LinkedIn">LinkedIn</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bloco Condicional: Motivo de Perda (Aparece se status === 'rejeitou') -->
+        <div id="wrap-loss-reason" class="form-row" style="display: none; background: rgba(225, 29, 72, 0.06); border: 1px solid rgba(225, 29, 72, 0.3); padding: 12px; border-radius: 6px; margin-bottom: 12px;">
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label" style="color: #e11d48; font-weight: 700;">❌ Motivo da Rejeição / Perda *</label>
+            <select id="lead-loss-reason" class="form-control">
+              <option value="">Selecione o motivo da perda...</option>
+              <option value="Preço / Orçamento Insuficiente">Preço / Orçamento Insuficiente</option>
+              <option value="Optou por Concorrente">Optou por Concorrente</option>
+              <option value="Projeto Adiado / Sem Previsão">Projeto Adiado / Sem Previsão</option>
+              <option value="Sem Fit Técnico / Escopo Incompatível">Sem Fit Técnico / Escopo Incompatível</option>
+              <option value="Contato Inacessível / Não Respondeu">Contato Inacessível / Não Respondeu</option>
+              <option value="Decisão Interna da Diretoria">Decisão Interna da Diretoria</option>
+              <option value="Outro Motivo">Outro Motivo</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label" style="color: #475569;">Detalhe do Motivo (Opcional)</label>
+            <input type="text" id="lead-loss-detail" class="form-control" placeholder="Ex: Achou o valor mensal alto; retomar em março">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Observações / Necessidades do Cliente</label>
+          <textarea id="lead-notes" class="form-control" rows="2" placeholder="Ex: Interessado em reformular o site para SEO e implantar o CRM para organizar o time comercial."></textarea>
+        </div>
+
+        <!-- Seção: Linha do Tempo e Histórico de Ações -->
+        <div class="lead-history-section" id="lead-history-section" style="margin-top: 14px; border-top: 1px solid var(--border-color); padding-top: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <label class="form-label" style="margin: 0; font-weight: 700; color: var(--text-primary);">
+              📋 Histórico Exclusivo deste Lead: <span id="lead-history-target-company" style="color: var(--accent-blue);"></span>
+            </label>
+            <span style="font-size: 11px; color: var(--text-muted);" id="history-entries-count">0 registros</span>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 10px;">
+            🔒 As notas e registros abaixo são gravados <strong>exclusivamente neste lead</strong> e não aparecem nos demais cards.
+          </div>
+
+          <!-- Input para Adicionar Nova Ação Manual -->
+          <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+            <input type="text" id="new-history-text" class="form-control" placeholder="Descreva uma ação ou anotação (ex: Liguei para o decisor, enviada proposta, retorno agendado...)">
+            <button type="button" class="btn btn-secondary" onclick="addManualHistoryAction()" style="white-space: nowrap;">+ Registrar Ação</button>
+          </div>
+
+          <!-- Timeline Container -->
+          <div id="lead-history-timeline" class="history-timeline-container">
+            <!-- Entradas renderizadas via JS -->
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+          <!-- Botão de Deletar Lead (visível apenas na edição) -->
+          <button type="button" class="btn btn-danger" id="btn-delete-lead" onclick="deleteCurrentLead()" style="display: none;">
+            🗑️ Excluir Lead
+          </button>
+          <div style="display: flex; gap: 8px; margin-left: auto;">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('lead-modal')">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Salvar Lead</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de Gerenciamento de Usuários (Apenas Administrador) -->
+  <div class="modal-overlay" id="users-modal">
+    <div class="modal-content" style="max-width: 580px;">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">👥 Gerenciamento de Usuários</div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+            Apenas administradores podem cadastrar e excluir usuários do CRM.
+          </div>
+        </div>
+        <button class="btn-close" onclick="closeModal('users-modal')">&times;</button>
+      </div>
+
+      <!-- Formulário de Criação de Usuário -->
+      <div class="new-user-box">
+        <div style="font-size: 12px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">+ Cadastrar Novo Usuário</div>
+        <form id="new-user-form" onsubmit="handleCreateUser(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nome Completo *</label>
+              <input type="text" id="new-user-name" class="form-control" required placeholder="Ex: Roberto Vendas">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Usuário (Login) *</label>
+              <input type="text" id="new-user-username" class="form-control" required placeholder="Ex: roberto">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Senha *</label>
+              <input type="password" id="new-user-password" class="form-control" required placeholder="Senha">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nível de Acesso *</label>
+              <select id="new-user-role" class="form-control" required>
+                <option value="user">Usuário Comum (Vendedor / Gestor)</option>
+                <option value="admin">Administrador (Controle Total)</option>
+              </select>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: flex-end; margin-top: 6px;">
+            <button type="submit" class="btn btn-primary">+ Cadastrar Usuário</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Lista de Usuários Existentes -->
+      <div style="font-size: 12px; font-weight: 700; margin-top: 14px; margin-bottom: 8px; color: var(--text-primary);">
+        Usuários Cadastrados
+      </div>
+      <div id="users-table-container">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Histórico de Logs (Últimos 30 Dias) -->
+  <div class="modal-overlay" id="logs-modal">
+    <div class="modal-content" style="max-width: 650px;">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">📋 Auditoria Geral da Agência (Todos os Leads - 30 Dias)</div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+            Log cronológico unificado de todas as ações e alterações realizadas por todos os usuários em todos os cards do CRM (expira em 30 dias).
+          </div>
+        </div>
+        <button class="btn-close" onclick="closeModal('logs-modal')">&times;</button>
+      </div>
+
+      <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+        <input type="text" id="logs-search" class="search-input" style="flex: 1;" placeholder="Filtrar por usuário, lead ou ação..." oninput="renderLogsList()">
+        <button class="btn btn-secondary" onclick="fetchAndRenderLogs()">🔄 Recarregar</button>
+      </div>
+
+      <div class="logs-list-container" id="logs-list-container">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Integration Code (WordPress SOSSEO) -->
+  <div class="modal-overlay" id="integration-modal">
+    <div class="modal-content" style="max-width: 650px;">
+      <div class="modal-header">
+        <div class="modal-title">🔌 Conectar Botões do seu Site WordPress ao CRM</div>
+        <button class="btn-close" onclick="closeModal('integration-modal')">&times;</button>
+      </div>
+
+      <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 14px;">
+        Para conectar qualquer clique nos botões de WhatsApp do site <strong>sosseo.com.br</strong> a este CRM, basta colar o script abaixo no seu WordPress (via plugin de Header/Footer ou WPCode):
+      </p>
+
+      <div class="code-box" id="script-code">&lt;!-- Conector SOSSEO CRM --&gt;
+&lt;script&gt;
+document.addEventListener('DOMContentLoaded', function() {
+  // Rastreia cliques nos botões de WhatsApp do site da SOSSEO
+  document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp.com"]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      fetch('https://sosseo-crm.sosseosites.workers.dev/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          company: 'Lead do Site SOSSEO',
+          contact: 'Contato via WhatsApp',
+          phone: 'Clique no Botão',
+          source: 'WhatsApp',
+          service: 'Criação de Site / Tráfego',
+          status: 'novo',
+          notes: 'Clique originado na página: ' + window.location.pathname
+        })
+      }).catch(function(e) { console.log('CRM tracking:', e); });
+    });
+  });
+});
+&lt;/script&gt;</div>
+
+      <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn btn-success" onclick="simulateIncomingLead()">
+          🧪 Testar Recebimento (Simular Lead)
+        </button>
+        <button class="btn btn-primary" onclick="copyIntegrationCode()">
+          📋 Copiar Código
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Rápido: Informar Motivo da Perda ao Arrastar para Rejeitou -->
+  <div class="modal-overlay" id="loss-prompt-modal" style="display: none;">
+    <div class="modal-content" style="max-width: 460px;">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" style="color: var(--accent-rose);">❌ Registrar Motivo da Rejeição</div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+            Identifique a causa para aprimorar o processo comercial e métricas de vendas.
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeLossPrompt(false)">&times;</button>
+      </div>
+      <div style="padding: 14px 0;">
+        <p style="margin: 0 0 12px 0; font-size: 13px; color: var(--text-secondary);" id="loss-prompt-lead-info">
+          Selecione por que este negócio não avançou:
+        </p>
+        <div class="form-group">
+          <label class="form-label" style="color: var(--accent-rose); font-weight: 700;">Motivo Principal *</label>
+          <select id="prompt-loss-reason" class="form-control" required>
+            <option value="">Selecione o motivo da perda...</option>
+            <option value="Preço / Orçamento Insuficiente">Preço / Orçamento Insuficiente</option>
+            <option value="Optou por Concorrente">Optou por Concorrente</option>
+            <option value="Projeto Adiado / Sem Previsão">Projeto Adiado / Sem Previsão</option>
+            <option value="Sem Fit Técnico / Escopo Incompatível">Sem Fit Técnico / Escopo Incompatível</option>
+            <option value="Contato Inacessível / Não Respondeu">Contato Inacessível / Não Respondeu</option>
+            <option value="Decisão Interna da Diretoria">Decisão Interna da Diretoria</option>
+            <option value="Outro Motivo">Outro Motivo</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-top: 10px;">
+          <label class="form-label">Detalhe Complementar (Opcional)</label>
+          <input type="text" id="prompt-loss-detail" class="form-control" placeholder="Ex: Achou o valor mensal alto; retomar em março">
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+        <button type="button" class="btn btn-secondary" onclick="closeLossPrompt(false)">Cancelar</button>
+        <button type="button" class="btn btn-danger" onclick="confirmLossPrompt()">Confirmar Rejeição</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Configuração de Notificações no WhatsApp -->
+  <div class="modal-overlay" id="whatsapp-modal" style="display: none;">
+    <div class="modal-content" style="max-width: 560px;">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">🔔 Alertas Instantâneos no WhatsApp</div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+            Receba notificações imediatas no seu celular sempre que um novo lead entrar no site.
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal('whatsapp-modal')">&times;</button>
+      </div>
+
+      <div style="background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; margin: 12px 0; font-size: 12px; line-height: 1.5; color: var(--text-secondary);">
+        <strong style="color: var(--text-primary); display: block; margin-bottom: 6px;">📲 Como ativar seu alerta gratuito em 30 segundos:</strong>
+        1. Salve o número nos contatos do seu celular: <strong style="color: var(--accent-blue);">+34 623 80 11 90</strong> (ex: "Alerta SOSSEO")<br>
+        2. No WhatsApp, envie para esse número exatamente: <code style="background: #e2e8f0; padding: 2px 4px; border-radius: 3px; font-weight: bold;">I allow callmebot to call me</code><br>
+        3. O robô responderá na hora com a sua <strong>Chave de API (ApiKey)</strong>.<br>
+        4. Digite seu número com DDD e a Chave de API nos campos abaixo e clique em Salvar!
+      </div>
+
+      <form id="whatsapp-form" onsubmit="saveWhatsAppSettings(event)">
+        <div class="form-group">
+          <label class="form-label" style="display: flex; align-items: center; justify-content: space-between;">
+            <span>Seu WhatsApp (com DDD)</span>
+            <label style="font-size: 11px; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+              <input type="checkbox" id="whatsapp-enabled" checked> Ativar notificações
+            </label>
+          </label>
+          <input type="text" id="whatsapp-phone" class="form-control" required placeholder="Ex: 11987654321 ou (11) 98765-4321">
+          <small style="color: var(--text-muted); font-size: 10.5px;">O sistema adicionará o código do país (+55) automaticamente.</small>
+        </div>
+
+        <div class="form-group" style="margin-top: 10px;">
+          <label class="form-label">Sua Chave de API (CallMeBot ApiKey)</label>
+          <input type="text" id="whatsapp-apikey" class="form-control" placeholder="Digite o código que o robô enviou no WhatsApp">
+          <small style="color: var(--text-muted); font-size: 10.5px;">Ficará guardada de forma segura na nuvem do Cloudflare.</small>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+          <button type="button" class="btn btn-secondary" onclick="testWhatsAppNotification()">
+            📲 Testar Alerta Agora
+          </button>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('whatsapp-modal')">Fechar</button>
+            <button type="submit" class="btn btn-primary">Salvar Configuração</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal/Tela de Login de Segurança -->
+  <div class="login-overlay" id="login-modal" style="display: none;">
+    <div class="login-box">
+      <div class="login-header">
+        <img src="/painel-leads/logo-sosseo.png?v=2" alt="SOSSEO" class="login-logo">
+        <span class="login-title-badge">CRM</span>
+      </div>
+      <div class="login-tagline">Acesso Comercial Seguro &bull; Registro de Auditoria</div>
+
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Usuário / ID</label>
+          <input type="text" id="login-username" class="form-control" required placeholder="Ex: admin" autofocus>
+        </div>
+        <div class="form-group" style="text-align: left;">
+          <label class="form-label">Senha de Acesso</label>
+          <input type="password" id="login-password" class="form-control" required placeholder="Digite sua senha">
+        </div>
+
+        <div id="login-error" class="login-error-msg" style="display: none;"></div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 9px; font-size: 13px; margin-top: 10px;">
+          Entrar no CRM
+        </button>
+
+        <div class="login-hint">
+          Primeiro acesso: usuário <strong>admin</strong> | senha <strong>123</strong>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/painel-leads/app.js"></script>
+</body>
+</html>

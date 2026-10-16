@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /demo/
+Disallow: /painel-leads/
+Disallow: /painel-leads
 
 # AI & Generative Search Crawlers (GEO/AEO)
 User-agent: GPTBot
