@@ -1,0 +1,29 @@
+{
+  "redirects": [
+    {
+      "source": "/tag-do-google-e-pix-do-facebook/:path*",
+      "destination": "/tag-do-google-e-pixel-do-facebook/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/wp-content/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/wp-includes/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
