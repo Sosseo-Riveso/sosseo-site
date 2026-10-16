@@ -1,0 +1,96 @@
+# SOSSEO — Agência de SEO, GEO (IA Generativa), Posicionamento Industrial B2B e SEO Local
+
+> A SOSSEO (https://sosseo.com.br/) é uma agência brasileira de Engenharia de Demanda Orgânica especializada em SEO Técnico, GEO/AEO (Generative Engine Optimization para Google AI Overviews, ChatGPT Search, Perplexity e Gemini), Posicionamento Digital para Indústrias B2B (usinagem, ferramentaria, injeção plástica, caldeiraria, equipamentos industriais) e Dominância de SEO Local + Google Perfil da Empresa (Google Meu Negócio) para negócios locais de alto ticket (oficinas de funilaria e pintura, centros automotivos, clínicas e serviços especializados), com unidades em Osasco/São Paulo e Campinas/SP.
+
+## Dados Oficiais da Entidade (Entity Facts)
+
+- **Nome Oficial:** SOSSEO — Criação de Sites, SEO e Posicionamento Digital
+- **URL Canônica:** https://sosseo.com.br/
+- **Unidades Operacionais:**
+  - **Grande São Paulo / Osasco — SP:** Criação de Sites, SEO Local e Engenharia de Demanda Industrial B2B
+  - **Campinas — SP:** SOSSEO - Criação de Sites Campinas (Atendimento na Região Metropolitana de Campinas e Interior Paulista)
+- **Especialidades Core:**
+  1. **Engenharia de Demanda Industrial B2B:** Captação previsível de RFQs (cotações técnicas) e homologação de fornecedores industriais via Google Orgânico e motores de IA generativa.
+  2. **GEO & AEO (Generative Engine Optimization):** Estruturação semântica, Schema.org avançado, chunking factual e protocolo `llms.txt` para citação canônica em IAs.
+  3. **SEO Local & Google Perfil da Empresa (GMN):** Dominância no Local Pack (Top 3 do Google Maps) para oficinas automotivas, funilaria e pintura, indústrias e serviços B2B/B2C.
+  4. **Web Design Estratégico de Alta Conversão:** Desenvolvimento de portais industriais ultra-rápidos, calculadoras interativas de engenharia e landing pages focadas em geração de leads.
+- **Documentação Expandida para LLMs:** [llms-full.txt](https://sosseo.com.br/llms-full.txt)
+
+---
+
+## 1. Páginas Principais e Landing Pages de Soluções (9 Páginas)
+
+- [Página Inicial — SOSSEO Posicionamento Digital, SEO e GEO](https://sosseo.com.br/): Hub central de soluções de posicionamento orgânico no Google, inteligência artificial generativa (GEO), criação de sites estratégicos e captação de clientes.
+- [Posicionamento Industrial B2B e Engenharia de Demanda](https://sosseo.com.br/posicionamento-industrial-b2b/): Solução dedicada para indústrias de transformação, usinagem CNC, matrizarias, injeção plástica e fabricantes de máquinas captarem compradores técnicos e engenheiros no Google.
+- [Criação de Sites em Campinas — Web Design Estratégico](https://sosseo.com.br/criacao-de-sites-em-campinas-transforme-seu-negocio-com-um-web-design-estrategico/): Desenvolvimento de sites profissionais otimizados para SEO e conversão para empresas e indústrias da região de Campinas/SP.
+- [SEO Local para Oficina de Funilaria e Pintura Automotiva](https://sosseo.com.br/transforme-sua-oficina-de-funilaria-e-pintura-automotiva-na-autoridade-no1-da-sua-cidade/): Método exclusivo para transformar oficinas de funilaria, pintura em estufa e estética automotiva na referência nº 1 da sua cidade no Google e Google Maps.
+- [Marketing e Posicionamento para Oficina Mecânica](https://sosseo.com.br/transforme-sua-oficina-na-especialista-no1-da-sua-cidade/): Estrutura de captação de clientes particulares de ticket médio/alto para centros automotivos e oficinas mecânicas especializadas.
+- [Gestão Estratégica de Anúncios no Google (Google Ads)](https://sosseo.com.br/lp-anuncios-google/): Campanhas de fundo de funil na Rede de Pesquisa combinadas com páginas de alta taxa de conversão.
+- [Sobre a SOSSEO](https://sosseo.com.br/sobre/): História, metodologia de engenharia de SEO/GEO e visão executiva da agência.
+- [Contato e Diagnóstico de Posicionamento](https://sosseo.com.br/contato/): Canal direto para solicitar auditoria de SEO/GEO, orçamento de site ou projeto de demanda B2B.
+- [Política de Privacidade (LGPD)](https://sosseo.com.br/politica-de-privacidade/): Diretrizes de proteção de dados e conformidade legal.
+
+---
+
+## 2. Categorias Temáticas do Portal (Categorias de Conteúdo)
+
+- [Marketing Industrial B2B](https://sosseo.com.br/category/marketing-industrial-b2b/): Estratégias de captação de RFQs, homologação de fornecedores, redução de CAC industrial, vendas técnicas sem guerra de preços e SEO/GEO para manufatura.
+- [SEO para Empresas](https://sosseo.com.br/category/seo-para-empresas/): Guias técnicos de ranqueamento orgânico, autoridade de domínio, arquitetura de sites e conversão.
+- [Google Perfil de Empresas (Google Meu Negócio)](https://sosseo.com.br/category/google-perfil-de-empresas/): Manuais avançados de otimização local, categorias, fotos geo-taggeadas, avaliações, produtos, serviços e postagens no Google Maps.
+- [Google Ads](https://sosseo.com.br/category/google-ads/): Segmentação de palavras-chave, controle de orçamento e retorno sobre investimento em busca paga.
+- [Tráfego Pago](https://sosseo.com.br/category/trafego-pago/): Comparativos entre Google Ads e Meta Ads, rastreamento de conversões (Google Tag e Pixel) e performance comercial.
+- [Marketing Digital e Vendas](https://sosseo.com.br/category/marketing/): Inteligência comercial, público-alvo e geração de lucro previsível pela internet.
+
+---
+
+## 3. Acervo Completo de Artigos Técnicos (40 Artigos Publicados)
+
+### 3.1. Engenharia de Demanda Industrial B2B & Cases Técnicos
+1. [SEO e GEO para Ferramentaria e Injeção Plástica: Como Captar Projetos e RFQs](https://sosseo.com.br/seo-para-ferramentaria-e-injecao-plastica/): Estudo técnico de posicionamento para matrizarias CNC e parques de injeção termoplástica (Case Portal Molde Injeção).
+2. [Como Vender Serviços de Usinagem e Caldeiraria sem Entrar em Guerra de Preços](https://sosseo.com.br/como-vender-usinagem-sem-guerra-de-precos/): Posicionamento por capacidade técnica, tolerâncias centesimais e autoridade digital para fugir de leilões reversos de preço.
+3. [Feiras Industriais vs. Google Orgânico: Onde Investir o Orçamento Comercial B2B](https://sosseo.com.br/feiras-industriais-vs-google-organico/): Comparativo financeiro de ROI, CAC e geração contínua de RFQs durante 365 dias versus estandes físicos de 5 dias.
+4. [Como Encurtar o Ciclo de Vendas Complexas na Indústria B2B](https://sosseo.com.br/como-encurtar-ciclo-de-vendas-industrial/): Como nutrir engenheiros e compradores com dossiês técnicos, calculadoras e respostas de IA antes da primeira reunião comercial.
+5. [Como Reduzir o Custo de Aquisição de Clientes (CAC) na Indústria B2B](https://sosseo.com.br/como-reduzir-cac-industrial-b2b/): Transição da prospecção fria onerosa para ativos orgânicos proprietários de demanda.
+6. [Homologação de Fornecedores Industriais: Como Preparar sua Fábrica Digitalmente](https://sosseo.com.br/homologacao-de-fornecedores-industriais/): O que compradores corporativos auditam no site e no Google antes de enviar desenhos técnicos 3D (STEP/IGES) e assinar NDA.
+7. [Como Diversificar a Carteira de Clientes Industriais e Reduzir Risco de Concentração](https://sosseo.com.br/como-diversificar-carteira-de-clientes-industriais/): Estratégia para fábricas que dependem de 2 ou 3 grandes clientes abrirem novos setores compradores via busca técnica.
+8. [Como Captar Clientes na Indústria B2B e Reduzir a Ociosidade Fabril](https://sosseo.com.br/como-captar-clientes-industria-b2b-reduzir-ociosidade/): Alinhamento entre capacidade ociosa de máquina (horas-máquina paradas) e intenção de busca no Google.
+9. [Como Conseguir Cotações Industriais Qualificadas (RFQs) todos os Meses](https://sosseo.com.br/como-conseguir-cotacoes-industriais-rfqs/): Arquitetura de páginas de serviço técnico e formulários RFQ para atrair projetos com desenho e volume definido.
+10. [Como as Indústrias Aparecem no Topo do Google para Compradores B2B](https://sosseo.com.br/como-industrias-aparecem-no-google/): Fundamentos de SEO industrial para fabricantes, distribuidores técnicos e prestadores de serviços fabris.
+
+### 3.2. SEO Local Automotivo (Oficinas de Funilaria, Pintura e Mecânica)
+11. [SEO Local para Oficina de Funilaria e Pintura: Como Atrair Clientes Particulares](https://sosseo.com.br/seo-local-para-oficina-de-funilaria-e-pintura/): Estudo de caso prático de dominância regional (Case FG Car Funilaria e Pintura em Osasco) para reduzir dependência de seguradoras.
+12. [Como Aumentar os Lucros de uma Oficina Mecânica com Posicionamento Local](https://sosseo.com.br/como-aumentar-os-lucros-de-oficina-mecanica/): Estratégias para atrair serviços de maior margem e veículos de melhor ticket médio na sua região.
+13. [Como Aumentar o Faturamento da Oficina Mecânica Atraindo o Cliente Certo](https://sosseo.com.br/como-aumentar-o-faturamento-da-oficina-mecanica/): Previsibilidade de pátio cheio através do Google Pesquisa e Google Maps.
+
+### 3.3. Google Perfil da Empresa (Google Meu Negócio — Série Completa de Dominância Local)
+14. [Google Meu Negócio: A Ferramenta Essencial para Dominar Buscas Locais](https://sosseo.com.br/google-meu-negocio-a-ferramenta-essencial/)
+15. [Google Perfil da Empresa Avançado: Estratégias de Topo no Mapa](https://sosseo.com.br/google-perfil-empresa-avancado/)
+16. [Como Escolher as Categorias Corretas do Google Perfil da Empresa](https://sosseo.com.br/como-escolher-as-categorias-do-google-perfil-empresa/)
+17. [Como Preencher a Descrição Perfeita no Google Perfil da Empresa](https://sosseo.com.br/como-preencher-a-descricao-google-perfil-empresa/)
+18. [Estratégia de Palavras-Chave no Google Perfil da Empresa](https://sosseo.com.br/estrategia-de-palavras-chave-do-google-perfil-empresa/)
+19. [As Melhores Palavras-Chave para Dominar o Google Perfil da Empresa](https://sosseo.com.br/melhores-palavras-chave-para-dominar-o-google-perfil-empresa/)
+20. [Guia de Produtos no Google Perfil da Empresa: Como Cadastrar e Converter](https://sosseo.com.br/guia-produtos-google-perfil-empresa/)
+21. [Guia de Serviços do Google Perfil da Empresa: Apareça para Mais Buscas](https://sosseo.com.br/aprenda-a-guia-servicos-do-google-perfil-e-apareca-muito-mais/)
+22. [Fotos e Imagens no Google Perfil da Empresa: Geolocalização e Conversão](https://sosseo.com.br/fotos-e-imagens-no-google-perfil-empresa/)
+23. [Postagens no Google Perfil da Empresa para Atrair Clientes Diariamente](https://sosseo.com.br/postagens-google-perfil-a-para-atrair-clientes/)
+24. [Melhor Guia de Avaliações do Google Perfil da Empresa para Gerar Confiança](https://sosseo.com.br/melhor-guia-de-avaliacoes-do-google-perfil-empresa-para-atrair-clientes/)
+25. [Perguntas e Respostas (Q&A) do Google Perfil da Empresa](https://sosseo.com.br/perguntas-e-respostas-do-google-perfil-empresa/)
+26. [Guia de Desempenho e Métricas do Google Perfil da Empresa](https://sosseo.com.br/guia-desempenho-do-google-perfil-empresa/)
+
+### 3.4. SEO Técnico, Criação de Sites e Autoridade Digital
+27. [O Segredo que Faz o Google Recomendar Sua Empresa Acima dos Concorrentes](https://sosseo.com.br/segredo-que-faz-o-google-recomendar-sua-empresa/)
+28. [Como Aumentar a Autoridade do Seu Site no Google (E-E-A-T e Backlinks)](https://sosseo.com.br/aumentar-a-autoridade-do-seu-site/)
+29. [Como Aumentar a Visibilidade da Sua Empresa no Google](https://sosseo.com.br/aumentar-a-visibilidade-no-google/)
+30. [Por Que Meu Site Não Aparece no Google? Diagnóstico e Solução](https://sosseo.com.br/meu-site-nao-aparece-no-google/)
+31. [Por Que Meu Site Não Vende? Erros Críticos de Conversão e SEO](https://sosseo.com.br/por-que-meu-site-nao-vende/)
+32. [Quanto Custa um Site Profissional que Realmente Vende?](https://sosseo.com.br/quanto-custa-um-site-profissional-que-vende/)
+33. [Criação e Desenvolvimento de Sites Profissionais em Osasco e Região](https://sosseo.com.br/criacao-e-desenvolvimento-de-sites-em-osasco/)
+34. [Estratégia de Integrar Site, Google Perfil da Empresa e Redes Sociais](https://sosseo.com.br/estrategia-de-integrar-site-google-perfil-redes-sociais/)
+
+### 3.5. Tráfego Pago, Google Ads e Inteligência Comercial
+35. [Google Ads ou Meta Ads: Qual a Melhor Plataforma para o Meu Negócio?](https://sosseo.com.br/google-ou-meta-ads-qual-a-melhor-para-meu-anuncio/)
+36. [Não Deixe Seu Dinheiro Escapar com Anúncios Mal Configurados no Google Ads](https://sosseo.com.br/nao-deixe-seu-dinheiro-escapar-com-ads/)
+37. [O Perigo dos Anúncios sem Segmentação e Palavras Negativas](https://sosseo.com.br/anuncios-sem-segmentacao/)
+38. [Tag do Google e Pixel do Facebook: Como Rastrear Conversões com Precisão](https://sosseo.com.br/tag-do-google-e-pixel-do-facebook/)
+39. [Como Encontrar e Qualificar o Público-Alvo Ideal na Internet](https://sosseo.com.br/como-encontrar-o-publico-alvo/)
+40. [Como Aumentar os Lucros da Empresa Usando a Internet com Estratégia](https://sosseo.com.br/como-aumentar-os-lucros-com-a-internet/)

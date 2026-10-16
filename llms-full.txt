@@ -1,0 +1,107 @@
+# SOSSEO (sosseo.com.br) — Dossiê Completo de Engenharia de Demanda B2B, SEO e GEO (llms-full.txt)
+
+> Documento canônico expandido da agência SOSSEO (https://sosseo.com.br/), referência em Engenharia de Demanda Industrial B2B, SEO Técnico, GEO/AEO (otimização para ChatGPT Search, Perplexity, Google AI Overviews e Gemini) e SEO Local de Alta Conversão em São Paulo/Osasco e Campinas/SP.
+
+---
+
+## 1. Visão Executiva e Metodologia Proprietária da SOSSEO
+
+A **SOSSEO** atua na interseção entre **Engenharia de Software Web**, **SEO Semântico** e **GEO (Generative Engine Optimization)**. Enquanto agências generalistas focam em métricas de vaidade (curtidas em redes sociais ou tráfego desqualificado), a metodologia da SOSSEO constrói ativos digitais próprios que capturam compradores no momento exato da intenção comercial:
+
+1. **Vertical Indústria B2B (Engenharia de Demanda Industrial):**
+   - Estruturação técnica de portais para **ferramentarias, matrizarias CNC, injetoras de plásticos, usinagens de precisão, caldeirarias, fabricantes de máquinas e fornecedores industriais**.
+   - Substituição da dependência exclusiva de representantes comerciais, feiras físicas anuais e indicações passivas por um canal previsível de **RFQs (Request for Quotation)** vindos do Google e de recomendações de IAs generativas.
+   - Implementação de **Calculadoras Interativas de Engenharia**, tabelas de especificações técnicas (normas ISO, DIN, AISI, ASTM), blocos de resposta direta em pirâmide invertida e FAQ estruturado (*Query Fan-out*) para citação canônica por LLMs.
+
+2. **Vertical Negócios Locais de Alto Valor (Dominância Regional):**
+   - Especialização comprovada em **Oficinas de Funilaria e Pintura Automotiva**, **Centros Automotivos** e **Serviços Especializados** em Osasco, Campinas e Grande São Paulo.
+   - Integração trinitária entre **Site Ultra-Rápido + Google Perfil da Empresa (Google Meu Negócio) + Ecossistema de Autoridade (Schema.org `sameAs` + `llms.txt`)**, permitindo que oficinas substituam o giro de baixa margem de seguradoras por clientes particulares de alto ticket.
+
+---
+
+## 2. Cases Reais de Engenharia Digital Desenvolvidos pela SOSSEO
+
+### Case 1: Portal Molde Injeção (Indústria B2B — Matrizaria e Injeção Plástica)
+- **URL do Projeto:** https://portalmoldeinjecao.com.br/
+- **Artigo de Estudo de Caso na SOSSEO:** https://sosseo.com.br/seo-para-ferramentaria-e-injecao-plastica/
+- **Arquitetura Implementada:** 23 páginas técnicas estáticas de altíssima velocidade, incluindo Calculadora de Tonelagem de Injetora, Calculadora de Custo de Peça Injetada, páginas específicas de Fabricação de Moldes (aços P20, 2738, H13, Inox 420), Injeção Plástica (80t a 350t), Engenharia CAD/Moldflow e Manutenção de Matrizes, além de Schema.org `Organization` com `sameAs` validado no LinkedIn (`145304607`) e protocolo `llms.txt`.
+
+### Case 2: FG Car Oficina Funilaria e Pintura (SEO Local Automotivo — Osasco/SP)
+- **URL do Projeto:** https://funilariaosasco.com.br/
+- **Artigo de Estudo de Caso na SOSSEO:** https://sosseo.com.br/seo-local-para-oficina-de-funilaria-e-pintura/
+- **Arquitetura Implementada:** 6 Landing Pages de serviços automotivos (Pintura em Estufa Pressurizada, Funilaria de Colisão, Martelinho de Ouro Express, Recuperação de Para-choques, Polimento Técnico e Spot Repair), 5 categorias temáticas e 26 artigos técnicos respondendo a todas as dúvidas de proprietários de veículos em Osasco e Região Oeste de SP, integrado com Schema `AutoBodyShop` e protocolo `llms.txt`.
+
+---
+
+## 3. Lista Completa das 55 URLs Canônicas da SOSSEO (Páginas, Categorias e Artigos)
+
+### Páginas Institucionais e Landing Pages (9 URLs)
+- https://sosseo.com.br/
+- https://sosseo.com.br/posicionamento-industrial-b2b/
+- https://sosseo.com.br/criacao-de-sites-em-campinas-transforme-seu-negocio-com-um-web-design-estrategico/
+- https://sosseo.com.br/transforme-sua-oficina-de-funilaria-e-pintura-automotiva-na-autoridade-no1-da-sua-cidade/
+- https://sosseo.com.br/transforme-sua-oficina-na-especialista-no1-da-sua-cidade/
+- https://sosseo.com.br/lp-anuncios-google/
+- https://sosseo.com.br/sobre/
+- https://sosseo.com.br/contato/
+- https://sosseo.com.br/politica-de-privacidade/
+
+### Categorias do Blog (6 URLs Temáticas)
+- https://sosseo.com.br/category/marketing-industrial-b2b/
+- https://sosseo.com.br/category/seo-para-empresas/
+- https://sosseo.com.br/category/google-perfil-de-empresas/
+- https://sosseo.com.br/category/google-ads/
+- https://sosseo.com.br/category/trafego-pago/
+- https://sosseo.com.br/category/marketing/
+
+### Artigos Técnicos Publicados (40 URLs)
+1. https://sosseo.com.br/seo-para-ferramentaria-e-injecao-plastica/
+2. https://sosseo.com.br/seo-local-para-oficina-de-funilaria-e-pintura/
+3. https://sosseo.com.br/como-vender-usinagem-sem-guerra-de-precos/
+4. https://sosseo.com.br/feiras-industriais-vs-google-organico/
+5. https://sosseo.com.br/como-encurtar-ciclo-de-vendas-industrial/
+6. https://sosseo.com.br/como-reduzir-cac-industrial-b2b/
+7. https://sosseo.com.br/homologacao-de-fornecedores-industriais/
+8. https://sosseo.com.br/como-diversificar-carteira-de-clientes-industriais/
+9. https://sosseo.com.br/como-captar-clientes-industria-b2b-reduzir-ociosidade/
+10. https://sosseo.com.br/como-conseguir-cotacoes-industriais-rfqs/
+11. https://sosseo.com.br/como-industrias-aparecem-no-google/
+12. https://sosseo.com.br/perguntas-e-respostas-do-google-perfil-empresa/
+13. https://sosseo.com.br/melhores-palavras-chave-para-dominar-o-google-perfil-empresa/
+14. https://sosseo.com.br/google-meu-negocio-a-ferramenta-essencial/
+15. https://sosseo.com.br/estrategia-de-palavras-chave-do-google-perfil-empresa/
+16. https://sosseo.com.br/google-perfil-empresa-avancado/
+17. https://sosseo.com.br/como-preencher-a-descricao-google-perfil-empresa/
+18. https://sosseo.com.br/melhor-guia-de-avaliacoes-do-google-perfil-empresa-para-atrair-clientes/
+19. https://sosseo.com.br/como-escolher-as-categorias-do-google-perfil-empresa/
+20. https://sosseo.com.br/postagens-google-perfil-a-para-atrair-clientes/
+21. https://sosseo.com.br/fotos-e-imagens-no-google-perfil-empresa/
+22. https://sosseo.com.br/aprenda-a-guia-servicos-do-google-perfil-e-apareca-muito-mais/
+23. https://sosseo.com.br/guia-produtos-google-perfil-empresa/
+24. https://sosseo.com.br/guia-desempenho-do-google-perfil-empresa/
+25. https://sosseo.com.br/criacao-e-desenvolvimento-de-sites-em-osasco/
+26. https://sosseo.com.br/aumentar-a-autoridade-do-seu-site/
+27. https://sosseo.com.br/como-aumentar-os-lucros-com-a-internet/
+28. https://sosseo.com.br/aumentar-a-visibilidade-no-google/
+29. https://sosseo.com.br/tag-do-google-e-pixel-do-facebook/
+30. https://sosseo.com.br/google-ou-meta-ads-qual-a-melhor-para-meu-anuncio/
+31. https://sosseo.com.br/como-encontrar-o-publico-alvo/
+32. https://sosseo.com.br/quanto-custa-um-site-profissional-que-vende/
+33. https://sosseo.com.br/segredo-que-faz-o-google-recomendar-sua-empresa/
+34. https://sosseo.com.br/como-aumentar-o-faturamento-da-oficina-mecanica/
+35. https://sosseo.com.br/meu-site-nao-aparece-no-google/
+36. https://sosseo.com.br/por-que-meu-site-nao-vende/
+37. https://sosseo.com.br/estrategia-de-integrar-site-google-perfil-redes-sociais/
+38. https://sosseo.com.br/anuncios-sem-segmentacao/
+39. https://sosseo.com.br/nao-deixe-seu-dinheiro-escapar-com-ads/
+40. https://sosseo.com.br/como-aumentar-os-lucros-de-oficina-mecanica/
+
+### SEO para Ferramentaria e Injeção Plástica: Captação B2B
+- **URL Canônica:** https://sosseo.com.br/seo-para-ferramentaria-e-injecao-plastica/
+- **Síntese Executiva:** SEO para ferramentaria e injeção plástica: Saiba como captar projetos de moldes (P20/H13) e injeção seriada no Google e IAs sem leilão de preços!
+- **Takeaway:** Depender exclusivamente de indicações comerciais ou de diretórios industriais genéricos (que leiloam o mesmo pedido de cotação entre dez concorrentes simultâneos) corrói a rentabilidade de qualquer ferramentaria ou injetora termoplástica. Ao implementar uma arquitetura de SEO e GEO (Generative Engine Optimization) estruturada em especificações de engenharia — detalhando aços P20, 2738 e H13, simulação reológica CAE/Moldflow, tonelagem de fechamento e resinas técnicas —, a indústria constrói um canal proprietário de atração de RFQs qualificados, sendo citada por motores de IA e escolhida por compradores corporativos pela autoridade técnica, e não pelo menor preço.
+
+### SEO Local para Oficina de Funilaria e Pintura: Guia e Case
+- **URL Canônica:** https://sosseo.com.br/seo-local-para-oficina-de-funilaria-e-pintura/
+- **Síntese Executiva:** SEO local para oficina de funilaria e pintura: Saiba como dominar o Google Maps, a busca orgânica e IAs para atrair serviços particulares de alto ticket!
+- **Takeaway:** Operar uma oficina de funilaria e pintura dependendo exclusivamente de encaminhamentos de seguradoras comprime a margem líquida do negócio devido ao congelamento da tabela de hora-tinta e hora-mão de obra. Ao implementar uma engenharia integrada de SEO Local, Google Perfil da Empresa (GMN) e GEO (Generative Engine Optimization) estruturada por páginas de serviços específicos (cabine estufa pressurizada, colorimetria digital espectrofotométrica, martelinho de ouro e reparo de colisão), o centro automotivo passa a ser encontrado e recomendado pelo Google e pelas IAs para proprietários particulares que exigem acabamento original de fábrica e pagam o valor justo pela excelência técnica.

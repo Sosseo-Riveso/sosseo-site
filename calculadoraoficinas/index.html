@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<!-- Google Tag Manager (SOSSEO) -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MWBLQ22S');</script>
+<!-- End Google Tag Manager -->
+<!-- Meta Pixel Code (SOSSEO) -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1189104682466848');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1189104682466848&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Potencial Automotivo</title>
+    <style>
+        /* ESTILOS GERAIS (CSS) */
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            /* Remove padding to allow full width header */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #0000CD;
+            /* Azul do Logo */
+            width: 100%;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            box-sizing: border-box;
+            flex-wrap: wrap;
+            /* Para mobile */
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            max-width: 1000px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        header img {
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            text-align: left;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        /* Remover H1 antigo que tinha estilo proprio */
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        select:focus,
+        input:focus {
+            border-color: #0000CD;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #0000CD;
+            /* Azul do Logo */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #00008B;
+            /* Azul mais escuro */
+        }
+
+        /* ÁREA DE RESULTADOS */
+        #resultado {
+            display: none;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .cenario {
+            margin-bottom: 25px;
+        }
+
+        .label-cenario {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .barra-fundo {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            height: 25px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .barra-progresso {
+            height: 100%;
+            width: 0%;
+            text-align: right;
+            padding-right: 10px;
+            line-height: 25px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            transition: width 1.5s ease-in-out;
+            border-radius: 10px;
+        }
+
+        /* CORES DAS BARRAS */
+        .marcha-lenta {
+            background: linear-gradient(90deg, #7f8c8d, #95a5a6);
+        }
+
+        .marcha-3 {
+            background: linear-gradient(90deg, #f1c40f, #f39c12);
+        }
+
+        .marcha-5 {
+            background: linear-gradient(90deg, #e67e22, #d35400);
+        }
+
+        .turbo {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+        }
+
+        .valor-destaque {
+            font-size: 1.1em;
+        }
+
+        .subtexto-barra {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+            text-align: right;
+            font-style: italic;
+        }
+
+        /* BOTÕES CTA */
+        .cta-section-top {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+
+        .btn-cta {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: opacity 0.3s;
+            box-sizing: border-box;
+        }
+
+        .btn-cta:hover {
+            opacity: 0.9;
+        }
+
+        .btn-funilaria {
+            background-color: #e67e22;
+            /* Laranja da 5a marcha/Funilaria */
+        }
+
+        .btn-mecanica {
+            background-color: #3498db;
+            /* Azul padrão/Mecânica */
+        }
+
+        @media (min-width: 600px) {
+            .cta-section-top {
+                flex-direction: row;
+            }
+        }
+
+        .box-explicacao {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-top: 30px;
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .box-explicacao h4 {
+            margin-top: 0;
+            color: #3498db;
+            font-size: 18px;
+        }
+
+        /* ÁREA DE CONTATO */
+        .contato-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px dashed #ddd;
+        }
+
+        .contato-title {
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .contato-text {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebc57;
+            transform: scale(1.05);
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 600px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            header h1 {
+                text-align: center;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWBLQ22S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+    <header>
+        <div class="header-content">
+            <img src="logo.png" alt="Logo SOSSEO">
+            <h1>Previsão de Ganhos em Oficina Mecânica ou Funilaria e Pintura</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Título removido daqui, agora está no header -->
+
+        <label for="perfil">Qual o foco principal da sua oficina?</label>
+        <select id="perfil">
+            <option value="" disabled selected>Selecione uma opção...</option>
+
+            <optgroup label="Oficina Funilaria e Pintura">
+                <option value="600">🔘 Martelinho e Reparos Rápidos: Valores médios de serviços R$ 600,00</option>
+                <option value="1500">🔘 Funilaria Geral / Misto Valores médios de serviços R$ 1.500,00</option>
+                <option value="3500">🔘 Especializada em Colisões / Seguros Valores médios de serviços R$ 3.500,00
+                </option>
+            </optgroup>
+
+            <optgroup label="Oficina Mecânica">
+                <option value="550">🔘 Auto Center / Serviços Rápidos (Óleo, Freios, Suspensão) Valores médios de
+                    serviços R$ 550,00</option>
+                <option value="1100">🔘 Mecânica Geral / Revisões (Motor, Correias, Embreagem) Valores médios de
+                    serviços R$ 1.100,00</option>
+                <option value="3200">🔘 Especializada / Premium (Câmbio Automático, Importados, Diesel) Valores médios
+                    de serviços R$ 3.200,00</option>
+            </optgroup>
+        </select>
+
+        <label for="veiculos">Quantos Veículos Atende Por Semana?</label>
+        <input type="number" id="veiculos" placeholder="Ex: 10">
+
+        <button onclick="calcularPotencial()">Ver Resultado</button>
+
+        <div id="resultado">
+
+            <h3>Potencial de Faturamento Mensal de Até</h3>
+
+            <div class="cenario">
+                <div class="label-cenario">
+                    <span>🟢 Marcha Lenta (Atual)</span>
+                    <span>Até <span id="valor-lenta" class="valor-destaque">R$ 0,00</span></span>
+                </div>
+                <div class="barra-fundo">
+                    <div id="bar-lenta" class="barra-progresso marcha-lenta"></div>
+                </div>
+                <div id="clientes-lenta" class="subtexto-barra"></div>
+            </div>
+
+            <div class="cenario">
+                <div class="label-cenario">
+                    <span>🟡 3ª Marcha (SEO Básico)</span>
+                    <span>Até <span id="valor-media" class="valor-destaque">R$ 0,00</span></span>
+                </div>
+                <div class="barra-fundo">
+                    <div id="bar-media" class="barra-progresso marcha-3"></div>
+                </div>
+                <div id="clientes-media" class="subtexto-barra"></div>
+            </div>
+
+            <div class="cenario">
+                <div class="label-cenario">
+                    <span>🟠 5ª Marcha Pisando Fundo (SEO Avançado)</span>
+                    <span>Até <span id="valor-quinta" class="valor-destaque">R$ 0,00</span></span>
+                </div>
+                <div class="barra-fundo">
+                    <div id="bar-quinta" class="barra-progresso marcha-5"></div>
+                </div>
+                <div id="clientes-quinta" class="subtexto-barra"></div>
+            </div>
+
+            <div class="cenario">
+                <div class="label-cenario">
+                    <span>Turbo (SEO SOSSEO Velocidade Máxima)</span>
+                    <span>Até <span id="valor-turbo" class="valor-destaque">R$ 0,00</span></span>
+                </div>
+                <div class="barra-fundo">
+                    <div id="bar-turbo" class="barra-progresso turbo"></div>
+                </div>
+                <div id="clientes-turbo" class="subtexto-barra"></div>
+            </div>
+
+            <div class="cta-section-top">
+                <a href="../transforme-sua-oficina-de-funilaria-e-pintura-automotiva-na-autoridade-no1-da-sua-cidade/"
+                    target="_blank" class="btn-cta btn-funilaria">
+                    Ir Para Página Oficina Funilaria
+                </a>
+                <a href="../transforme-sua-oficina-na-especialista-no1-da-sua-cidade/"
+                    target="_blank" class="btn-cta btn-mecanica">
+                    Ir Para Página Oficina Mecânica
+                </a>
+            </div>
+
+            <div class="box-explicacao">
+                <h4>O que significam esses números?</h4>
+                <p><strong>MARCHA LENTA:</strong> Faturamento estimado para quem não tem site e Google Perfil Empresa.
+                </p>
+                <p><strong>3ª MARCHA (SEO Básico):</strong> Estimativa para quem já começou Site e Google Perfil Empresa
+                    (+30%). Estimativa de 3 meses.</p>
+                <p><strong>5ª MARCHA (SEO Avançado):</strong> Crescimento acelerado com estratégias de SEO mais robustas
+                    (+60%). Estimativa em 6 meses.</p>
+                <p><strong>TURBO (SEO OTIMIZADO):</strong> Potencial para sites e Google Perfil Empresa (+80%). e toda
+                    estratégia aplicada - Com mais de 1 ano de maturação</p>
+            </div>
+
+            <div class="contato-section">
+                <h2 class="contato-title">Onde sua oficina precisa chegar?</h2>
+                <p class="contato-text">Entre em contato agora abaixo deixando uma mensagem no WhatsApp</p>
+                <a href="https://wa.me/5511974695663?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20potencial%20da%20minha%20oficina"
+                    target="_blank" class="btn-whatsapp">
+                    Entre em contato
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // LÓGICA (JAVASCRIPT)
+        function calcularPotencial() {
+            // 1. Pegar os valores
+            const ticketMedio = parseFloat(document.getElementById('perfil').value);
+            const veiculosSemana = parseFloat(document.getElementById('veiculos').value);
+
+            // Validação simples (se não preencher, avisa)
+            if (isNaN(ticketMedio) || isNaN(veiculosSemana)) {
+                alert("Por favor, selecione o perfil e a quantidade de veículos.");
+                return;
+            }
+
+            // 2. Cálculos Matemáticos
+            // Base mensal = (Veiculos * 4 semanas) * Ticket
+            const faturamentoBase = (veiculosSemana * 4) * ticketMedio;
+
+            const faturamentoMedia = faturamentoBase * 1.30; // +30%
+            const faturamentoQuinta = faturamentoBase * 1.60; // +60%
+            const faturamentoTurbo = faturamentoBase * 1.80; // +80%
+
+            // 3. Mostrar a área de resultado
+            document.getElementById('resultado').style.display = 'block';
+
+            // 4. Atualizar os Textos (Formatando em Reais)
+            document.getElementById('valor-lenta').innerText = formatarMoeda(faturamentoBase);
+            document.getElementById('valor-media').innerText = formatarMoeda(faturamentoMedia);
+            document.getElementById('valor-quinta').innerText = formatarMoeda(faturamentoQuinta);
+            document.getElementById('valor-turbo').innerText = formatarMoeda(faturamentoTurbo);
+
+            // 4.1 Atualizar Quantidade de Clientes (Veículos)
+            // Arredondando para int para não ficar "13.5 veículos"
+            document.getElementById('clientes-lenta').innerText = `Aprox. ${Math.round(veiculosSemana)} veículos/semana`;
+            document.getElementById('clientes-media').innerText = `Aprox. ${Math.round(veiculosSemana * 1.30)} veículos/semana`;
+            document.getElementById('clientes-quinta').innerText = `Aprox. ${Math.round(veiculosSemana * 1.60)} veículos/semana`;
+            document.getElementById('clientes-turbo').innerText = `Aprox. ${Math.round(veiculosSemana * 1.80)} veículos/semana`;
+
+            // 5. Atualizar as Barras (Animação Visual)
+            // A barra turbo é 100% da largura. As outras são proporcionais a ela.
+            // Regra de 3 simples para a largura visual
+
+            // Definimos o Turbo como "100%" visualmente para caber na tela
+            const larguraLenta = (faturamentoBase / faturamentoTurbo) * 100;
+            const larguraMedia = (faturamentoMedia / faturamentoTurbo) * 100;
+            const larguraQuinta = (faturamentoQuinta / faturamentoTurbo) * 100;
+
+            // Aplicar largura (com pequeno delay para o CSS fazer a animação)
+            setTimeout(() => {
+                document.getElementById('bar-lenta').style.width = larguraLenta + '%';
+                document.getElementById('bar-media').style.width = larguraMedia + '%';
+                document.getElementById('bar-quinta').style.width = larguraQuinta + '%';
+                document.getElementById('bar-turbo').style.width = '100%';
+            }, 100);
+        }
+
+        // Função auxiliar para deixar bonito (R$ 1.000,00)
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // Adicionar evento de tecla Enter no input de veículos
+        document.getElementById('veiculos').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                calcularPotencial();
+            }
+        });
+    </script>
+
+<script id="sosseo-static-crm-integration">
+(function() {
+  var crmEndpoint = 'https://sosseo-crm.sosseosites.workers.dev/api/leads';
+  var NUMERO_WHATSAPP = '5511974695663';
+
+  // Remove loading class from Fluent Forms immediately
+  document.querySelectorAll('form.frm-fluent-form').forEach(function(f) {
+    f.classList.remove('ff-form-loading');
+  });
+
+  function setupRadioSelection() {
+    document.querySelectorAll('.sosseo-radio-item input[type="radio"]').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        var groupName = radio.getAttribute('name');
+        document.querySelectorAll('input[name="' + groupName + '"]').forEach(function(r) {
+          var parent = r.closest('.sosseo-radio-item');
+          if (parent) parent.classList.toggle('checked', r.checked);
+        });
+      });
+    });
+  }
+
+  window.sosseoFecharModal = function() {
+    var overlay = document.getElementById('sosseo-wa-overlay');
+    if (overlay) overlay.style.display = 'none';
+  };
+
+  var overlay = document.getElementById('sosseo-wa-overlay');
+  if (overlay) {
+    overlay.onclick = function(e) {
+      if (e.target === overlay) sosseoFecharModal();
+    };
+  }
+
+  // Intercepta qualquer clique de WhatsApp no site
+  document.addEventListener('click', function(e) {
+    var waLink = e.target.closest('a[href*="wa.me"], a[href*="whatsapp.com"], a[href*="api.whatsapp.com"]');
+    if (waLink) {
+      e.preventDefault();
+      e.stopPropagation();
+      setupRadioSelection();
+      var m = document.getElementById('sosseo-wa-overlay');
+      if (m) m.style.display = 'flex';
+    }
+  }, true);
+
+  // Envio Final do Modal de WhatsApp
+  window.sosseoEnviarParaWhatsApp = function() {
+    var radioPerfil = document.querySelector('input[name="sosseo_perfil"]:checked');
+    var radioServico = document.querySelector('input[name="sosseo_servico"]:checked');
+
+    var perfil = radioPerfil ? radioPerfil.value : 'Indústria / Fábrica';
+    var servico = radioServico ? radioServico.value : 'Otimização, SEO & Posicionamento';
+
+    var inputNome = document.getElementById('sosseo-lead-nome');
+    var inputWhats = document.getElementById('sosseo-lead-whats');
+    var inputMsg = document.getElementById('sosseo-lead-msg');
+
+    var nome = (inputNome ? inputNome.value : '').trim();
+    var whats = (inputWhats ? inputWhats.value : '').trim();
+    var msg = (inputMsg ? inputMsg.value : '').trim();
+
+    var hasError = false;
+    if (!nome) {
+      if (inputNome) inputNome.classList.add('sosseo-field-error');
+      hasError = true;
+    } else {
+      if (inputNome) inputNome.classList.remove('sosseo-field-error');
+    }
+
+    if (!whats || whats.length < 8) {
+      if (inputWhats) inputWhats.classList.add('sosseo-field-error');
+      hasError = true;
+    } else {
+      if (inputWhats) inputWhats.classList.remove('sosseo-field-error');
+    }
+
+    if (hasError) {
+      alert('Por favor, informe seu Nome e WhatsApp com DDD para direcionarmos seu atendimento.');
+      return;
+    }
+
+    var pagina = window.location.pathname || '/';
+    var titulo = document.title || 'SOSSEO';
+
+    // 1. Grava no Cloudflare CRM
+    fetch(crmEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        company: nome + ' (' + perfil + ')',
+        contact: nome,
+        phone: whats,
+        service: servico,
+        source: 'WhatsApp',
+        status: 'novo',
+        notes: 'Perfil: ' + perfil + ' | Interesse: ' + servico +
+               (msg ? ' | Dúvida: ' + msg : '') +
+               ' | Página: ' + titulo + ' (' + pagina + ')'
+      })
+    }).catch(function(err) { console.log('CRM tracking:', err); });
+
+    if (typeof window.fbq === 'function') {
+      try { window.fbq('track', 'Lead', { content_name: servico, content_category: perfil }); } catch(e) {}
+    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'generate_lead', lead_source: 'whatsapp_modal', service: servico, profile: perfil });
+
+    // 2. Abre a conversa no WhatsApp
+    var texto = 'Olá Reinaldo! Sou ' + nome + ' (' + perfil + ') e gostaria de conversar sobre ' + servico + ' para nossa empresa.' + (msg ? ' Observação: ' + msg : '');
+    var linkFinal = 'https://api.whatsapp.com/send?phone=' + NUMERO_WHATSAPP + '&text=' + encodeURIComponent(texto);
+
+    sosseoFecharModal();
+    window.open(linkFinal, '_blank');
+  };
+
+  // ENVIO DIRETO DOS FORMULÁRIOS NATIVOS (FLUENT FORMS -> SOSSEO CRM)
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    if (!form || form.classList.contains('search-form') || form.getAttribute('role') === 'search') return;
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    var formData = new FormData(form);
+    var nome = '', email = '', telefone = '', empresa = '', mensagem = '', assunto = '', servico = 'Criação de Site / SEO', perfil = '', porte = '';
+
+    formData.forEach(function(val, key) {
+      var k = key.toLowerCase();
+      var v = String(val || '').trim();
+      if (!v) return;
+      if (k.includes('ak_') || k.includes('fluent') || k.includes('referer') || k.includes('nonce')) return;
+      if (k.includes('nome') || k.includes('name')) nome = v;
+      else if (k.includes('mail')) email = v;
+      else if (k.includes('tel') || k.includes('phone') || k.includes('whats') || k.includes('cel')) telefone = v;
+      else if (k.includes('empresa') || k.includes('company')) empresa = v;
+      else if (k.includes('subject') || k.includes('assunto')) assunto = v;
+      else if (k.includes('msg') || k.includes('message') || k.includes('mensagem')) mensagem = v;
+      else if (k.includes('servico') || k.includes('service') || k.includes('interesse')) servico = v;
+      else if (k.includes('perfil')) perfil = v;
+      else if (k.includes('multi_select')) porte = v;
+    });
+
+    if (!nome || (!telefone && !email)) {
+      alert('Por favor, preencha seu Nome, E-mail e Telefone/WhatsApp para enviarmos o retorno.');
+      return;
+    }
+
+    var submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+    var originalBtnText = submitBtn ? submitBtn.innerHTML : 'Enviar';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Enviando...';
+    }
+
+    var notesParts = [];
+    if (perfil) notesParts.push('Perfil: ' + perfil);
+    if (porte) notesParts.push('Porte/Investimento: ' + porte);
+    if (assunto) notesParts.push('Assunto: ' + assunto);
+    if (mensagem) notesParts.push('Mensagem: ' + mensagem);
+    notesParts.push('Página: ' + document.title + ' (' + window.location.pathname + ')');
+
+    fetch(crmEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        company: empresa || (perfil ? nome + ' (' + perfil + ')' : (porte ? nome + ' (' + porte + ')' : nome)),
+        contact: nome || 'Visitante do Site SOSSEO',
+        phone: telefone || '(Não informado)',
+        email: email || '',
+        service: servico,
+        status: 'novo',
+        source: 'Formulário do Site',
+        notes: notesParts.join(' | ')
+      })
+    })
+    .then(function() {
+      if (typeof window.fbq === 'function') {
+        try { window.fbq('track', 'Lead', { content_name: servico }); } catch(err) {}
+      }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'generate_lead', lead_source: 'site_form', service: servico });
+
+      form.reset();
+      var prevMsg = form.parentNode.querySelector('.sosseo-form-success-box');
+      if (prevMsg) prevMsg.remove();
+      var successBox = document.createElement('div');
+      successBox.className = 'sosseo-form-success-box';
+      successBox.style.cssText = 'margin-top:18px;padding:16px 20px;background:#ecfdf5;border:1px solid #10b981;border-left:5px solid #059669;border-radius:8px;color:#065f46;font-weight:600;font-size:15px;line-height:1.5;';
+      successBox.innerHTML = '✅ Mensagem enviada com sucesso! Recebemos sua solicitação e nossa equipe entrará em contato em breve.';
+      form.appendChild(successBox);
+    })
+    .catch(function(err) {
+      console.error('Erro ao enviar formulário:', err);
+      alert('Ocorreu um erro temporário. Por favor, chame-nos diretamente no botão de WhatsApp.');
+    })
+    .finally(function() {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      }
+    });
+  }, true);
+})();
+</script>
+</body>
+
+</html>

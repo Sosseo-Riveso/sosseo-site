@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+Disallow: /demo/
+
+# AI & Generative Search Crawlers (GEO/AEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://sosseo.com.br/sitemap_index.xml
+Sitemap: https://sosseo.com.br/sitemap.xml
