@@ -352,17 +352,20 @@ function normalizeLead(lead) {
   return lead;
 }
 
+function isDemoLead(l) {
+  return !l || ["lead-1","lead-2","lead-3","lead-4","lead-5","lead-1791292021620"].includes(l.id);
+}
+
 function initCRMData() {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored) {
     try {
-      leads = JSON.parse(stored).map(normalizeLead);
+      leads = JSON.parse(stored).filter(l => !isDemoLead(l)).map(normalizeLead);
     } catch (e) {
-      leads = JSON.parse(JSON.stringify(SEED_DATA)).map(normalizeLead);
+      leads = [];
     }
   } else {
-    leads = JSON.parse(JSON.stringify(SEED_DATA)).map(normalizeLead);
-    saveToStorage(false);
+    leads = [];
   }
   renderBoard();
   setupColumnDragAndDrop();
@@ -404,7 +407,7 @@ async function syncWithServer(forceRender = false) {
         const serverJson = JSON.stringify(data.leads);
         const localJson = JSON.stringify(leads);
         if (serverJson !== localJson || forceRender) {
-          leads = data.leads.map(normalizeLead);
+          leads = data.leads.filter(l => !isDemoLead(l)).map(normalizeLead);
           localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
           renderBoard();
         }
