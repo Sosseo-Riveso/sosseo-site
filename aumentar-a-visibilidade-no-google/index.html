@@ -252,7 +252,122 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 /*# sourceURL=kadence_blocks_css-inline-css */
 </style>
 <style id="kadence_blocks_custom_css-inline-css">
-/* * 1. INSTRUÇÃO IMPORTANTE: * Insira o código abaixo na área "Custom CSS" do seu bloco Kadence. * * 2. CLASSE OBRIGATÓRIA: * Você DEVE adicionar a classe `meu-botao-whatsapp` * no campo "Additional CSS Classes" do mesmo bloco. * * NOTA: O seletor .kt-button é o padrão Kadence. Se não funcionar, * inspecione o botão para encontrar a classe do link principal. *//* ====== CLASSE PRINCIPAL DO BOTÃO (Placeholder para .elementor-button) ====== */.meu-botao-whatsapp .kt-button {  min-height: 52px !important; /* Reserva espaço fixo do botão */  line-height: 1.2 !important; /* Altura de linha consistente */  flex-grow: 1 !important;  flex-shrink: 0 !important;  contain: layout paint !important; /* Isola o layout do botão */}/* Garante que o texto do botão não quebre */.meu-botao-whatsapp .kt-button,.meu-botao-whatsapp .kt-button * {  white-space: nowrap !important;  text-wrap: nowrap !important;}/* ====== ESTILOS GERAIS ====== */.meu-botao-whatsapp {  text-wrap: balance !important;}/* Estilo do Texto *//* OBS: Use .kt-button-text se precisar estilizar apenas o texto interno do botão Kadence. */.meu-botao-whatsapp .kt-button-text {  color: white !important;  font-family: "Made Outer Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif !important;  line-height: 1.2 !important;}@media (max-width: 767px) {  .meu-botao-whatsapp .kt-button-text {    font-size: 14px !important;  }}/* Cor e Estilos Principais do Botão */.meu-botao-whatsapp .kt-button {  background: linear-gradient(90deg, #D611FD 0%, #6900FE 100%) !important;  color: #fff !important;  box-shadow: 0 309px 87px 0 rgba(200, 114, 255, 0.00),              0 198px 79px 0 rgba(200, 114, 255, 0.03),              0 111px 67px 0 rgba(200, 114, 255, 0.10),              0 49px 49px 0 rgba(200, 114, 255, 0.17),              0 12px 27px 0 rgba(200, 114, 255, 0.20) !important;  overflow: hidden !important;  transform: translate(0%, 0%) !important;  align-self: stretch !important;  transition: .5s all !important;  display: flex !important;  justify-content: center !important;  align-items: center !important;  position: relative !important;}/* Cor do botão no Hover */.meu-botao-whatsapp .kt-button:hover {  background: linear-gradient(90deg, #6900FE 0%, #D611FD 100%) !important;  box-shadow: 0 242px 68px 0 rgba(207, 137, 251, 0.00),              0 155px 62px 0 rgba(207, 137, 251, 0.04),              0 87px 52px 0 rgba(207, 137, 251, 0.13),              0 39px 39px 0 rgba(207, 137, 251, 0.21),              0 10px 21px 0 rgba(207, 137, 251, 0.25) !important;  transform: scale(1.05) !important;  transition: .5s all !important;}/* Efeito de brilho */.meu-botao-whatsapp .kt-button::before {  content: '' !important;  background: linear-gradient(10deg, #ffffff60 12.81%, rgba(209, 210, 234, 0.00) 66.66%) !important;  width: 90px !important;  height: 180% !important;  position: absolute !important;  transform: translateX(-50%) skew(-25deg) !important;  bottom: 0% !important;  user-select: none !important;  pointer-events: none !important;  animation: shinery 3s infinite ease-in-out !important;  filter: blur(4px) !important;}@keyframes shinery {  0%, 100% { left: -10% !important; opacity: 0 !important; }  20% { opacity: 1 !important; }  48% { left: 110% !important; opacity: 1 !important; }  51% { opacity: 0 !important; }}/* Cor da Borda */.meu-botao-whatsapp .kt-button::after {  content: '' !important;  width: calc(100% + 6px) !important;  height: calc(100% + 6px) !important;  border-radius: inherit !important;  border-radius: 500px !important;  border: 5px solid #ADADAD40 !important;  position: absolute !important;  top: 50% !important;  left: 50% !important;  z-index: 2 !important;  transform: translate(-50%, -50%) !important;  user-select: none !important;  pointer-events: none !important;}
+/*
+ * 1. INSTRUÇÃO IMPORTANTE:
+ * Insira o código abaixo na área "Custom CSS" do seu bloco Kadence.
+ *
+ * 2. CLASSE OBRIGATÓRIA:
+ * Você DEVE adicionar a classe `meu-botao-whatsapp`
+ * no campo "Additional CSS Classes" do mesmo bloco.
+ *
+ * NOTA: O seletor .kt-button é o padrão Kadence. Se não funcionar,
+ * inspecione o botão para encontrar a classe do link principal.
+ */
+
+/* ====== CLASSE PRINCIPAL DO BOTÃO (Placeholder para .elementor-button) ====== */
+.meu-botao-whatsapp .kt-button {
+  min-height: 52px !important; /* Reserva espaço fixo do botão */
+  line-height: 1.2 !important; /* Altura de linha consistente */
+  flex-grow: 1 !important;
+  flex-shrink: 0 !important;
+  contain: layout paint !important; /* Isola o layout do botão */
+}
+
+/* Garante que o texto do botão não quebre */
+.meu-botao-whatsapp .kt-button,
+.meu-botao-whatsapp .kt-button * {
+  white-space: nowrap !important;
+  text-wrap: nowrap !important;
+}
+
+/* ====== ESTILOS GERAIS ====== */
+.meu-botao-whatsapp {
+  text-wrap: balance !important;
+}
+
+/* Estilo do Texto */
+/* OBS: Use .kt-button-text se precisar estilizar apenas o texto interno do botão Kadence. */
+.meu-botao-whatsapp .kt-button-text {
+  color: white !important;
+  font-family: "Made Outer Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif !important;
+  line-height: 1.2 !important;
+}
+
+@media (max-width: 767px) {
+  .meu-botao-whatsapp .kt-button-text {
+    font-size: 14px !important;
+  }
+}
+
+/* Cor e Estilos Principais do Botão */
+.meu-botao-whatsapp .kt-button {
+  background: linear-gradient(90deg, #D611FD 0%, #6900FE 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 309px 87px 0 rgba(200, 114, 255, 0.00),
+              0 198px 79px 0 rgba(200, 114, 255, 0.03),
+              0 111px 67px 0 rgba(200, 114, 255, 0.10),
+              0 49px 49px 0 rgba(200, 114, 255, 0.17),
+              0 12px 27px 0 rgba(200, 114, 255, 0.20) !important;
+  overflow: hidden !important;
+  transform: translate(0%, 0%) !important;
+  align-self: stretch !important;
+  transition: .5s all !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  position: relative !important;
+}
+
+/* Cor do botão no Hover */
+.meu-botao-whatsapp .kt-button:hover {
+  background: linear-gradient(90deg, #6900FE 0%, #D611FD 100%) !important;
+  box-shadow: 0 242px 68px 0 rgba(207, 137, 251, 0.00),
+              0 155px 62px 0 rgba(207, 137, 251, 0.04),
+              0 87px 52px 0 rgba(207, 137, 251, 0.13),
+              0 39px 39px 0 rgba(207, 137, 251, 0.21),
+              0 10px 21px 0 rgba(207, 137, 251, 0.25) !important;
+  transform: scale(1.05) !important;
+  transition: .5s all !important;
+}
+
+/* Efeito de brilho */
+.meu-botao-whatsapp .kt-button::before {
+  content: '' !important;
+  background: linear-gradient(10deg, #ffffff60 12.81%, rgba(209, 210, 234, 0.00) 66.66%) !important;
+  width: 90px !important;
+  height: 180% !important;
+  position: absolute !important;
+  transform: translateX(-50%) skew(-25deg) !important;
+  bottom: 0% !important;
+  user-select: none !important;
+  pointer-events: none !important;
+  animation: shinery 3s infinite ease-in-out !important;
+  filter: blur(4px) !important;
+}
+
+@keyframes shinery {
+  0%, 100% { left: -10% !important; opacity: 0 !important; }
+  20% { opacity: 1 !important; }
+  48% { left: 110% !important; opacity: 1 !important; }
+  51% { opacity: 0 !important; }
+}
+
+/* Cor da Borda */
+.meu-botao-whatsapp .kt-button::after {
+  content: '' !important;
+  width: calc(100% + 6px) !important;
+  height: calc(100% + 6px) !important;
+  border-radius: inherit !important;
+  border-radius: 500px !important;
+  border: 5px solid #ADADAD40 !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  z-index: 2 !important;
+  transform: translate(-50%, -50%) !important;
+  user-select: none !important;
+  pointer-events: none !important;
+}
 /*# sourceURL=kadence_blocks_custom_css-inline-css */
 </style>
 <style id="kadence_blocks_palette_css">:root .has-palette1-color{color:#3182CE}:root .has-palette1-background-color{background-color:#3182CE}:root .has-palette2-color{color:#2B6CB0}:root .has-palette2-background-color{background-color:#2B6CB0}:root .has-palette3-color{color:#1A202C}:root .has-palette3-background-color{background-color:#1A202C}:root .has-palette4-color{color:#2D3748}:root .has-palette4-background-color{background-color:#2D3748}:root .has-palette5-color{color:#4A5568}:root .has-palette5-background-color{background-color:#4A5568}:root .has-palette6-color{color:#718096}:root .has-palette6-background-color{background-color:#718096}:root .has-palette7-color{color:#EDF2F7}:root .has-palette7-background-color{background-color:#EDF2F7}:root .has-palette8-color{color:#F7FAFC}:root .has-palette8-background-color{background-color:#F7FAFC}:root .has-palette9-color{color:#ffffff}:root .has-palette9-background-color{background-color:#ffffff}</style><script id="jquery-core-js" src="../wp-includes/js/jquery/jquery.min.js"></script>
@@ -751,6 +866,37 @@ class="hfeed site" id="page">
                 </svg></span>Google Perfil Empresa AVANÇADO</a></li>
 	</ul>
 </li>
+	<li id="menu-item-6800" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-6800"><a aria-expanded="false" href="../category/novos-sites-sosseo/" class="menu-link"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span>Novos Sites SOSSEO<span role="button" class="dropdown-menu-toggle ast-header-navigation-arrow" tabindex="0" aria-expanded="false" aria-label="Alternar menu" aria-haspopup="true"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span></span></a><button class="ast-menu-toggle" aria-expanded="false" aria-label="Toggle Menu"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span></button>
+	<ul class="sub-menu">
+		<li id="menu-item-6801" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6801"><a href="../seo-local-para-oficina-de-funilaria-e-pintura/" class="menu-link"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span>FG Car Funilaria e Pintura (Osasco): Guia e Case</a></li>
+		<li id="menu-item-6802" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6802"><a href="../seo-para-ferramentaria-e-injecao-plastica/" class="menu-link"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span>Portal Molde Injeção (Indústria B2B): Guia e Case</a></li>
+		<li id="menu-item-6803" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6803"><a href="../seo-local-para-oficina-de-cambio-automatico-em-osasco/" class="menu-link"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span>Câmbio Automático Osasco: Guia e Case</a></li>
+		<li id="menu-item-6804" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6804"><a href="../criacao-de-site-e-seo-para-cambio-automatico-em-campinas/" class="menu-link"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span>Câmbio Automático Campinas: Guia e Case</a></li>
+		<li id="menu-item-6805" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6805"><a href="../seo-local-para-oficina-mecanica-em-osasco/" class="menu-link"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span>Oficina Mecânica Osasco: Guia e Case</a></li>
+		<li id="menu-item-6806" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6806"><a href="../criacao-de-site-e-seo-para-oficina-mecanica-em-campinas/" class="menu-link"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span>Oficina Mecânica Campinas: Guia e Case</a></li>
+		<li id="menu-item-6807" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6807"><a href="../criacao-de-site-e-seo-para-psicanalista-e-terapia-online/" class="menu-link"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span>Psicanálise Alma e Luz (Terapia Online): Guia e Case</a></li>
+	</ul>
+</li>
 </ul>
 </li>
 <li id="menu-item-2864" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2864"><a href="../lp-criacao-de-sites/" class="menu-link">Criação de Sites</a></li>
@@ -909,6 +1055,19 @@ class="hfeed site" id="page">
 		<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-5459"><a href="../estrategia-de-palavras-chave-do-google-perfil-empresa/" title="Como Utilizar A Estratégia de Palavras-Chave Dentro do Google Perfil Empresa 🚀" class="menu-link">Estratégia de PALAVRAS-CHAVE do (GPE)</a></li>
 		<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-5533"><a href="../melhores-palavras-chave-para-dominar-o-google-perfil-empresa/" title="Como Encontrar as Melhores Palavras-Chave para Dominar o Google Perfil Empresa 🚀" class="menu-link">PALAVRAS-CHAVE no (GPE) AVANÇADO</a></li>
 		<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-5475"><a href="../google-perfil-empresa-avancado/" title="O Código-Fonte da Relevância Local: Engenharia Reversa do Algoritmo para Dominar o Google Perfil Empresa" class="menu-link">Google Perfil Empresa AVANÇADO</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-6800"><a aria-expanded="false" href="../category/novos-sites-sosseo/" class="menu-link">Novos Sites SOSSEO<span role="button" class="dropdown-menu-toggle ast-header-navigation-arrow" tabindex="0" aria-expanded="false" aria-label="Alternar menu" aria-haspopup="true"></span></a><button class="ast-menu-toggle" aria-expanded="false" aria-label="Toggle Menu"><span class="ast-icon icon-arrow"><svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewbox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" />
+                </svg></span></button>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6801"><a href="../seo-local-para-oficina-de-funilaria-e-pintura/" class="menu-link">FG Car Funilaria e Pintura (Osasco): Guia e Case</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6802"><a href="../seo-para-ferramentaria-e-injecao-plastica/" class="menu-link">Portal Molde Injeção (Indústria B2B): Guia e Case</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6803"><a href="../seo-local-para-oficina-de-cambio-automatico-em-osasco/" class="menu-link">Câmbio Automático Osasco: Guia e Case</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6804"><a href="../criacao-de-site-e-seo-para-cambio-automatico-em-campinas/" class="menu-link">Câmbio Automático Campinas: Guia e Case</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6805"><a href="../seo-local-para-oficina-mecanica-em-osasco/" class="menu-link">Oficina Mecânica Osasco: Guia e Case</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6806"><a href="../criacao-de-site-e-seo-para-oficina-mecanica-em-campinas/" class="menu-link">Oficina Mecânica Campinas: Guia e Case</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-6807"><a href="../criacao-de-site-e-seo-para-psicanalista-e-terapia-online/" class="menu-link">Psicanálise Alma e Luz (Terapia Online): Guia e Case</a></li>
 	</ul>
 </li>
 </ul>
