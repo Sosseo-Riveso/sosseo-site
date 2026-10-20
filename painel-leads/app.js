@@ -1,7 +1,39 @@
 // SOSSEO CRM - Engine Comercial para Agência (Sites, Tráfego & CRM)
 const STORAGE_KEY = 'sosseo_agency_crm_v3_clean';
+const DELETED_IDS_KEY = STORAGE_KEY + '_deleted_ids';
+const CLEARED_AT_KEY = STORAGE_KEY + '_cleared_at';
 const SESSION_KEY = 'sosseo_user_session';
 const COLUMNS = ['novo', 'respondido', 'reuniao', 'proposta', 'rejeitou', 'ganho'];
+
+function getDeletedIds() {
+  try { return JSON.parse(localStorage.getItem(DELETED_IDS_KEY) || '[]'); } catch(e) { return []; }
+}
+function addDeletedId(id) {
+  if (!id) return;
+  const list = getDeletedIds();
+  const s = String(id);
+  if (!list.includes(s)) {
+    list.push(s);
+    localStorage.setItem(DELETED_IDS_KEY, JSON.stringify(list.slice(-1000)));
+  }
+}
+function getClearedAt() {
+  return Number(localStorage.getItem(CLEARED_AT_KEY) || '0') || 0;
+}
+function setClearedAt(ts) {
+  localStorage.setItem(CLEARED_AT_KEY, String(ts));
+}
+function isDeletedOrClearedLead(l) {
+  if (!l || isDemoLead(l)) return true;
+  const deletedSet = new Set(getDeletedIds().map(String));
+  if (l.id && deletedSet.has(String(l.id))) return true;
+  const clearedAt = getClearedAt();
+  if (clearedAt > 0 && l.createdAt) {
+    const ts = new Date(l.createdAt).getTime();
+    if (!isNaN(ts) && ts <= clearedAt) return true;
+  }
+  return false;
+}
 
 const STATUS_LABELS = {
   novo: '1. Novo Lead',
@@ -327,13 +359,37 @@ function clearCacheAndSync() {
   }
 }
 
+function clearAllCRMLeads() {
+  if (!confirm('ATENÇÃO: Deseja excluir PERMANENTEMENTE todos os leads deste CRM (local e na nuvem Cloudflare)?')) {
+    return;
+  }
+  const nowTs = Date.now();
+  setClearedAt(nowTs);
+  leads.forEach(l => { if (l && l.id) addDeletedId(l.id); });
+  leads = [];
+  localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
+  renderBoard();
+  fetch('https://sosseo-crm.sosseosites.workers.dev/api/leads', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'clear' })
+  }).catch(() => {});
+  addAuditLog('limpeza_total', 'Limpou todos os leads do CRM permanentemente.');
+  alert('Todos os leads foram excluídos permanentemente do CRM e da nuvem!');
+}
+
 // ==========================================
 // 5. INICIALIZAÇÃO E GESTÃO DE LEADS
 // ==========================================
 function normalizeLead(lead) {
   if (!lead) return lead;
+  lead.company = String(lead.company || lead.nome || 'Sem Empresa');
+  lead.contact = String(lead.contact || lead.nome || 'Visitante');
+  lead.phone = String(lead.phone || lead.telefone || '');
+  lead.service = String(lead.service || lead.servico || 'Criação de Site');
   if (lead.status === 'qualificacao') lead.status = 'respondido';
   if (lead.status === 'negociacao') lead.status = 'rejeitou';
+  if (!COLUMNS.includes(lead.status)) lead.status = 'novo';
 
   // Garantir que o histórico exista como array independente (cópia isolada)
   if (!Array.isArray(lead.history)) {
@@ -360,7 +416,7 @@ function initCRMData() {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored) {
     try {
-      leads = JSON.parse(stored).filter(l => !isDemoLead(l)).map(normalizeLead);
+      leads = JSON.parse(stored).filter(l => !isDeletedOrClearedLead(l)).map(normalizeLead);
     } catch (e) {
       leads = [];
     }
@@ -403,17 +459,51 @@ async function syncWithServer(forceRender = false) {
     const res = await fetch('https://sosseo-crm.sosseosites.workers.dev/api/leads');
     if (res.ok) {
       const data = await res.json();
+      if (data.meta) {
+        if (Array.isArray(data.meta.deletedIds)) {
+          data.meta.deletedIds.forEach(id => addDeletedId(id));
+        }
+        if (Number(data.meta.clearedAt) > getClearedAt()) {
+          setClearedAt(Number(data.meta.clearedAt));
+        }
+      }
       if (Array.isArray(data.leads)) {
-        const serverJson = JSON.stringify(data.leads);
+        const cleanServerLeads = data.leads.filter(l => !isDeletedOrClearedLead(l)).map(normalizeLead);
+        const serverJson = JSON.stringify(cleanServerLeads);
         const localJson = JSON.stringify(leads);
         if (serverJson !== localJson || forceRender) {
-          leads = data.leads.filter(l => !isDemoLead(l)).map(normalizeLead);
+          leads = cleanServerLeads;
           localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
           renderBoard();
         }
       }
     }
   } catch (err) {}
+}
+
+function deleteCurrentLead() {
+  const id = document.getElementById('lead-id').value;
+  if (!id) return;
+
+  const lead = leads.find(l => l.id === id);
+  const companyName = lead ? lead.company : 'este lead';
+
+  if (!confirm(`Deseja realmente excluir o lead "${companyName}"? Esta ação removerá a oportunidade permanentemente.`)) {
+    return;
+  }
+
+  addDeletedId(id);
+  leads = leads.filter(l => l.id !== id);
+  fetch('https://sosseo-crm.sosseosites.workers.dev/api/leads', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'delete', id })
+  }).catch(() => {});
+  saveToStorage();
+  closeModal('lead-modal');
+  renderBoard();
+  addAuditLog('lead_excluido', `Excluiu permanentemente o lead '${companyName}'.`);
+  alert(`Lead "${companyName}" foi excluído com sucesso!`);
 }
 
 function saveToStorage() {
@@ -773,25 +863,6 @@ function openEditLeadModal(id) {
   if (btnDelete) btnDelete.style.display = 'inline-flex';
 
   document.getElementById('lead-modal').style.display = 'flex';
-}
-
-function deleteCurrentLead() {
-  const id = document.getElementById('lead-id').value;
-  if (!id) return;
-
-  const lead = leads.find(l => l.id === id);
-  const companyName = lead ? lead.company : 'este lead';
-
-  if (!confirm(`Deseja realmente excluir o lead "${companyName}"? Esta ação removerá a oportunidade permanentemente.`)) {
-    return;
-  }
-
-  leads = leads.filter(l => l.id !== id);
-  saveToStorage();
-  closeModal('lead-modal');
-  renderBoard();
-  addAuditLog('lead_excluido', `Excluiu permanentemente o lead '${companyName}'.`);
-  alert(`Lead "${companyName}" foi excluído com sucesso!`);
 }
 
 function saveLead(e) {
