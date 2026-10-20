@@ -4,3 +4,7 @@
 .nojekyll
 wrangler.json
 publicar-artigo.mjs
+Carro-suv
+Carro-suv/**
+Logos
+Logos/**
