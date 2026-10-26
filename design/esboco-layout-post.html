@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esboço do Layout de Post — Desktop &amp; Mobile (SOSSEO)</title>
+<style>
+  :root{--azul:#0a3d91;--azul-escuro:#031146;--cinza:#f1f5f9;--borda:#cbd5e1;--texto:#0f172a;--legenda:#475569;--destaque:#fcb900;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#e2e8f0;color:var(--texto);padding:24px;}
+  h1{text-align:center;font-size:26px;margin:0 0 4px;}
+  .subtitulo{text-align:center;color:var(--legenda);margin:0 0 24px;font-size:14px;}
+  .wrapper{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1500px;margin:0 auto;}
+  .coluna{background:#fff;border:2px solid var(--borda);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
+  .coluna>.cabecalho-coluna{background:var(--azul);color:#fff;text-align:center;font-weight:700;padding:10px;font-size:15px;}
+  .coluna.desktop{min-width:0;}
+  .coluna.mobile .tela{max-width:390px;margin:0 auto;}
+  .tela{padding:12px;display:flex;flex-direction:column;gap:10px;background:#fff;}
+  .b{border:2px dashed var(--borda);border-radius:8px;padding:8px 10px;font-size:12px;color:var(--legenda);background:var(--cinza);text-align:center;line-height:1.35;}
+  .b strong{color:var(--azul);display:block;font-size:11.5px;}
+  .b span{display:block;font-weight:600;color:var(--texto);}
+  .b .desc{font-weight:400;font-size:11px;color:var(--legenda);}
+  .rotulo{font-size:10.5px;font-weight:700;color:#fff;background:var(--azul);display:inline-block;padding:1px 7px;border-radius:10px;margin-bottom:3px;}
+  .hero{background:linear-gradient(135deg,var(--azul-escuro),var(--azul));color:#fff;border:none;text-align:center;padding:18px 12px;}
+  .hero .rotulo{background:rgba(255,255,255,.2);}
+  .hero strong{color:#fff;font-size:14px;}
+  .hero .subtitulo-banner{color:var(--destaque);font-weight:600;font-size:12px;}
+  .hero .meta{color:#e2e8f0;font-size:11px;margin-top:6px;}
+  .cta{background:#eafff1;border:1.5px solid #22c55e;color:#14532d;}
+  .cta strong{color:#15803d;}
+  .btn-wa{background:#25D366;color:#fff;font-weight:700;border-radius:20px;padding:6px 14px;font-size:12px;display:inline-block;margin-top:5px;}
+  .col2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .col3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  .coluna.mobile .col2,.coluna.mobile .col3{grid-template-columns:1fr;}
+  .img-bloco{border:2px solid var(--borda);border-radius:8px;background:#fff;height:90px;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:11px;flex-direction:column;gap:4px;}
+  .img-bloco::before{content:'🖼';font-size:22px;}
+  .tabela-conteudo{background:#fff;border:2px solid var(--borda);border-radius:8px;padding:8px;}
+  .tabela-conteudo strong{color:var(--azul);font-size:11.5px;}
+  .tabela-conteudo ul{font-size:11px;color:var(--legenda);margin:4px 0 0;padding-left:16px;}
+  .faq{border:2px solid var(--borda);border-radius:8px;padding:8px;}
+  .faq strong{color:var(--azul);}
+  .faq .item{font-size:11px;color:var(--legenda);border-top:1px dashed var(--borda);padding-top:4px;margin-top:4px;}
+  .takeaway{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;border:none;text-align:left;}
+  .takeaway strong{color:var(--destaque);}
+  .takeaway p{font-size:11.5px;margin:4px 0;}
+  .takeaway .btn-wa{background:var(--destaque);color:#000;margin-top:6px;}
+  .mapa{background:#fff;border:2px solid var(--borda);border-radius:8px;height:70px;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:11px;gap:6px;}
+  .mapa::before{content:'📍';}
+  .nav-posts{display:flex;justify-content:space-between;gap:10px;border-top:2px solid var(--borda);border-bottom:2px solid var(--borda);padding:8px;font-size:11px;color:var(--azul);background:#fff;}
+  .coluna.mobile .nav-posts{flex-direction:column;}
+  .relacionados{background:var(--cinza);border:2px solid var(--borda);border-radius:8px;padding:10px;}
+  .relacionados>strong{color:var(--azul);display:block;margin-bottom:8px;font-size:12px;}
+  .rel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .coluna.mobile .rel-grid{grid-template-columns:1fr 1fr;}
+  .rel-card{background:#fff;border:1.5px solid var(--borda);border-radius:8px;overflow:hidden;font-size:10.5px;text-align:center;color:var(--legenda);}
+  .rel-card .thumb{height:46px;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:9px;color:#3b82f6;}
+  .rel-card .txt{padding:5px;}
+  .sticky{position:sticky;top:10px;font-size:10px;color:var(--legenda);text-align:center;background:#fef3c7;border:1px dashed #f59e0b;border-radius:6px;padding:3px;}
+  .footer{background:var(--azul-escuro);color:#fff;border:none;padding:14px;text-align:left;}
+  .footer strong{color:#fff;font-size:12px;display:block;margin-bottom:6px;}
+  .footer .col3{gap:8px;}
+  .footer .col3>div{border:1px dashed rgba(255,255,255,.3);border-radius:6px;padding:6px;font-size:10.5px;color:#cbd5e1;}
+  .footer .barra{text-align:center;color:#94a3b8;font-size:10px;border-top:1px solid rgba(255,255,255,.2);margin-top:8px;padding-top:6px;}
+  .coluna.mobile .footer .col3{grid-template-columns:1fr;}
+  .nota-rodape{grid-column:1/-1;text-align:center;color:var(--legenda);font-size:12px;background:#fff;border:1px solid var(--borda);border-radius:8px;padding:10px;}
+  @media (max-width:900px){.wrapper{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<h1>Esboço do Layout do Post</h1>
+<p class="subtitulo">Sem conteúdo — apenas o desenho/estrutura. Duas variações: <strong>Desktop</strong> (coluna larga) e <strong>Mobile</strong> (tudo empilhado em 390px).</p>
+<div class="wrapper">
+
+    <!-- ===================== DESKTOP ===================== -->
+    <div class="coluna desktop">
+      <div class="cabecalho-coluna">🖥️ DESKTOP (visualização ~1400px)</div>
+      <div class="tela">
+
+        <div class="b"><span class="rotulo">HEADER</span><strong>Barra Superior + Menu Principal</strong><span class="desc">Logo SOSSEO · telefone WhatsApp · menu completo com submenus</span></div>
+
+        <div class="b hero">
+          <span class="rotulo">HERO / BANNER</span>
+          <strong>Título H1 do Post (centro, faixa azul escura)</strong>
+          <div class="subtitulo-banner">Subtítulo do banner</div>
+          <div class="meta">Atualizado em [data] — Por SOSSEO / Categoria</div>
+        </div>
+
+        <div class="b respiro"><span class="rotulo">RESPIRO</span><span class="desc">espaço em branco (~28px) entre o banner e o conteúdo</span></div>
+
+        <div class="b"><span class="rotulo">H2 PALAVRA-CHAVE</span><strong>H2 reforçando a palavra-chave alvo</strong><span class="desc">antes do 1º parágrafo (âncora semântica de SEO)</span></div>
+
+        <div class="b"><strong>1º e 2º Parágrafos (curtos — 2 a 4 linhas)</strong><span class="desc">texto de abertura com parágrafos variando em 2, 3 e 4 linhas</span></div>
+
+        <div class="col2">
+          <div class="img-bloco">Imagem quadrada hero (1024×1024)</div>
+          <div class="b cta"><strong>Coluna 2 — H3 + Texto</strong><span>H3 e texto ajustados à altura da imagem</span><span class="btn-wa">Após o 3º/4º parágrafo</span></div>
+        </div>
+
+        <div class="b"><strong>3º e 4º Parágrafos (curtos)</strong><span class="desc">continuação do texto em blocos de 2–4 linhas</span></div>
+
+        <div class="b"><strong>Seções de texto (H2 + H3)</strong><span class="desc">Parágrafos, listas, blockquote de destaque, blocos de conteúdo</span></div>
+
+        <div class="img-bloco" style="height:70px;">Imagem 2 (no meio do conteúdo)</div>
+
+        <div class="b"><strong>Continuação do conteúdo (H2 + H3)</strong><span class="desc">Parágrafos, listas e subseções</span></div>
+
+        <div class="col3">
+          <div class="b"><strong>3 Colunas (Kadence)</strong><span class="desc">Cards / pontos-chave</span></div>
+          <div class="b"><strong>3 Colunas (Kadence)</strong><span class="desc">Cards / pontos-chave</span></div>
+          <div class="b"><strong>3 Colunas (Kadence)</strong><span class="desc">Cards / pontos-chave</span></div>
+        </div>
+
+        <div class="faq">
+          <strong>❓ FAQ / Perguntas Frequentes (H2)</strong>
+          <div class="item">Pergunta 1 → resposta</div>
+          <div class="item">Pergunta 2 → resposta</div>
+          <div class="item">Pergunta 3 → resposta</div>
+        </div>
+
+        <div class="b takeaway">
+          <span class="rotulo" style="background:rgba(255,255,255,.2)">⚡ TAKEAWAY</span>
+          <strong>Conclusão Estratégica (card escuro)</strong>
+          <p>Resumo da conclusão do artigo…</p>
+          <span class="btn-wa">👉 CTA — link para Posicionamento Industrial B2B</span>
+        </div>
+
+        <div class="b cta"><strong>Bloco do Autor (InfoBox)</strong><span>Foto/avatar + chamada "Meu nome é Reinaldo"</span><span class="btn-wa">Chame no WhatsApp</span></div>
+        <div class="b"><strong>Marca SOSSEO – Criação de Sites</strong></div>
+        <div class="mapa">Google Maps — localização SOSSEO</div>
+
+        <div class="nav-posts">
+          <div>← Post anterior</div>
+          <div>Post seguinte →</div>
+        </div>
+
+        <div class="relacionados">
+          <strong>Posts relacionados</strong>
+          <div class="rel-grid">
+            <div class="rel-card"><div class="thumb">thumb</div><div class="txt">Artigo A</div></div>
+            <div class="rel-card"><div class="thumb">thumb</div><div class="txt">Artigo B</div></div>
+            <div class="rel-card"><div class="thumb">thumb</div><div class="txt">Artigo C</div></div>
+            <div class="rel-card"><div class="thumb">thumb</div><div class="txt">Artigo D</div></div>
+          </div>
+        </div>
+
+        <div class="b footer">
+          <strong>FOOTER (site-footer)</strong>
+          <div class="col3">
+            <div>Coluna 1 — Sobre / endereço</div>
+            <div>Coluna 2 — Contato / links</div>
+            <div>Coluna 3 — Categorias / serviços</div>
+          </div>
+          <div class="barra">Copyright © SOSSEO · Política de Privacidade · CNPJ</div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ===================== MOBILE ===================== -->
+    <div class="coluna mobile">
+      <div class="cabecalho-coluna">📱 MOBILE (visualização ~390px, tudo empilhado)</div>
+      <div class="tela">
+
+        <div class="b"><span class="rotulo">HEADER MOBILE</span><strong>Hambúrguer + Logo + Tel WhatsApp</strong><span class="desc">menu recolhido em ícone ☰</span></div>
+
+        <div class="b hero">
+          <span class="rotulo">HERO</span>
+          <strong>Título H1</strong>
+          <div class="subtitulo-banner">Subtítulo do banner</div>
+          <div class="meta">Atualizado — Por SOSSEO / Categoria</div>
+        </div>
+
+        <div class="b respiro"><span class="rotulo">RESPIRO</span><span class="desc">espaço ~28px entre banner e conteúdo</span></div>
+
+        <div class="b"><span class="rotulo">H2 PALAVRA-CHAVE</span><strong>H2 reforçando a palavra-chave</strong></div>
+
+        <div class="b"><strong>1º e 2º Parágrafos (curtos)</strong><span class="desc">2 a 4 linhas</span></div>
+
+        <div class="img-bloco">Imagem quadrada hero</div>
+        <div class="b cta"><strong>H3 + Texto (empilha em 1 coluna)</strong><span>após o 3º/4º parágrafo</span></div>
+
+        <div class="b"><strong>3º e 4º Parágrafos (curtos)</strong><span class="desc">continuação em blocos de 2–4 linhas</span></div>
+
+        <div class="b"><strong>Seções de texto (H2 + H3)</strong><span class="desc">Parágrafos, listas, blockquote</span></div>
+
+        <div class="img-bloco" style="height:60px;">Imagem 2</div>
+
+        <div class="b"><strong>Continuação do conteúdo</strong></div>
+
+        <div class="b"><strong>3 Colunas → empilham em 1</strong><span class="desc">cards empilhados verticalmente</span></div>
+        <div class="b"><strong>3 Colunas</strong><span class="desc">cards empilhados</span></div>
+        <div class="b"><strong>3 Colunas</strong><span class="desc">cards empilhados</span></div>
+
+        <div class="faq">
+          <strong>❓ FAQ</strong>
+          <div class="item">Pergunta 1 → resposta</div>
+          <div class="item">Pergunta 2 → resposta</div>
+          <div class="item">Pergunta 3 → resposta</div>
+        </div>
+
+        <div class="b takeaway">
+          <span class="rotulo" style="background:rgba(255,255,255,.2)">⚡ TAKEAWAY</span>
+          <strong>Conclusão Estratégica (card escuro)</strong>
+          <p>Resumo da conclusão…</p>
+          <span class="btn-wa">👉 CTA — Posicionamento B2B</span>
+        </div>
+
+        <div class="b cta"><strong>Bloco do Autor</strong><span>Reinaldo / chamada</span><span class="btn-wa">Chame no WhatsApp</span></div>
+        <div class="b"><strong>Marca SOSSEO</strong></div>
+        <div class="mapa">Google Maps</div>
+
+        <div class="nav-posts">
+          <div>← Post anterior</div>
+          <div>Post seguinte →</div>
+        </div>
+
+        <div class="relacionados">
+          <strong>Posts relacionados</strong>
+          <div class="rel-grid">
+            <div class="rel-card"><div class="thumb">thumb</div><div class="txt">Artigo A</div></div>
+            <div class="rel-card"><div class="thumb">thumb</div><div class="txt">Artigo B</div></div>
+            <div class="rel-card"><div class="thumb">thumb</div><div class="txt">Artigo C</div></div>
+            <div class="rel-card"><div class="thumb">thumb</div><div class="txt">Artigo D</div></div>
+          </div>
+        </div>
+
+        <div class="b footer">
+          <strong>FOOTER MOBILE</strong>
+          <div class="col3">
+            <div>Coluna 1 — Sobre</div>
+            <div>Coluna 2 — Contato</div>
+            <div>Coluna 3 — Categorias</div>
+          </div>
+          <div class="barra">Copyright © SOSSEO</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="nota-rodape">
+      💡 <strong>Observação:</strong> no layout <strong>Desktop</strong>, o bloco principal e a <strong>sidebar</strong> ficam lado a lado (artigo à esquerda, ~300px de sidebar fixa à direita). No <strong>Mobile</strong>, a sidebar desce para baixo do artigo e os grids (2 e 3 colunas) viram uma coluna só. O conteúdo (textos, imagens reais, FAQ) é preenchido depois pelo script <code>publicar-artigo.mjs</code>.
+    </div>
+
+  </div>
+
+</body>
+</html>
+

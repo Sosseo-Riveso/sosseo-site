@@ -1,0 +1,7 @@
+# Dependências temporárias (sharp/parse5) usadas para manipular imagens - não fazem parte do site
+node_modules/
+package.json
+package-lock.json
+
+# Arquivos de editor
+.vscode/

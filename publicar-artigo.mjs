@@ -64,9 +64,44 @@ function parseArticleFile(rawHtml) {
     const afterMarker = rawHtml.indexOf('-->', copyMarkerIdx);
     bodyHtml = rawHtml.slice(afterMarker + 3).trim();
   } else {
-    const endWrapperIdx = rawHtml.indexOf('</div>\n</div>');
-    if (endWrapperIdx !== -1) {
-      bodyHtml = rawHtml.slice(endWrapperIdx + 13).trim();
+    // No "COPIE DAQUI PARA BAIXO" marker. Try to strip the mandatory
+    // metadata block and the subtitulo_banner wrapper so only the real
+    // body content remains in the published post.
+    const takeawayIdx = rawHtml.indexOf('Conclusão Estratégica (Takeaway):');
+    if (takeawayIdx !== -1) {
+      const metaUlEnd = rawHtml.indexOf('</ul>', takeawayIdx);
+      const metaDivEnd = metaUlEnd !== -1 ? rawHtml.indexOf('</div>', metaUlEnd) : -1;
+      if (metaDivEnd !== -1) {
+        let bodyStart = metaDivEnd + '</div>'.length;
+        // Skip the subtitulo_banner wrapper that often follows the metadata block
+        const bannerStart = rawHtml.indexOf('subtitulo_banner_wrapper', bodyStart);
+        if (bannerStart !== -1) {
+          const bannerEnd = rawHtml.indexOf('</div>', bannerStart);
+          if (bannerEnd !== -1) bodyStart = bannerEnd + '</div>'.length;
+        }
+        bodyHtml = rawHtml.slice(bodyStart).trim();
+      } else {
+        // Fallback: legacy wrapper detection
+        const endWrapperIdx = rawHtml.indexOf('</div>\n</div>');
+        if (endWrapperIdx !== -1) {
+          bodyHtml = rawHtml.slice(endWrapperIdx + 13).trim();
+        }
+      }
+    } else {
+      const endWrapperIdx = rawHtml.indexOf('</div>\n</div>');
+      if (endWrapperIdx !== -1) {
+        bodyHtml = rawHtml.slice(endWrapperIdx + 13).trim();
+      }
+    }
+  }
+
+  // If the source article wrapped everything in an outer <div class="artigo-sosseo-b2b">
+  // whose opening tag was cut away by the slice above, drop the now-orphaned
+  // closing </div> that remains at the end of the extracted body.
+  if (rawHtml.includes('class="artigo-sosseo-b2b"') && !bodyHtml.includes('class="artigo-sosseo-b2b"')) {
+    const trimmed = bodyHtml.replace(/\s+$/, '');
+    if (trimmed.endsWith('</div>')) {
+      bodyHtml = trimmed.slice(0, trimmed.lastIndexOf('</div>')).replace(/\s+$/, '');
     }
   }
 
@@ -144,6 +179,51 @@ async function detectAndCopyImages(articleFilePath, slug) {
 
 function buildEnhancedBodyHtml(parsed, images, categorySlug) {
   let body = parsed.bodyHtml;
+
+  // 0. SEO: Respiro após o banner + H2 com a palavra-chave alvo antes do 1º parágrafo
+  const kw = (parsed.palavraChave || parsed.tituloSeo || '').trim();
+  const h2Titulo = kw.charAt(0).toUpperCase() + kw.slice(1);
+  const respiroH2 = `
+<div style="height: 28px;" aria-hidden="true"></div>
+
+<h2 style="color:#0f172a;font-size:24px;font-weight:800;line-height:1.3;margin-top:8px;margin-bottom:14px;">${escapeHtmlAttr(h2Titulo)}</h2>
+
+`;
+  // Primeiro <p> do corpo
+  const firstP = body.search(/<p[^>]*>/i);
+  if (firstP !== -1) {
+    body = body.slice(0, firstP) + respiroH2 + body.slice(firstP);
+  }
+
+  // 0b. SEO: Bloco de 2 colunas (imagem quadrada hero + H3 + texto) após o 3º/4º parágrafo
+  if (images.length > 0) {
+    const heroImg = images[0];
+    const paragrafos = [...body.matchAll(/<p[^>]*>[\s\S]*?<\/p>/gi)];
+    if (paragrafos.length >= 3) {
+      const quartoP = paragrafos[Math.min(3, paragrafos.length - 1)];
+      const idxAlvo = quartoP.index;
+      const bloco2col = `
+
+<div class="sc-2col-imagem-h3" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;margin:36px 0;">
+  <div style="min-width:0;">
+    <img width="1024" height="1024" src="../${heroImg}" alt="${escapeHtmlAttr(parsed.tituloSeo)}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;box-shadow:0 8px 24px rgba(15,23,42,0.12);display:block;" />
+  </div>
+  <div style="min-width:0;display:flex;flex-direction:column;justify-content:center;">
+    <h3 style="color:#0369a1;font-size:21px;font-weight:800;margin:0 0 12px 0;line-height:1.3;">${escapeHtmlAttr(h2Titulo)}</h3>
+    <p style="margin:0;font-size:17px;line-height:1.7;color:#334155;">${escapeHtmlAttr(parsed.resumo || parsed.metaDesc || '')}</p>
+  </div>
+</div>
+<style>
+  @media (max-width:768px){
+    .sc-2col-imagem-h3{grid-template-columns:1fr!important;}
+    .sc-2col-imagem-h3 img{max-height:300px!important;}
+  }
+</style>
+
+`;
+      body = body.slice(0, idxAlvo) + bloco2col + body.slice(idxAlvo);
+    }
+  }
 
   // 1. Insert 1st image + 2-column Kadence layout right after the opening 3 paragraphs (before the 2nd H2)
   const h2Matches = [...body.matchAll(/<h2[^>]*>[\s\S]*?<\/h2>/gi)];
