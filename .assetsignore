@@ -11,13 +11,6 @@ Logos/**
 vercel.json
 wp-content/plugins
 wp-content/plugins/**
-wp-content/themes
-wp-content/themes/**
-wp-content/uploads
-wp-content/uploads/**
 wp-includes
 wp-includes/**
-!wp-content/themes/**/*.css
-!wp-content/themes/**/*.js
-!wp-content/themes/**/*.woff2
 !wp-content/plugins/ives-premium-blocks/build/post-slider/view.js
