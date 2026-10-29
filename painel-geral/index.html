@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM Geral SOSSEO — Coletor de Leads</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📥</text></svg>">
+<link rel="stylesheet" href="style.css?v=8">
+</head>
+<body>
+
+<!-- Tela de Login (mesma senha do CRM SOSSEO) -->
+<div id="loginScreen" class="login-screen hidden">
+  <form id="loginForm" class="login-card" autocomplete="off">
+    <div class="login-logo">🔐</div>
+    <h1 class="login-title">Painel Geral SOSSEO</h1>
+    <p class="login-sub">Use o mesmo usuário e senha do CRM SOSSEO.</p>
+    <label class="login-label" for="loginUsername">Usuário</label>
+    <input id="loginUsername" class="login-input" placeholder="Usuário" required autocomplete="username">
+    <label class="login-label" for="loginPassword">Senha</label>
+    <input id="loginPassword" type="password" class="login-input" placeholder="Senha" required autocomplete="current-password">
+    <div id="loginError" class="login-error hidden"></div>
+    <button type="submit" class="btn btn-primary login-btn">Entrar</button>
+    <button type="button" id="btnLoginBack" class="login-back" title="Voltar para o site">← Voltar ao site</button>
+  </form>
+</div>
+
+<header class="topbar">
+  <div class="brand">
+    <div>
+      <h1>CRM Geral SOSSEO</h1>
+      <p id="lastUpdate" class="last-update">Inicializando...</p>
+    </div>
+  </div>
+  <div class="stats" id="statsBar">
+    <div class="stat stat-entrada">
+      <span class="stat-num" id="statEntrada">0</span>
+      <span class="stat-label">na Entrada</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" id="statTotal">0</span>
+      <span class="stat-label">Leads Hoje</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" id="statArquivados">0</span>
+      <span class="stat-label">Arquivados</span>
+    </div>
+  </div>
+  <div class="actions">
+    <button id="btnRefresh" class="btn btn-primary" title="Atualizar agora">
+      ⟳ Atualizar
+    </button>
+    <button id="btnTrash" class="btn btn-trash" title="Ver leads excluídos (ficam 6 meses)">
+      🗑 Ver Excluídos
+    </button>
+    <button id="btnCsv" class="btn btn-ghost" title="Baixar planilha (CSV/Excel)">
+      ⬇ CSV
+    </button>
+    <button id="btnReset" class="btn btn-reset" title="Zerar tudo do painel e puxar os leads de novo">
+      ♻ Zerar Tudo
+    </button>
+    <a id="btnSosseo" class="btn btn-ghost" href="https://sosseo-crm.sosseosites.workers.dev" target="_blank" rel="noopener" title="Abrir o CRM SOSSEO em outra aba">
+      CRM SOSSEO ↗
+    </a>
+    <button id="btnLogout" class="btn btn-ghost" title="Sair do Painel Geral">
+      Sair
+    </button>
+  </div>
+</header>
+
+<div id="errorBanner" class="error-banner hidden"></div>
+
+<main id="board" class="board">Carregando leads...</main>
+
+<!-- Modal de detalhes do lead -->
+<div id="modal" class="modal-overlay hidden">
+  <div class="modal-card">
+    <button id="modalClose" class="modal-close" aria-label="Fechar">&times;</button>
+    <div id="modalBody" class="modal-body"></div>
+  </div>
+</div>
+
+<!-- Modal de leads excluídos -->
+<div id="trashModal" class="modal-overlay hidden">
+  <div class="modal-card wide">
+    <button id="trashClose" class="modal-close" aria-label="Fechar">&times;</button>
+    <div id="trashBody" class="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="app.js?v=8"></script>
+</body>
+</html>
