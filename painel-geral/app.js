@@ -389,6 +389,10 @@ function render() {
     archivedBySite[l._siteKey] = archivedBySite[l._siteKey] || [];
     archivedBySite[l._siteKey].push(l);
   });
+  // Ordena os leads de cada coluna do mais recente (topo) para o mais antigo
+  Object.keys(archivedBySite).forEach(siteKey => {
+    archivedBySite[siteKey].sort((a, b) => (b._ts || 0) - (a._ts || 0));
+  });
 
   board.appendChild(buildEntradaColumn());
   SITES.forEach(site => {
