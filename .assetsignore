@@ -13,11 +13,11 @@ wp-content/plugins
 wp-content/plugins/**
 wp-content/themes
 wp-content/themes/**
+wp-content/uploads
+wp-content/uploads/**
 wp-includes
 wp-includes/**
-!wp-content/themes/astra/assets/fonts/montserrat-700.woff2
-!wp-content/themes/astra/assets/fonts/roboto-900.woff2
-!wp-content/themes/astra/assets/js/minified/frontend.min.js
-!wp-content/themes/astra/assets/js/minified/sticky-sidebar.min.js
-!wp-content/themes/astra/assets/css/minified/*.css
+!wp-content/themes/**/*.css
+!wp-content/themes/**/*.js
+!wp-content/themes/**/*.woff2
 !wp-content/plugins/ives-premium-blocks/build/post-slider/view.js
