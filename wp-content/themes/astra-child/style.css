@@ -87,3 +87,184 @@ Version: 1.0.0
     font-weight: 700 !important;
   }
 }
+
+/* ==========================================================================
+   SOSSEO — BANNERS DO CONTEÚDO (CSS isolado)
+   --------------------------------------------------------------------------
+   Todas as regras abaixo estão presas ao ID/classe do próprio bloco Kadence
+   (row/column), portanto NÃO vazam para outros elementos do tema.
+
+   Servem como camada de segurança dos 3 banners do site:
+     Banner 1 — "SITES Otimizados Para APARECER no GOOGLE" (topo do artigo)
+     Banner 2 — Card de chamada com degradê azul (shortlist / conclusão)
+     Banner 3 — Widget da sidebar "Não Sabe Como Iniciar?"
+
+   O CSS base desses blocos vem dos plugins Kadence
+   (style-blocks-rowlayout.css / column.css / advancedbtn.css). Se ele não
+   carregar, o layout quebra (colunas empilhadas, fundo branco, botão sem
+   estilo) — por isso o fallback estrutural fica aqui.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   BANNER 1 — "SITES Otimizados Para APARECER no GOOGLE"
+   Row: .kb-row-layout-id3642_92aa72-10 (2 colunas: texto/botão + imagem)
+   -------------------------------------------------------------------------- */
+.kb-row-layout-id3642_92aa72-10 {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+}
+
+/* Camada do degradê azul (fica atrás do conteúdo, sobre o fundo da row) */
+.kb-row-layout-id3642_92aa72-10 > .kt-row-layout-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 1;
+    background-image: radial-gradient(ellipse at left center, rgb(17, 50, 224) 51%, rgb(148, 190, 241) 57%, var(--ast-global-color-8, #0a0a0a) 77%);
+}
+
+/* Divisão limpa em 2 colunas (texto à esquerda, imagem à direita) */
+.kb-row-layout-id3642_92aa72-10 > .kt-row-column-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+    align-items: center;
+    gap: var(--global-row-gutter-md, 2rem);
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-left: var(--global-content-edge-padding, 15px);
+    padding-right: var(--global-content-edge-padding, 15px);
+}
+
+.kb-row-layout-id3642_92aa72-10 .wp-block-kadence-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.kb-row-layout-id3642_92aa72-10 .kt-inside-inner-col {
+    position: relative;
+}
+
+/* Botão verde "Só Chamar WhatsApp para uma Consultoria" */
+.kb-row-layout-id3642_92aa72-10 .kb-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--kb-btn-padding, 0.4em 1em);
+    border-radius: var(--kb-btn-radius, 8px);
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Mobile: uma coluna, com a imagem acima do texto */
+@media all and (max-width: 767px) {
+    .kb-row-layout-id3642_92aa72-10 > .kt-row-column-wrap {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: var(--global-kb-gap-md, 1rem);
+    }
+
+    .kb-row-layout-id3642_92aa72-10 .kadence-column3642_9fb2b5-06 {
+        order: 1;
+    }
+
+    .kb-row-layout-id3642_92aa72-10 .kadence-column3642_f52226-1e {
+        order: 2;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   BANNER 2 — Card de chamada com degradê azul (shortlist / conclusão)
+   Colunas marcadas com .kb-section-has-overlay: o degradê é pintado no
+   ::before do .kt-inside-inner-col (cor definida no CSS inline de cada card).
+   Sem estas regras o card fica branco e o texto branco desaparece.
+   -------------------------------------------------------------------------- */
+.wp-block-kadence-column.kb-section-has-overlay {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.wp-block-kadence-column.kb-section-has-overlay > .kt-inside-inner-col {
+    position: relative;
+    z-index: 1;
+    flex-direction: column;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.wp-block-kadence-column.kb-section-has-overlay > .kt-inside-inner-col::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 1;
+    border-radius: inherit;
+    background-image: radial-gradient(ellipse at center center, rgb(7, 49, 167) 0%, rgb(3, 3, 3) 100%);
+    transition: all 0.3s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   BANNER 3 — Sidebar "Não Sabe Como Iniciar?" + "Consultoria Gratuita"
+   Widgets #block-7 (texto) e #block-8 (botão verde) formam um único card.
+   -------------------------------------------------------------------------- */
+#secondary .widget_block .kb-row-layout-idblock-7_7d4eb7-b3,
+#secondary .widget_block .kb-row-layout-idblock-8_a161c3-fb {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
+}
+
+#secondary .widget_block .kb-row-layout-idblock-7_7d4eb7-b3 > .kt-row-column-wrap,
+#secondary .widget_block .kb-row-layout-idblock-8_a161c3-fb > .kt-row-column-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--global-kb-gap-md, 1rem);
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+#secondary .widget_block .kb-row-layout-idblock-7_7d4eb7-b3 .wp-block-kadence-column,
+#secondary .widget_block .kb-row-layout-idblock-8_a161c3-fb .wp-block-kadence-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Botão verde inferior "Consultoria Gratuita" */
+#secondary .widget_block .kb-row-layout-idblock-8_a161c3-fb .kb-buttons-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#secondary .widget_block .kb-row-layout-idblock-8_a161c3-fb .kb-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--kb-btn-padding, 0.4em 1em);
+    border-radius: var(--kb-btn-radius, 10px);
+    text-align: center;
+    text-decoration: none;
+}
+

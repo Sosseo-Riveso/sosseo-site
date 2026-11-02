@@ -9,8 +9,10 @@ Carro-suv/**
 Logos
 Logos/**
 vercel.json
-wp-content/plugins
-wp-content/plugins/**
-wp-includes
-wp-includes/**
-!wp-content/plugins/ives-premium-blocks/build/post-slider/view.js
+
+# wp-content/plugins/** e wp-includes/** PRECISAM subir no deploy.
+# O HTML dos posts/paginas referencia os CSS dos plugins (Kadence, Accordion
+# Blocks, Premium Blocks, Fluent Forms) e o block-library do WordPress.
+# Quando ficavam de fora, esses arquivos retornavam 404 e quebravam os
+# banners do conteudo: grid de 2 colunas, fundo em degrade, cor dos cards
+# e o estilo dos botoes (Kadence) simplesmente desapareciam.

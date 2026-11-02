@@ -94,6 +94,14 @@ npx wrangler deploy
 5. **Leads iam para o fim da coluna ao arquivar**  
    *Solução:* Ordenação por `_ts` decrescente no `render()` (commit `c9551e8`)
 
+6. **Banners do conteúdo quebrados no site publicado** (2 colunas empilhadas, fundo vermelho/laranja no topo do artigo, card "Shortlist" branco com texto branco invisível, widget da sidebar fora da grade e botão sem estilo)  
+   *Causa:* o `.assetsignore` excluía `wp-content/plugins/**` e `wp-includes/**`. Os CSS do Kadence (`style-blocks-rowlayout.css`, `column.css`, `advancedbtn.css`…), do Accordion Blocks e o `block-library` do WordPress retornavam **404** no domínio — sem eles o grid, o degradê dos cards e o estilo dos botões desaparecem.  
+   *Solução:* removidas as exclusões do `.assetsignore` (plugins e wp-includes agora sobem no deploy) + camada de fallback isolada no `astra-child/style.css`, na seção **"SOSSEO — BANNERS DO CONTEÚDO"**:
+   - Banner 1: `.kb-row-layout-id3642_92aa72-10` (grid 55/45, overlay absoluto com degradê azul, botão verde)
+   - Banner 2: `.wp-block-kadence-column.kb-section-has-overlay` (`::before` absoluto com degradê azul e texto branco)
+   - Banner 3: widgets `#block-7` / `#block-8` da sidebar (largura 100%, grid de 1 coluna, botão centralizado)
+
+
 ## 🧠 FUNCIONALIDADES DO CRM GERAL
 
 - ✅ Login com mesma senha do CRM SOSSEO
