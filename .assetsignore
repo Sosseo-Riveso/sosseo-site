@@ -30,6 +30,11 @@ package.json
 package-lock.json
 publicar-artigo.mjs
 template-post-padrao.html
+scripts
+scripts/**
+*.py
+__pycache__
+__pycache__/**
 
 # --- 3. Documentação de governança (não precisa ser pública) --------------
 *.md

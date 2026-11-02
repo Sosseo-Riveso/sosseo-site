@@ -7,6 +7,13 @@ node_modules/
 package.json
 package-lock.json
 
+# --- Scripts de auditoria (ferramenta local, nao versionar) ---------------
+scripts/
+scripts/**/*.py
+*.py
+__pycache__/
+*.pyc
+
 # --- Caches e artefatos de ferramentas ------------------------------------
 .wrangler/
 .cache/

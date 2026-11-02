@@ -12,6 +12,24 @@ Migration WordPress (Turbocloud) → GitHub + Cloudflare em fase de teste/monito
 
 ## 📅 Histórico
 
+### 2026-11-02 — Auditores SEO e GEO (`scripts/`)
+- Criada a pasta `scripts/` (ferramenta local, fora do deploy) com dois validadores
+  adaptados das skills `seo-fundamentals` e `geo-fundamentals`:
+  `seo_checker.py` (title/description com alvo 50-60 e 70-160, Open Graph, canonical,
+  H1 único, alt de imagens) e `geo_checker.py` (JSON-LD, FAQ, listas, tabelas,
+  entidade, estatísticas e respostas diretas em pt-BR).
+- `scripts/`, `*.py` e `__pycache__/` estão no `.gitignore` e no `.assetsignore`:
+  não versionam nem sobem no deploy da Cloudflare.
+- Primeira execução: GEO com média **91%** em 75 páginas; SEO com **73 páginas** e
+  **141 achados** (47 titles fora de 50-60, 10 páginas sem meta description,
+  13 com Open Graph incompleto, 65 com `alt=""`, 0 imagem realmente sem `alt`).
+- Pendências reais: `calculadoras-b2b/calculadora-*` (sem description/OG, sem JSON-LD
+  e sem autor), `calculadoraoficinas/`, `politica-de-privacidade/` e as LPs
+  `transforme-sua-oficina-*` (sem meta description). Os painéis do CRM aparecem no
+  relatório porque são `noindex` de propósito — não otimizar.
+- Comando: `py scripts/seo_checker.py .` e `py scripts/geo_checker.py .` (o alias
+  `python` do Windows está desativado nesta máquina).
+
 ### 2026-11-02 — Skills históricas B2B incorporadas às regras
 - `.clinerules` ampliado para 15 seções com base em
   `.agent/rules/metadados_artigos.md` e nas skills `seo-fundamentals`,

@@ -18,7 +18,7 @@ Digital**, agência brasileira de *Engenharia de Demanda Orgânica*. O site é 1
 | Hospedagem | Cloudflare Workers Static Assets (`wrangler.json` → worker `sosseo-site`) |
 | Deploy | `npx wrangler deploy` (ou push na `main`, conforme integração ativa) |
 | Backend de leads | Worker `sosseo-crm` → `https://sosseo-crm.sosseosites.workers.dev/api/*` |
-| Sem build | HTML/CSS/JS puros; `publicar-artigo.mjs` é o único script de automação |
+| Sem build | HTML/CSS/JS puros; `publicar-artigo.mjs` é o único script de publicação; `scripts/seo_checker.py` e `scripts/geo_checker.py` (locais, ignorados no git/deploy) auditam SEO e GEO |
 | WhatsApp comercial | **+55 11 97469-5663** (`5511974695663`) |
 | Unidades | Osasco/Grande SP e Campinas/SP |
 | CNPJ | 26.787.198/0001-99 |
