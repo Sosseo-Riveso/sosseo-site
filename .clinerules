@@ -1,0 +1,127 @@
+# Regras do Projeto — SOSSEO (sosseo.com.br)
+
+Site institucional da agência **SOSSEO**, estático (export do WordPress), hospedado na
+Cloudflare. Estas regras valem para qualquer alteração feita por IA ou por pessoa.
+
+---
+
+## 1. Regra número 1: não quebrar o que já funciona
+
+- **Não altere páginas/arquivos que já estão publicados** sem pedido explícito.
+  São 60 diretórios com `index.html` (posts, categorias, LPs, calculadoras, painéis).
+- Nunca edite `wp-content/**` ou `wp-includes/**` "para limpar". Esses arquivos são
+  dependências de CSS/JS do que está publicado (ver `.assetsignore`).
+- Se a tarefa pedir um arquivo novo, crie o arquivo novo. Não reescreva a home
+  (`index.html`, 580 KB) nem o template mestre
+  (`como-vender-usinagem-sem-guerra-de-precos/index.html`).
+- Antes de editar em lote, rode `git status` e confirme a lista de arquivos.
+
+## 2. Deploy e infraestrutura
+
+- Deploy: `npx wrangler deploy` (worker `sosseo-site`, assets na raiz `.`).
+- `.assetsignore` define o que **não** vai para a Cloudflare. É proibido excluir:
+  - `wp-content/themes/**`  (Astra + astra-child)
+  - `wp-content/plugins/**` (Kadence, Elementor, Fluent Forms, Accordion Blocks…)
+  - `wp-includes/**`        (block-library, jQuery)
+  - `wp-content/uploads/**` (imagens dos posts)
+  - `_headers` e `_redirects`
+- `_headers`/`_redirects` só funcionam na Cloudflare Pages; no Worker eles são apenas
+  arquivos estáticos. Não apague: são a fonte de verdade das regras.
+- `vercel.json` é resquício da hospedagem antiga — não usar como referência.
+
+## 3. Estrutura semântica / SEO on-page
+
+- **Um `<h1>` por página.** Nos posts, o H1 é o título dentro do banner azul.
+- Hierarquia obrigatória: `h1 → h2 → h3`, nunca pular nível por estética.
+- Cada `<section>` do artigo abre com um H2 que contenha a palavra-chave do artigo.
+- Parágrafos curtos (2–4 linhas), listas para escaneabilidade, `blockquote` para
+  insights e uma tabela comparativa quando ajudar a decisão B2B.
+- Todo post termina com o bloco **`⚡ Conclusão Estratégica (Takeaway)`** — o
+  `publicar-artigo.mjs` lê esse campo e o injeta como card escuro no fim do artigo.
+- `FAQ` sempre com pares `h3 (pergunta) + p (resposta)` para gerar o schema FAQPage.
+- Imagens: `alt` descritivo e técnico, `width`/`height`, `loading="lazy"` (exceto a
+  imagem do banner, que usa `fetchpriority="high"` + `decoding="async"`).
+- Links internos com caminho relativo (`../slug/`) — nunca `https://sosseo.com.br/...`
+  dentro do corpo do post.
+
+## 4. CTAs, WhatsApp e links que NÃO podem mudar
+
+- WhatsApp oficial da agência: **5511974695663**
+  `https://api.whatsapp.com/send?1=pt_BR&phone=5511974695663`
+  (links externos sempre com `target="_blank" rel="noreferrer noopener"`).
+- Telefone do rodapé: `tel:+5511974695663` — `11 97469-5663`.
+- CTAs que precisam existir em todo post:
+  1. Banner do topo (H1 + subtítulo + data/autor/categoria);
+  2. Banner de 2 colunas "Eu crio SITES Otimizados para APARECER no GOOGLE"
+     com o botão verde de consultoria;
+  3. Card `⚡ Takeaway` no fim, apontando para `/posicionamento-industrial-b2b/`
+     (categoria `marketing-industrial-b2b`) ou `/contato/`;
+  4. Sidebar: "Não Sabe Como Iniciar?" + botão verde "Consultoria Gratuita".
+- Nunca troque o texto de um CTA por variação "mais bonita" sem pedido: são âncoras
+  de conversão já validadas.
+
+## 5. CSS e layout (Kadence / Astra)
+
+- **Não crie CSS global novo no `style.css` do tema.** Correções vão no
+  `wp-content/themes/astra-child/style.css`, em seção própria e **sempre presas ao
+  ID/classe do bloco** (ex.: `.kb-row-layout-id3642_92aa72-10`), sem `!important`
+  quando der para evitar.
+- Antes de culpar o CSS, verifique se o arquivo do plugin está no deploy
+  (`.assetsignore`) — 90% dos "layouts quebrados" foram 404 de CSS.
+- Padrões do projeto:
+  - Grid de 2 colunas do banner: `55fr / 45fr`, quebrando para 1 coluna em ≤767 px.
+  - Banner azul corrigido: `background-color:#0a3d91` na row e degradê no
+    `.kt-row-layout-overlay` (`radial-gradient` azul). O vermelho `#ea5959` do
+    inline do WordPress **nunca** deve aparecer.
+  - Sidebar alinhada ao topo do artigo: `#secondary { margin-top:0; padding-top:0; }`
+    em `@media (min-width: 922px)`.
+  - Cards com overlay: `.wp-block-kadence-column.kb-section-has-overlay` usa
+    `::before` com `z-index:-1` e `border-radius: inherit`.
+- Prefira `clamp()`/`var()` e grid/flex a alturas fixas; mantenha responsivo em
+  360 px, 768 px, 1024 px e 1400 px.
+- Toda correção visual deve ser validada nos dois modos: CSS dos plugins carregando
+  **e** fallback do astra-child funcionando sozinho.
+
+## 6. Conteúdo e tom (público industrial B2B)
+
+- Público: dono/diretor industrial, engenheiro de processos, comprador técnico.
+- Tom consultivo e técnico, sem jargão de marketing genérico ("alavancar", "sinergia").
+- Sempre citar norma, tolerância, material ou indicador concreto quando fizer sentido
+  (ex.: DIN ISO 2768, RFQ, CAC, hora-máquina, STEP/IGES).
+- Nada de promessa de resultado garantido nem prazo de "primeira posição no Google".
+- Nunca inventar dados, cases ou números de clientes.
+
+## 7. Publicação de artigos
+
+- Fluxo oficial: `node publicar-artigo.mjs ../Artigos/artigo-NN-slug.html --categoria=slug`
+- O script espera o bloco de metadados no HTML de origem:
+  `subtitulo_banner`, `Palavra-chave Principal`, `Título SEO`, `Slug / URL`,
+  `Meta Descrição`, `Resumo (Excerpt)`, `Conclusão Estratégica (Takeaway)`.
+- O template mestre é `como-vender-usinagem-sem-guerra-de-precos/index.html`;
+  a referência de layout (sem WordPress) é `template-post-padrao.html`.
+- Depois de publicar, o script atualiza `post-sitemap.xml`, `sitemap.xml`,
+  `llms.txt`, `llms-full.txt` e o card da categoria. Confira esses 5 pontos.
+
+## 8. Performance, analytics e privacidade
+
+- GTM `GTM-MWBLQ22S` e Meta Pixel `1189104682466848` já estão no `<head>`:
+  não duplicar.
+- CSS/JS de `/wp-content/` e `/wp-includes/` têm cache de 1 ano (`immutable`).
+  Se trocar um arquivo desses, renomeie ou peça purge — senão o visitante fica
+  com a versão antiga.
+- Não inserir bibliotecas novas via CDN sem necessidade; o site não tem build.
+
+## 9. Segurança
+
+- Os painéis (`/painel-leads/`, `/painel-geral/`) autenticam no worker
+  `sosseo-crm`. **Nunca** reintroduza fallback local de senha (tipo `admin`/`123`).
+- Não commitar tokens, senhas ou chaves. Token da Cloudflare não vai para arquivo.
+
+## 10. Convenções de arquivo
+
+- HTML/CSS/JS indentados com 2 ou 4 espaços de forma consistente no arquivo;
+  não reformatar arquivo inteiro em uma alteração pontual (gera diff gigante).
+- Nomes de pasta de post em `kebab-case`, iguais ao slug e à URL canônica.
+- Texto em português do Brasil, UTF-8, `lang="pt-BR"`.
+- Documentação viva: `PROJECT_CONTEXT.md` (visão geral) e `PROGRESS.md` (histórico
+  e pendências). Atualize os dois quando concluir algo relevante.

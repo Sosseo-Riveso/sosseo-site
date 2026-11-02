@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!--
+  ==========================================================================
+  TEMPLATE PADRÃO DE POST — SOSSEO (sosseo.com.br)
+  --------------------------------------------------------------------------
+  Estrutura base de artigo: <head> SEO/OpenGraph, banner principal de 2
+  colunas com o fundo azul corrigido, área de conteúdo, barra lateral
+  alinhada e rodapé.
+
+  COMO USAR
+  1. Copie este arquivo para a pasta do artigo: /<slug>/index.html
+  2. Substitua os placeholders (busque por "{{"):
+       {{TITULO_SEO}}          título do post (title, og:title, H1)
+       {{SUBTITULO_BANNER}}    subtítulo amarelo do banner (og:description curta)
+       {{META_DESCRIPTION}}    meta description (150-160 caracteres)
+       {{SLUG}}                slug/URL do post (sem barras)
+       {{CATEGORIA_NOME}}      ex.: Marketing Industrial B2B
+       {{CATEGORIA_SLUG}}      ex.: marketing-industrial-b2b
+       {{PALAVRA_CHAVE}}       palavra-chave principal (H2 do 1º bloco)
+       {{DATA_ISO}} / {{DATA_BR}}   ex.: 2026-11-02T10:00:00+00:00 / 02/11/2026
+       {{IMAGEM_OG}}           URL absoluta da imagem 1200x630 (JPG)
+       {{TAKEAWAY}}            texto da Conclusão Estratégica
+  3. Preencha o corpo entre os marcadores COLE O CONTEÚDO AQUI.
+     Os demais placeholders ({{TITULO_H2_1}}, {{ITEM_LISTA_1}}, {{PERGUNTA_1}},
+     {{RELACIONADO_1_SLUG}}...) aparecem no corpo, na ordem de leitura.
+  4. Caminhos: este template usa caminhos absolutos (/wp-content/...) para
+     funcionar tanto na raiz quanto em /<slug>/. O publicar-artigo.mjs gera
+     caminhos relativos (../wp-content/...); ambos resolvem na Cloudflare.
+
+  REGRAS QUE NÃO PODEM SER QUEBRADAS
+  - Um único <h1> (dentro do banner azul do topo).
+  - Banner de 2 colunas: grid 55fr / 45fr e fundo AZUL (nunca o vermelho
+    #ea5959 do inline do WordPress).
+  - Barra lateral alinhada ao topo do artigo (#secondary sem padding-top).
+  - Todo post termina com o card "⚡ Conclusão Estratégica (Takeaway)".
+  - WhatsApp oficial: 5511974695663 (não alterar número nem texto do CTA).
+  ==========================================================================
+-->
+<script id="sosseo-canonical-domain-guard">
+(function(){
+  if (window.location.hostname.indexOf('github.io') !== -1) {
+    var m = document.createElement('meta');
+    m.name = 'robots';
+    m.content = 'noindex, nofollow';
+    document.head.appendChild(m);
+    var cleanPath = window.location.pathname.replace(/^\/sosseo-site(\/|$)/, '/');
+    window.location.replace('https://sosseo.com.br' + cleanPath + window.location.search + window.location.hash);
+  }
+})();
+</script>
+<meta charset="UTF-8">
+<!-- Google Tag Manager (SOSSEO) -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MWBLQ22S');</script>
+<!-- End Google Tag Manager -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<!-- ================= SEO ================= -->
+<title>{{TITULO_SEO}} - SOSSEO</title>
+<meta name="description" content="{{META_DESCRIPTION}}" />
+<link rel="canonical" href="https://sosseo.com.br/{{SLUG}}/" />
+<meta name="author" content="SOSSEO" />
+
+<!-- ================= OpenGraph ================= -->
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{TITULO_SEO}} - SOSSEO" />
+<meta property="og:description" content="{{META_DESCRIPTION}}" />
+<meta property="og:url" content="https://sosseo.com.br/{{SLUG}}/" />
+<meta property="og:site_name" content="SOSSEO" />
+<meta property="article:publisher" content="https://www.facebook.com/ComercialSosseo/" />
+<meta property="article:published_time" content="{{DATA_ISO}}" />
+<meta property="article:modified_time" content="{{DATA_ISO}}" />
+<meta property="og:image" content="{{IMAGEM_OG}}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:alt" content="{{TITULO_SEO}}" />
+
+<!-- ================= Twitter / X ================= -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{TITULO_SEO}} - SOSSEO" />
+<meta name="twitter:description" content="{{META_DESCRIPTION}}" />
+<meta name="twitter:image" content="{{IMAGEM_OG}}" />
+<meta name="twitter:label1" content="Escrito por" />
+<meta name="twitter:data1" content="SOSSEO" />
+<meta name="twitter:label2" content="Est. tempo de leitura" />
+<meta name="twitter:data2" content="{{TEMPO_LEITURA}} minutos" />
+
+<!-- ================= Fontes ================= -->
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link href='https://fonts.googleapis.com' rel='preconnect' />
+<link rel='stylesheet' id='astra-google-fonts-css' href='https://fonts.googleapis.com/css?family=Lora:400|Lato:600%2C700&#038;display=swap' media='all' />
+
+<!-- ================= CSS (não remover: dependências do layout) ================= -->
+<link rel='stylesheet' id='astra-theme-css-css' href='/wp-content/themes/astra/assets/css/minified/main.min.css' media='all' />
+<link rel='stylesheet' id='astra-menu-animation-css' href='/wp-content/themes/astra/assets/css/minified/menu-animation.min.css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css' media='all' />
+<link rel='stylesheet' id='pb-accordion-blocks-style-css' href='/wp-content/plugins/accordion-blocks/build/index.css' media='all' />
+<link rel='stylesheet' id='astra-child-theme-css-css' href='/wp-content/themes/astra-child/style.css' media='all' />
+<link rel='stylesheet' id='kadence-blocks-rowlayout-css' href='/wp-content/plugins/kadence-blocks/dist/style-blocks-rowlayout.css' media='all' />
+<link rel='stylesheet' id='kadence-blocks-column-css' href='/wp-content/plugins/kadence-blocks/dist/style-blocks-column.css' media='all' />
+<link rel='stylesheet' id='kadence-blocks-image-css' href='/wp-content/plugins/kadence-blocks/dist/style-blocks-image.css' media='all' />
+<link rel='stylesheet' id='kadence-blocks-advancedbtn-css' href='/wp-content/plugins/kadence-blocks/dist/style-blocks-advancedbtn.css' media='all' />
+<link rel='stylesheet' id='kadence-blocks-tableofcontents-css' href='/wp-content/plugins/kadence-blocks/dist/style-blocks-tableofcontents.css' media='all' />
+
+<!-- ================= Dados estruturados (Article + Breadcrumb + FAQ) ========= -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://sosseo.com.br/{{SLUG}}/#article",
+      "isPartOf": { "@id": "https://sosseo.com.br/{{SLUG}}/" },
+      "author": { "@type": "Organization", "name": "SOSSEO" },
+      "headline": "{{TITULO_SEO}}",
+      "description": "{{META_DESCRIPTION}}",
+      "datePublished": "{{DATA_ISO}}",
+      "dateModified": "{{DATA_ISO}}",
+      "inLanguage": "pt-BR",
+      "mainEntityOfPage": { "@id": "https://sosseo.com.br/{{SLUG}}/" },
+      "image": { "@type": "ImageObject", "url": "{{IMAGEM_OG}}", "width": 1200, "height": 630 },
+      "publisher": { "@id": "https://sosseo.com.br/#organization" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://sosseo.com.br/{{SLUG}}/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://sosseo.com.br/" },
+        { "@type": "ListItem", "position": 2, "name": "{{CATEGORIA_NOME}}", "item": "https://sosseo.com.br/category/{{CATEGORIA_SLUG}}/" },
+        { "@type": "ListItem", "position": 3, "name": "{{TITULO_SEO}}" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://sosseo.com.br/{{SLUG}}/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "{{PERGUNTA_1}}", "acceptedAnswer": { "@type": "Answer", "text": "{{RESPOSTA_1}}" } },
+        { "@type": "Question", "name": "{{PERGUNTA_2}}", "acceptedAnswer": { "@type": "Answer", "text": "{{RESPOSTA_2}}" } },
+        { "@type": "Question", "name": "{{PERGUNTA_3}}", "acceptedAnswer": { "@type": "Answer", "text": "{{RESPOSTA_3}}" } }
+      ]
+    }
+  ]
+}
+</script>
+
+<style id="sosseo-template-fallback">
+/* ==========================================================================
+   FALLBACK DE LAYOUT — espelha a seção "SOSSEO — BANNERS DO CONTEÚDO" do
+   astra-child/style.css. Serve para o layout não quebrar se algum CSS do
+   Kadence/Astra falhar. Todas as regras estão presas ao bloco (sem vazamento).
+   ========================================================================== */
+
+/* ---- Banner de 2 colunas: fundo AZUL corrigido (nunca vermelho) --------- */
+.kb-row-layout-id3642_92aa72-10 {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  /* o inline do WordPress traz #ea5959; este azul é a correção definitiva */
+  background-color: #0a3d91 !important;
+  border-radius: 200px 1px 200px 0;
+  overflow: clip;
+  box-shadow: 0 0 8px 5px rgba(22, 20, 172, 0.8);
+}
+
+.kb-row-layout-id3642_92aa72-10 > .kt-row-layout-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 1;
+  background-image: radial-gradient(ellipse at left center, rgb(17, 50, 224) 51%, rgb(148, 190, 241) 57%, var(--ast-global-color-8, #0a0a0a) 77%);
+}
+
+.kb-row-layout-id3642_92aa72-10 > .kt-row-column-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+  align-items: center;
+  gap: var(--global-row-gutter-md, 2rem);
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px var(--global-content-edge-padding, 15px);
+}
+
+.kb-row-layout-id3642_92aa72-10 .wp-block-kadence-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.kb-row-layout-id3642_92aa72-10 .kt-inside-inner-col { position: relative; }
+
+.kb-row-layout-id3642_92aa72-10 .kb-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--kb-btn-padding, 0.4em 1em);
+  border-radius: var(--kb-btn-radius, 8px);
+  text-align: center;
+  text-decoration: none;
+}
+</style>
+
+<style id="sosseo-template-fallback-2">
+/* ---- Cards com overlay (Takeaway / shortlist): degradê azul ------------ */
+.wp-block-kadence-column.kb-section-has-overlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.wp-block-kadence-column.kb-section-has-overlay > .kt-inside-inner-col {
+  position: relative;
+  z-index: 1;
+  flex-direction: column;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.wp-block-kadence-column.kb-section-has-overlay > .kt-inside-inner-col::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 1;
+  border-radius: inherit;
+  background-image: radial-gradient(ellipse at center center, rgb(7, 49, 167) 0%, rgb(3, 3, 3) 100%);
+  transition: all 0.3s ease-in-out;
+}
+
+/* ---- Barra lateral alinhada ao topo do artigo -------------------------- */
+@media (min-width: 922px) {
+  .ast-right-sidebar #secondary {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .ast-right-sidebar #secondary #block-5 { padding-left: 12px !important; }
+}
+
+/* ---- Widgets da sidebar (largura total, 1 coluna, botão centralizado) -- */
+#secondary .widget_block .kb-row-layout-idblock-7_7d4eb7-b3,
+#secondary .widget_block .kb-row-layout-idblock-8_a161c3-fb {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+}
+
+#secondary .widget_block .kb-row-layout-idblock-7_7d4eb7-b3 > .kt-row-column-wrap,
+#secondary .widget_block .kb-row-layout-idblock-8_a161c3-fb > .kt-row-column-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--global-kb-gap-md, 1rem);
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+}
+
+#secondary .widget_block .kb-row-layout-idblock-8_a161c3-fb .kb-buttons-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Responsivo do banner --------------------------------------------- */
+@media all and (max-width: 767px) {
+  .kb-row-layout-id3642_92aa72-10 { border-radius: 24px; }
+  .kb-row-layout-id3642_92aa72-10 > .kt-row-column-wrap {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--global-kb-gap-md, 1rem);
+    padding-bottom: 2rem;
+  }
+  .kb-row-layout-id3642_92aa72-10 .kadence-column3642_9fb2b5-06 { order: 1; }
+  .kb-row-layout-id3642_92aa72-10 .kadence-column3642_f52226-1e { order: 2; }
+}
+</style>
+
+</head>
+
+<body class="wp-singular post-template-default single single-post post-static single-format-standard wp-custom-logo wp-embed-responsive wp-theme-astra wp-child-theme-astra-child ast-desktop ast-plain-container ast-right-sidebar astra-4.14.0 ast-sticky-sidebar ast-blog-single-style-1 ast-single-post ast-inherit-site-logo-transparent ast-hfb-header">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWBLQ22S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<a class="skip-link screen-reader-text" href="#content">Ir para o conteúdo</a>
+
+<div class="hfeed site" id="page">
+
+  <!-- ===================== HEADER (logo + menu) ===================== -->
+  <header id="masthead" class="site-header header-main-layout-1 ast-primary-menu-enabled ast-logo-title-inline ast-hide-custom-menu-mobile ast-builder-menu-toggle-icon ast-mobile-header-inline">
+    <div class="ast-main-header-wrap main-header-bar-wrap">
+      <div class="ast-primary-header-bar ast-primary-header main-header-bar site-header-focus-item" data-section="section-primary-header-builder">
+        <div class="site-primary-header-wrap ast-builder-grid-row-container site-header-focus-item ast-container" data-section="section-primary-header-builder">
+          <div class="ast-builder-grid-row ast-builder-grid-row-has-sides ast-grid-left-center-right">
+            <div class="site-header-primary-section-left site-header-section ast-flex site-header-section-left">
+              <div class="ast-builder-layout-element ast-flex site-header-focus-item">
+                <div class="site-branding ast-site-identity">
+                  <span class="site-logo-img">
+                    <a href="/" class="custom-logo-link" rel="home">
+                      <img width="182" height="46" src="/wp-content/uploads/2021/03/Sites-para-pequenas-e-medias-empresas-2-182x46.png" class="custom-logo" alt="Criação de Sites em Osasco" decoding="async" />
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="site-header-primary-section-right site-header-section ast-flex ast-grid-right-section">
+              <div class="ast-builder-layout-element ast-flex site-header-focus-item">
+                <div class="ast-main-header-bar-alignment">
+                  <div class="main-header-bar-navigation">
+                    <nav class="site-navigation ast-flex-grow-1 navigation-accessibility" id="primary-site-navigation-desktop" aria-label="Navegação principal">
+                      <div class="main-navigation ast-inline-flex">
+                        <ul id="ast-hf-menu-1" class="main-header-menu ast-menu-shadow ast-nav-menu ast-flex submenu-with-border astra-menu-animation-slide-down stack-on-mobile">
+                          <li class="menu-item"><a href="/" class="menu-link">Início</a></li>
+                          <li class="menu-item"><a href="/category/marketing-industrial-b2b/" class="menu-link">Indústria B2B</a></li>
+                          <li class="menu-item"><a href="/category/seo-para-empresas/" class="menu-link">SEO para Empresas</a></li>
+                          <li class="menu-item"><a href="/category/google-perfil-de-empresas/" class="menu-link">Google Perfil</a></li>
+                          <li class="menu-item"><a href="/posicionamento-industrial-b2b/" class="menu-link">Posicionamento B2B</a></li>
+                          <li class="menu-item"><a href="/sobre/" class="menu-link">Sobre</a></li>
+                          <li class="menu-item"><a href="/contato/" class="menu-link">Contato</a></li>
+                        </ul>
+                      </div>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header><!-- #masthead -->
+
+  <div id="content" class="site-content">
+    <div class="ast-container">
+
+      <!-- ===================== CONTEÚDO PRINCIPAL ===================== -->
+      <div id="primary" class="content-area primary">
+        <main id="main" class="site-main">
+
+          <article class="post-static post type-post status-publish format-standard has-post-thumbnail hentry category-{{CATEGORIA_SLUG}} ast-article-single" id="post-static">
+            <div class="ast-post-format- single-layout-1">
+              <div class="entry-content clear" data-ast-blocks-layout="true">
+
+<!-- ============================================================
+     BANNER PRINCIPAL (H1) — fundo em degradê azul, 1 coluna
+     Único <h1> da página. Subtítulo em amarelo (#fcb900).
+     ============================================================ -->
+<div class="kb-row-layout-wrap kb-row-layout-id2708_86d4b4-e1 alignfull kt-row-has-bg wp-block-kadence-rowlayout"
+     style="border-radius:10px;overflow:clip;box-shadow:5px 10px 30px 5px rgba(0,0,0,0.2);background-image:radial-gradient(ellipse at 50% 50%,rgb(3,24,122) 29%,rgb(13,46,116) 54%,rgb(7,7,7) 92%);">
+  <div class="kt-row-column-wrap kt-has-1-columns kt-row-layout-equal kt-tab-layout-inherit kt-mobile-layout-row kt-row-valign-middle"
+       style="display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;padding:4rem 1.5rem 1.5rem;">
+    <div class="wp-block-kadence-column kadence-column2708_0954c2-af">
+      <div class="kt-inside-inner-col">
+        <h1 class="has-text-align-center has-link-color alignfull float-title titulo-responsivo wp-block-post-title has-text-color has-ast-global-color-5-color"
+            style="font-size:29px;margin:0 0 12px;padding:0;color:#ffffff;">
+          {{TITULO_SEO}}
+        </h1>
+
+        <p class="has-luminous-vivid-amber-color has-text-color wp-block-paragraph" style="font-size:18px;color:#fcb900;margin:0 0 8px;">
+          {{SUBTITULO_BANNER}}
+        </p>
+
+        <div class="wp-block-group is-layout-flex wp-block-group-is-layout-flex"
+             style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;color:#ffffff;font-size:14px;">
+          <span>Atualizado em</span>
+          <time datetime="{{DATA_ISO}}">{{DATA_BR}}</time>
+          <span>&#8211; Por SOSSEO</span>
+          <span class="taxonomy-category">
+            <span>/ Categoria &#8211;</span>
+            <a href="/category/{{CATEGORIA_SLUG}}/" rel="tag" style="color:#ffffff;text-decoration:underline;">{{CATEGORIA_NOME}}</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Respiro de 28px + H2 com a palavra-chave (SEO on-page) -->
+<div style="height: 28px;" aria-hidden="true"></div>
+
+<h2 id="{{PALAVRA_CHAVE_SLUG}}">{{PALAVRA_CHAVE}}: o que muda para a sua empresa</h2>
+
+<p class="wp-block-paragraph">
+  {{PARAGRAFO_1 — 2 a 4 linhas, resposta direta com a palavra-chave principal.}}
+</p>
+
+<p class="wp-block-paragraph">
+  {{PARAGRAFO_2 — contexto do problema, termo técnico e impacto financeiro.}}
+</p>
+
+<!-- ============================================================
+     BANNER DE 2 COLUNAS — "Eu crio SITES Otimizados para APARECER
+     no GOOGLE". Grid 55fr / 45fr e fundo AZUL corrigido (o inline
+     do WordPress traz #ea5959; o fallback no <head> sobrescreve).
+     ============================================================ -->
+<div class="kb-row-layout-wrap kb-row-layout-id3642_92aa72-10 alignfull kt-row-has-bg wp-block-kadence-rowlayout">
+  <div class="kt-row-layout-overlay kt-row-overlay-gradient"></div>
+  <div class="kt-row-column-wrap kt-has-2-columns kt-row-layout-equal kt-tab-layout-equal kt-mobile-layout-row kt-row-valign-middle kb-theme-content-width">
+
+    <div class="wp-block-kadence-column kadence-column3642_f52226-1e inner-column-1">
+      <div class="kt-inside-inner-col">
+        <p class="wp-block-kadence-advancedheading" style="font-size:24px;line-height:1.3;font-weight:700;color:#ffffff;margin:0 0 10px;">
+          Eu crio SITES Otimizados para
+          <mark style="background-color:rgba(0,0,0,0);color:#fcb900;" class="has-inline-color">APARECER no GOOGLE</mark>
+        </p>
+
+        <p class="wp-block-kadence-advancedheading" style="font-size:17px;line-height:1.4;color:#ffffff;margin:0 0 18px;">
+          Anuncie nas MELHORES ferramentas Ads &#8211; Google e Facebook
+        </p>
+
+        <div class="wp-block-kadence-advancedbtn kb-buttons-wrap">
+          <a class="kb-button kt-button button kt-btn-size-small kt-btn-width-type-auto kb-btn-global-fill"
+             href="https://api.whatsapp.com/send?1=pt_BR&#038;phone=5511974695663"
+             target="_blank" rel="noreferrer noopener"
+             style="background:#0e6606;color:#ffffff;border:1px solid #ffffff;border-radius:10px;padding:12px 22px;font-weight:700;line-height:1.3;">
+            <span class="kt-btn-inner-text">Só Chamar WhatsApp<br>para uma Consultoria</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-block-kadence-column kadence-column3642_9fb2b5-06 inner-column-2">
+      <div class="kt-inside-inner-col">
+        <div class="wp-block-kadence-image kb-image3642_5fed11-fb">
+          <figure class="aligncenter size-large" style="margin:0;">
+            <img fetchpriority="high" decoding="async" width="1024" height="683"
+                 src="/wp-content/uploads/2025/03/Criacao-de-Sites-com-Intencao-de-Busca-1024x683.webp"
+                 alt="Criação de sites com intenção de busca para indústria B2B"
+                 class="kb-img wp-image-3347" style="width:100%;height:auto;border-radius:10px;" />
+            <figcaption style="font-size:13px;color:#e2e8f0;text-align:center;margin-top:8px;">
+              Sites e Anúncios Ads
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+<!-- ==================== COLE O CONTEÚDO AQUI (início) ==================== -->
+<!-- ============================================================
+     CORPO DO ARTIGO — seções semânticas (H2 → H3), parágrafos
+     curtos, listas, tabela e imagem com legenda técnica.
+     Duplique quantas seções o artigo precisar.
+     ============================================================ -->
+<section>
+  <h2 id="secao-1">{{TITULO_H2_1}}</h2>
+
+  <p class="wp-block-paragraph">{{PARAGRAFO_3}}</p>
+
+  <h3 id="subsecao-1-1">{{TITULO_H3_1}}</h3>
+
+  <p class="wp-block-paragraph">{{PARAGRAFO_4}}</p>
+
+  <ul class="wp-block-list">
+    <li>{{ITEM_LISTA_1}}</li>
+    <li>{{ITEM_LISTA_2}}</li>
+    <li>{{ITEM_LISTA_3}}</li>
+  </ul>
+
+  <blockquote class="wp-block-quote">
+    <p>{{CITACAO_DE_IMPACTO — insight curto, sem promessa de resultado.}}</p>
+    <cite>SOSSEO — Engenharia de Demanda Industrial B2B</cite>
+  </blockquote>
+</section>
+
+<figure class="aligncenter size-large" style="margin: 32px auto; text-align: center;">
+  <img loading="lazy" decoding="async" width="1024" height="1024"
+       src="/wp-content/uploads/2026/10/{{IMAGEM_ARTIGO}}.webp"
+       alt="{{ALT_DA_IMAGEM — descritivo e técnico}}"
+       class="kb-img"
+       style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 8px 24px rgba(15,23,42,0.12);" />
+  <figcaption style="font-size: 14px; color: #475569; margin-top: 10px; font-style: italic;">
+    {{LEGENDA_DA_IMAGEM}}
+  </figcaption>
+</figure>
+
+<section>
+  <h2 id="secao-2">{{TITULO_H2_2}}</h2>
+
+  <p class="wp-block-paragraph">{{PARAGRAFO_5}}</p>
+
+  <div style="overflow-x:auto; margin: 24px 0;">
+    <table class="wp-block-table" style="width:100%; border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th style="text-align:left; padding:12px; background:#0a3d91; color:#ffffff; border:1px solid #cbd5e1;">{{COLUNA_1}}</th>
+          <th style="text-align:left; padding:12px; background:#0a3d91; color:#ffffff; border:1px solid #cbd5e1;">{{COLUNA_2}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:12px; border:1px solid #cbd5e1;">{{LINHA_1_COLUNA_1}}</td>
+          <td style="padding:12px; border:1px solid #cbd5e1;">{{LINHA_1_COLUNA_2}}</td>
+        </tr>
+        <tr>
+          <td style="padding:12px; border:1px solid #cbd5e1; background:#f8fafc;">{{LINHA_2_COLUNA_1}}</td>
+          <td style="padding:12px; border:1px solid #cbd5e1; background:#f8fafc;">{{LINHA_2_COLUNA_2}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="subsecao-2-1">{{TITULO_H3_2}}</h3>
+
+  <p class="wp-block-paragraph">{{PARAGRAFO_6}}</p>
+</section>
+
+<section>
+  <h2 id="secao-3">{{TITULO_H2_3}}</h2>
+
+  <p class="wp-block-paragraph">{{PARAGRAFO_7}}</p>
+
+  <ol class="wp-block-list">
+    <li><strong>{{PASSO_1}}:</strong> {{DETALHE_PASSO_1}}</li>
+    <li><strong>{{PASSO_2}}:</strong> {{DETALHE_PASSO_2}}</li>
+    <li><strong>{{PASSO_3}}:</strong> {{DETALHE_PASSO_3}}</li>
+  </ol>
+</section>
+
+<!-- ============================================================
+     FAQ — sempre H3 (pergunta) + P (resposta). É desse par que o
+     schema FAQPage (no <head>) e o publicar-artigo.mjs se alimentam.
+     ============================================================ -->
+<section>
+  <h2 id="faq">❓ FAQ — Perguntas Frequentes</h2>
+
+  <h3 id="faq-1">{{PERGUNTA_1}}</h3>
+  <p class="wp-block-paragraph">{{RESPOSTA_1}}</p>
+
+  <h3 id="faq-2">{{PERGUNTA_2}}</h3>
+  <p class="wp-block-paragraph">{{RESPOSTA_2}}</p>
+
+  <h3 id="faq-3">{{PERGUNTA_3}}</h3>
+  <p class="wp-block-paragraph">{{RESPOSTA_3}}</p>
+</section>
+
+<!-- ============================================================
+     CARD ⚡ CONCLUSÃO ESTRATÉGICA (TAKEAWAY)
+     Coluna com .kb-section-has-overlay: o degradê azul vem do
+     ::before do fallback (ou do astra-child/style.css).
+     CTA final: /posicionamento-industrial-b2b/ ou /contato/.
+     ============================================================ -->
+<div class="wp-block-kadence-column kb-section-has-overlay"
+     style="margin: 35px 0; border-radius: 10px; overflow: hidden;">
+  <div class="kt-inside-inner-col" style="padding: 28px;">
+    <h3 class="wp-block-kadence-advancedheading" style="color:#ffffff; font-size:22px; line-height:1.35; margin:0 0 12px;">
+      ⚡ Conclusão Estratégica (Takeaway): <strong>{{TITULO_SEO}}</strong>
+    </h3>
+
+    <p style="color:#ffffff; font-size:18px; line-height:1.65; margin:0 0 16px;">
+      {{TAKEAWAY}}
+    </p>
+
+    <hr class="wp-block-separator has-text-color has-white-color has-alpha-channel-opacity" />
+
+    <p style="color:#fcb900; font-size:20px; line-height:1.6; margin:0;">
+      👉 Descubra como estruturamos o posicionamento técnico da sua empresa no Google e nas IAs para atrair clientes e contratos de alto valor agregado.<br>
+      <a href="/posicionamento-industrial-b2b/" style="color:#ffffff; font-weight:700; text-decoration:underline;">
+        Posicionamento Industrial B2B
+      </a>
+    </p>
+  </div>
+</div>
+
+<!-- ============================================================
+     BLOCO DO AUTOR / MARCA SOSSEO
+     ============================================================ -->
+<div class="wp-block-kadence-infobox kt-info-box3307_aa9b4f-d9"
+     style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap; margin:36px 0 0; padding:22px; border:1px solid #e5e5e5; border-radius:10px; background:#f8fafc;">
+  <div class="kt-blocks-info-box-media-container">
+    <div class="kt-blocks-info-box-media">
+      <div class="kadence-info-box-image-inner-intrisic-container">
+        <img loading="lazy" decoding="async" width="96" height="96"
+             src="/wp-content/uploads/2024/11/cropped-Mini-Logo-SOSSEO.jpg"
+             alt="SOSSEO — criação de sites e posicionamento digital"
+             class="kt-info-box-image" style="width:96px;height:96px;border-radius:50%;object-fit:cover;" />
+      </div>
+    </div>
+  </div>
+  <div class="kt-infobox-textcontent" style="flex:1; min-width:240px;">
+    <h3 class="kt-blocks-info-box-title" style="margin:0 0 6px; font-size:20px; color:#0a3d91;">SOSSEO</h3>
+    <p class="kt-blocks-info-box-text" style="margin:0 0 10px; color:#475569; font-size:14px;">Entregando resultados</p>
+    <p style="margin:0 0 12px; font-size:15px; line-height:1.6; color:#0f172a;">
+      Especialista na criação de sites e Google Perfil Empresa que vendem, com foco em SEO para você
+      aparecer na internet e atrair os clientes certos. Também inovamos com anúncios no Google e
+      Meta Ads para gerar cliques qualificados e resultados reais.
+      📊 <strong>Saia do anonimato e transforme seu negócio em destaque digital!</strong>
+    </p>
+    <a href="https://api.whatsapp.com/send?1=pt_BR&#038;phone=5511974695663"
+       target="_blank" rel="noreferrer noopener"
+       style="display:inline-block; background:#25D366; color:#ffffff; font-weight:700; border-radius:20px; padding:10px 20px; text-decoration:none;">
+      Chame no WhatsApp — 11 97469-5663
+    </a>
+  </div>
+</div>
+
+<!-- ==================== COLE O CONTEÚDO AQUI (fim) ==================== -->
+
+
+
+              </div><!-- .entry-content -->
+            </div>
+          </article>
+
+          <!-- Navegação entre posts (preencher com os vizinhos reais) -->
+          <nav class="navigation post-navigation" aria-label="Posts"
+               style="display:flex; justify-content:space-between; gap:16px; margin:28px 0; flex-wrap:wrap;">
+            <a href="/{{POST_ANTERIOR_SLUG}}/" rel="prev" style="color:#0a3d91;">&larr; {{POST_ANTERIOR_TITULO}}</a>
+            <a href="/{{POST_SEGUINTE_SLUG}}/" rel="next" style="color:#0a3d91;">{{POST_SEGUINTE_TITULO}} &rarr;</a>
+          </nav>
+
+          <!-- Posts relacionados (3 cards) -->
+          <div class="ast-single-related-posts-container">
+            <div class="ast-related-posts-title-section">
+              <h2 class="ast-related-posts-title">Posts relacionados</h2>
+            </div>
+            <div class="ast-related-posts-wrapper"
+                 style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:20px;">
+
+              <article class="ast-related-post post type-post status-publish format-standard has-post-thumbnail hentry category-{{CATEGORIA_SLUG}}">
+                <div class="ast-related-post-featured-section post-has-thumb">
+                  <a href="/{{RELACIONADO_1_SLUG}}/" aria-label="Ler: {{RELACIONADO_1_TITULO}}">
+                    <img width="300" height="300" loading="lazy" decoding="async"
+                         src="/wp-content/uploads/2026/10/{{RELACIONADO_1_IMAGEM}}.webp"
+                         alt="{{RELACIONADO_1_TITULO}}" class="attachment-large size-large wp-post-image"
+                         style="width:100%;height:auto;border-radius:8px;" />
+                  </a>
+                </div>
+                <h2 class="ast-related-post-title" style="font-size:16px;margin:8px 0 0;">
+                  <a href="/{{RELACIONADO_1_SLUG}}/" style="color:#0a3d91;">{{RELACIONADO_1_TITULO}}</a>
+                </h2>
+              </article>
+
+              <article class="ast-related-post post type-post status-publish format-standard has-post-thumbnail hentry category-{{CATEGORIA_SLUG}}">
+                <div class="ast-related-post-featured-section post-has-thumb">
+                  <a href="/{{RELACIONADO_2_SLUG}}/" aria-label="Ler: {{RELACIONADO_2_TITULO}}">
+                    <img width="300" height="300" loading="lazy" decoding="async"
+                         src="/wp-content/uploads/2026/10/{{RELACIONADO_2_IMAGEM}}.webp"
+                         alt="{{RELACIONADO_2_TITULO}}" class="attachment-large size-large wp-post-image"
+                         style="width:100%;height:auto;border-radius:8px;" />
+                  </a>
+                </div>
+                <h2 class="ast-related-post-title" style="font-size:16px;margin:8px 0 0;">
+                  <a href="/{{RELACIONADO_2_SLUG}}/" style="color:#0a3d91;">{{RELACIONADO_2_TITULO}}</a>
+                </h2>
+              </article>
+
+              <article class="ast-related-post post type-post status-publish format-standard has-post-thumbnail hentry category-{{CATEGORIA_SLUG}}">
+                <div class="ast-related-post-featured-section post-has-thumb">
+                  <a href="/{{RELACIONADO_3_SLUG}}/" aria-label="Ler: {{RELACIONADO_3_TITULO}}">
+                    <img width="300" height="300" loading="lazy" decoding="async"
+                         src="/wp-content/uploads/2026/10/{{RELACIONADO_3_IMAGEM}}.webp"
+                         alt="{{RELACIONADO_3_TITULO}}" class="attachment-large size-large wp-post-image"
+                         style="width:100%;height:auto;border-radius:8px;" />
+                  </a>
+                </div>
+                <h2 class="ast-related-post-title" style="font-size:16px;margin:8px 0 0;">
+                  <a href="/{{RELACIONADO_3_SLUG}}/" style="color:#0a3d91;">{{RELACIONADO_3_TITULO}}</a>
+                </h2>
+              </article>
+
+            </div>
+          </div>
+
+        </main><!-- #main -->
+      </div><!-- #primary -->
+
+      <!-- ===================== BARRA LATERAL =====================
+           #secondary alinhada ao topo do artigo (ver fallback no <head>).
+           Em telas < 922px a coluna desce para baixo do conteúdo.
+           ========================================================== -->
+      <div class="widget-area secondary" id="secondary">
+        <div class="sidebar-main">
+
+          <!-- Índice (Table of Contents) -->
+          <aside id="block-5" class="widget widget_block">
+            <nav class="wp-block-kadence-tableofcontents kb-table-of-content-nav kb-table-of-content-idblock-5_7c3d51-81 indice-sidebar"
+                 role="navigation" aria-label="Índice do artigo">
+              <div class="kb-table-of-content-wrap" style="border:1px solid #e5e5e5;border-radius:8px;padding:14px;background:#ffffff;">
+                <div class="kb-table-of-contents-title-wrap">
+                  <span class="kb-table-of-contents-title" style="color:#172a9e;font-weight:700;">Índice</span>
+                </div>
+                <ul class="kb-table-of-content-list" style="font-size:14px;margin:8px 0 0;padding-left:18px;">
+                  <li><a class="kb-table-of-contents__entry" href="#secao-1">{{TITULO_H2_1}}</a></li>
+                  <li><a class="kb-table-of-contents__entry" href="#secao-2">{{TITULO_H2_2}}</a></li>
+                  <li><a class="kb-table-of-contents__entry" href="#secao-3">{{TITULO_H2_3}}</a></li>
+                  <li><a class="kb-table-of-contents__entry" href="#faq">❓ FAQ — Perguntas Frequentes</a></li>
+                </ul>
+              </div>
+            </nav>
+          </aside>
+
+          <!-- Card "Não Sabe Como Iniciar?" (degradê azul) -->
+          <aside id="block-7" class="widget widget_block">
+            <div class="kb-row-layout-wrap kb-row-layout-idblock-7_7d4eb7-b3 alignnone kt-row-has-bg wp-block-kadence-rowlayout"
+                 style="border-radius:10px 10px 0 0;overflow:clip;isolation:isolate;background-image:radial-gradient(ellipse at center center,rgb(3,17,70) 0%,#000000 54%,rgb(12,85,153) 82%);">
+              <div class="kt-row-column-wrap kt-has-1-columns" style="display:grid;grid-template-columns:minmax(0,1fr);row-gap:1rem;padding:1.5rem 1rem;text-align:center;">
+                <div class="wp-block-kadence-column">
+                  <div class="kt-inside-inner-col">
+                    <p style="color:#ffffff;font-size:18px;font-weight:700;font-style:italic;line-height:1.2;margin:0 0 6px;">
+                      Não Sabe Como Iniciar?
+                    </p>
+                    <p style="color:#fcb900;font-size:16px;font-weight:700;line-height:1.4;margin:0 0 10px;">
+                      Torne Sua Empresa Relevante Para Quando Alguém Procurar
+                    </p>
+                    <p style="color:#e2e8f0;font-size:14px;line-height:1.55;margin:0;">
+                      Diagnóstico gratuito do seu posicionamento no Google e nas IAs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Botão verde "Consultoria Gratuita" -->
+          <aside id="block-8" class="widget widget_block">
+            <div class="kb-row-layout-wrap kb-row-layout-idblock-8_a161c3-fb alignnone kt-row-has-bg wp-block-kadence-rowlayout"
+                 style="border-radius:0 0 10px 10px;overflow:clip;background-color:#0e6606;border:1px solid #49079e;border-top:none;">
+              <div class="kt-row-column-wrap kt-has-1-columns" style="display:grid;grid-template-columns:minmax(0,1fr);padding:1rem;">
+                <div class="wp-block-kadence-column">
+                  <div class="kt-inside-inner-col">
+                    <div class="wp-block-kadence-advancedbtn kb-buttons-wrap">
+                      <a class="kb-button kt-button button"
+                         href="https://api.whatsapp.com/send?1=pt_BR&#038;phone=5511974695663"
+                         target="_blank" rel="noreferrer noopener nofollow"
+                         style="display:inline-flex;align-items:center;justify-content:center;background:#0e6606;color:#ffffff;border:1px solid #ffffff;border-radius:10px;padding:10px 16px;font-weight:700;text-decoration:none;">
+                        <span class="kt-btn-inner-text">Consultoria Gratuita</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        </div><!-- .sidebar-main -->
+      </div><!-- #secondary -->
+
+
+    </div><!-- .ast-container -->
+  </div><!-- #content -->
+
+<!-- ===================== RODAPÉ ===================== -->
+  <footer class="site-footer" id="colophon" itemid="#colophon">
+    <div class="site-primary-footer-wrap ast-builder-grid-row-container site-footer-focus-item"
+         style="background-color:#031146; color:#ffffff; padding:40px 0;">
+      <div class="ast-container">
+        <div class="ast-builder-grid-row ast-builder-grid-row-3-equal"
+             style="display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:32px;">
+
+          <!-- Coluna 1 — Contato -->
+          <div class="site-footer-section site-footer-section-1">
+            <p style="text-align:center; color:#e3be59; font-size:22px; margin:0 0 10px;">
+              <strong>Entre em contato, teremos o prazer em atendê-lo</strong>
+            </p>
+            <p style="text-align:center; font-size:28px; margin:0 0 6px;">
+              <a href="tel:+5511974695663" style="color:#ffffff; text-decoration:none;">11 97469-5663</a>
+            </p>
+            <p style="text-align:center; color:#f5f5f5; margin:0 0 12px;">
+              Ou deixe uma mensagem em nosso WhatsApp
+            </p>
+            <p style="text-align:center; margin:0;">
+              <a href="https://api.whatsapp.com/send?1=pt_BR&amp;phone=+5511974695663&amp;text=Ol%C3%A1!%20Sou%20o%20Reinaldo.%20O%20que%20deseja?"
+                 target="_blank" rel="noopener noreferrer">
+                <img loading="lazy" decoding="async" width="44" height="44"
+                     src="/wp-content/uploads/2022/01/Whatsapp.png"
+                     alt="Falar no WhatsApp com a SOSSEO"
+                     style="width:44px;height:44px;border-radius:9px;box-shadow:2px 2px 14px 3px #ffffff;" />
+              </a>
+            </p>
+          </div>
+
+          <!-- Coluna 2 — Marca -->
+          <div class="site-footer-section site-footer-section-2">
+            <p style="text-align:center; color:#ffffff; margin:0 0 8px;">
+              <mark style="background-color:rgba(0,0,0,0); color:#f5f5f5;">Sites para pequenas e médias empresas</mark>
+            </p>
+            <p style="text-align:center; color:#ffffff; margin:0;">
+              <em><strong>Criamos sites otimizados e conectamos sua presença online com Google Perfil Empresas,
+              Instagram, Facebook, YouTube e Pinterest para máxima visibilidade.</strong></em>
+            </p>
+          </div>
+
+          <!-- Coluna 3 — Categorias -->
+          <div class="site-footer-section site-footer-section-3">
+            <p style="text-align:center; color:#e3be59; margin:0 0 8px;"><strong>Categorias</strong></p>
+            <p style="text-align:left; color:#ffffff; line-height:1.8; margin:0;">
+              - <a href="/category/trafego-pago/" style="color:#ffffff;">Tráfego pago</a><br>
+              - <a href="/category/marketing-industrial-b2b/" style="color:#ffffff;">Marketing indústria B2B</a><br>
+              - <a href="/category/seo-para-empresas/" style="color:#ffffff;">SEO para Empresas</a><br>
+              - <a href="/category/marketing/" style="color:#ffffff;">Marketing</a><br>
+              - <a href="/category/google-ads/" style="color:#ffffff;">Google Ads</a><br>
+              - <a href="/category/google-perfil-de-empresas/" style="color:#ffffff;">Google Perfil de Empresas</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="site-below-footer-wrap ast-builder-grid-row-container site-footer-focus-item"
+         style="background-color:#010a24; color:#ffffff; padding:18px 0;">
+      <div class="ast-container">
+        <p style="text-align:center; color:#ffffff; font-size:14px; line-height:1.7; margin:0;">
+          Copyright © 2025 SOSSEO
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Justino+Alves+Batista+351+Vila+Yolanda+Osasco+SP"
+             target="_blank" rel="noreferrer noopener" style="color:#ffffff;">Rua: Justino Alves Batista N. 351 (Antigo 89)</a>
+          - Vila Yolanda - Osasco - SP.<br>
+          Termos de uso -&nbsp;<a href="/politica-de-privacidade/" target="_blank" rel="noreferrer noopener" style="color:#ffffff;">Política de Privacidade</a>
+          - CNPJ: 26.787.198/0001-99
+        </p>
+      </div>
+    </div>
+  </footer><!-- #colophon -->
+
+
+</div><!-- #page -->
+</body>
+</html>

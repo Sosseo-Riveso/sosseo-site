@@ -1,18 +1,67 @@
+# ==========================================================================
+# .assetsignore — o que NÃO sobe no deploy da Cloudflare (Workers/Pages)
+# --------------------------------------------------------------------------
+# Sintaxe igual ao .gitignore (globs, / para pastas, # para comentário).
+# REGRA DE OURO: qualquer arquivo referenciado pelo HTML de uma página
+# (CSS, JS, fonte, imagem) PRECISA subir. Se ficar de fora, retorna 404 e
+# o layout da página quebra (ver PROGRESS.md → "Banners do conteúdo").
+# ==========================================================================
+
+# --- 1. Controle de versão / configuração local ---------------------------
 .git
 .git/**
 .gitignore
 .nojekyll
+.vscode
+.vscode/**
+.wrangler
+.wrangler/**
+.clineignore
+.clinerules
 wrangler.json
+vercel.json
+# _headers e _redirects NÃO entram nesta lista: são lidos pela Cloudflare
+# para aplicar headers de segurança/cache e os 301. Excluir = perder ambos.
+
+# --- 2. Ferramentas de desenvolvimento (não fazem parte do site) ----------
+node_modules
+node_modules/**
+package.json
+package-lock.json
 publicar-artigo.mjs
+template-post-padrao.html
+
+# --- 3. Documentação de governança (não precisa ser pública) --------------
+*.md
+PROJECT_CONTEXT.md
+PROGRESS.md
+ANALISE_PROJETO.md
+_MEMORIA_PROJETO.md
+
+# --- 4. Acervo local / arquivos de design (não referenciados no site) -----
 Carro-suv
 Carro-suv/**
 Logos
 Logos/**
-vercel.json
+design
+design/**
 
-# wp-content/plugins/** e wp-includes/** PRECISAM subir no deploy.
-# O HTML dos posts/paginas referencia os CSS dos plugins (Kadence, Accordion
-# Blocks, Premium Blocks, Fluent Forms) e o block-library do WordPress.
-# Quando ficavam de fora, esses arquivos retornavam 404 e quebravam os
-# banners do conteudo: grid de 2 colunas, fundo em degrade, cor dos cards
-# e o estilo dos botoes (Kadence) simplesmente desapareciam.
+# ==========================================================================
+# NUNCA BLOQUEAR (mantido de propósito, sem regras de exclusão):
+#
+#   wp-content/themes/**          → Astra (main.min.css, menu-animation.min.css)
+#                                   e astra-child/style.css
+#   wp-content/plugins/**         → Kadence Blocks (rowlayout, column,
+#                                   advancedbtn, infobox, image, tableofcontents),
+#                                   Premium Blocks, Accordion Blocks, Fluent Forms,
+#                                   Elementor/Elementor Pro, PixelYourSite
+#   wp-includes/**                → css/dist/block-library/style.min.css,
+#                                   js/jquery, comment-reply, imagesloaded
+#   wp-content/uploads/**         → todas as imagens usadas nos posts
+#                                   (~48 MB / 760 arquivos)
+#
+# Histórico do bug: quando `wp-content/plugins/**` e `wp-includes/**` estavam
+# excluídos, os posts publicados perdiam o grid de 2 colunas, o degradê azul
+# do banner, a cor dos cards e o estilo dos botões Kadence.
+# Não reintroduza exclusões nessas três pastas sem testar o site publicado.
+# ==========================================================================

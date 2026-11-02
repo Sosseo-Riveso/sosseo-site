@@ -1,7 +1,43 @@
-# Dependências temporárias (sharp/parse5) usadas para manipular imagens - não fazem parte do site
+# ==========================================================================
+# .gitignore — mantém o repositório leve (site estático + ferramentas locais)
+# ==========================================================================
+
+# --- Dependências locais (sharp/parse5 usadas por publicar-artigo.mjs) ----
 node_modules/
 package.json
 package-lock.json
 
-# Arquivos de editor
+# --- Caches e artefatos de ferramentas ------------------------------------
+.wrangler/
+.cache/
+.parcel-cache/
+.temp/
+tmp/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Editor / sistema operacional ----------------------------------------
 .vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# ==========================================================================
+# NÃO IGNORAR (o site precisa estar versionado):
+#   wp-content/uploads/**   → imagens referenciadas nos posts
+#   wp-content/themes/**    → Astra + astra-child/style.css
+#   wp-content/plugins/**   → CSS/JS do Kadence, Elementor, Fluent Forms...
+#   wp-includes/**          → block-library e jQuery
+#   _headers  _redirects    → regras de cache, segurança e 301 da Cloudflare
+# ==========================================================================
+

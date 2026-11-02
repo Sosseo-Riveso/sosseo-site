@@ -1,0 +1,53 @@
+# ==========================================================================
+# .clineignore — economiza tokens e acelera a leitura do projeto
+# Sintaxe igual ao .gitignore. Use "!" para reabrir um caminho específico.
+# Ex.: se precisar auditar o CSS do Kadence, comente a linha de plugins.
+# ==========================================================================
+
+# --- Pastas de controle / ferramentas (sem valor de contexto) -------------
+.git/
+.vscode/
+.wrangler/
+node_modules/
+design/
+
+# --- Mídia e uploads (48 MB, 760 imagens — quase nunca precisa ser lida) --
+wp-content/uploads/
+
+# --- Acervo local (não é usado pelo site publicado) ----------------------
+Logos/
+Carro-suv/
+
+# --- Bibliotecas de terceiros: ficam fora, mas o CSS do Kadence/Astra
+#     (que causa bugs de layout) continua legível porque está em
+#     wp-content/plugins/kadence-blocks/dist/ e wp-content/themes/ ---------
+wp-content/plugins/elementor/assets/lib/
+wp-content/plugins/elementor-pro/modules/
+wp-content/plugins/fluentform/assets/libs/
+wp-content/plugins/fluentformpro/public/libs/
+
+# --- Binários e fontes (ruído em qualquer leitura) -----------------------
+*.webp
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.avif
+*.svg
+*.eot
+*.ttf
+*.woff
+*.woff2
+*.otf
+*.pdf
+*.zip
+
+# --- Mapas e artefatos gerados -------------------------------------------
+*.map
+*.min.js
+package-lock.json
+
+# --- Documentação antiga (o contexto atual está em PROJECT_CONTEXT.md) ----
+ANALISE_PROJETO.md
+_MEMORIA_PROJETO.md
