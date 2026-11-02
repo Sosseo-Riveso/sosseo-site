@@ -1,4 +1,7 @@
-// SOSSEO CRM - Engine Comercial para Agência (Sites, Tráfego & CRM)
+/**
+ * SOSSEO CRM - Engine Comercial para Agência (Sites, Tráfego & CRM)
+ * Documento de análise em ANALISE_PROJETO.md
+ */
 const STORAGE_KEY = 'sosseo_agency_crm_v3_clean';
 const DELETED_IDS_KEY = STORAGE_KEY + '_deleted_ids';
 const CLEARED_AT_KEY = STORAGE_KEY + '_cleared_at';
@@ -129,16 +132,9 @@ async function handleLogin(e) {
       errDiv.style.display = 'block';
     }
   } catch (err) {
-    // Fallback offline caso API esteja indisponível
-    if (username.toLowerCase() === 'admin' && (password === '123' || password === 'admin')) {
-      currentUser = { id: 'admin', name: 'Administrador SOSSEO', username: 'admin', role: 'admin' };
-      localStorage.setItem(SESSION_KEY, JSON.stringify(currentUser));
-      updateUserHeaderUI();
-      initCRMData();
-    } else {
-      errDiv.textContent = 'Erro ao conectar ao servidor de autenticação';
-      errDiv.style.display = 'block';
-    }
+    // Sem fallback local: a autenticação é feita SOMENTE pelo Worker central (sosseo-crm).
+    errDiv.textContent = 'Erro ao conectar ao servidor de autenticação';
+    errDiv.style.display = 'block';
   }
 }
 
