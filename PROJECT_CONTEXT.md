@@ -224,3 +224,52 @@ Depois: `git add -A && git commit -m "..." && git push`.
 **Novo lead**
 Formulário do site → `POST /api/leads` no worker `sosseo-crm` → aparece em
 `/painel-leads/` e `/painel-geral/`.
+
+---
+
+## 12. Padrão editorial — SEO, GEO e escaneabilidade B2B
+
+Regras herdadas das skills históricas da agência em
+`c:\Users\Reinaldo\Desktop\SOSSEO_sites\.agent\`. O detalhamento executável está no
+`.clinerules` (seções 7 e 11 a 15); aqui está o resumo de decisão.
+
+### 12.1 Metadados obrigatórios (8 itens, nesta ordem)
+
+| # | Item | Regra |
+|---|---|---|
+| 1 | Palavra-chave Principal | termo foco |
+| 2 | Título SEO | ≤ 60 caracteres |
+| 3 | Meta Descrição | ≤ 160 caracteres, com a palavra-chave |
+| 4 | Resumo do Post (Excerpt) — rótulo literal `Resumo (Excerpt)` | ≤ 180 caracteres |
+| 5 | `subtitulo_banner` (H2 do banner) | confirma a promessa do H1, sem repeti-lo |
+| 6 | Slug / URL | `kebab-case`, igual à pasta e ao canonical |
+| 7 | Opções de Títulos H1 Extras | mínimo 2 |
+| 8 | **Conclusão Estratégica (Takeaway)** | **obrigatória e sempre a última** |
+
+O item 8 é bloqueante: o `publicar-artigo.mjs` transforma o takeaway no card escuro
+`⚡ Conclusão Estratégica` no fim do artigo e na síntese do `llms-full.txt`. Sem ele,
+o artigo não é publicado. O bloco pronto está em `template-post-padrao.html`.
+
+### 12.2 Escaneabilidade sem jargão
+- Parágrafos de no máximo **2, 3 ou 4 linhas**; intertítulos descritivos (nunca
+  "Introdução"/"Dicas"); listas e tabelas no lugar de blocos densos.
+- Negrito só em conceito-chave — e em HTML sempre `<strong>`, nunca `**` do Markdown.
+- Pull quote entre o 2º e o 3º parágrafo; pirâmide invertida (o 1º parágrafo já
+  resolve a promessa do H1).
+- Respiro de 28 px + H2 com a palavra-chave antes do primeiro parágrafo.
+- Jargão proibido: "alavancar", "sinergia", "disruptivo", "game changer", "mindset",
+  "mergulhe", "desvende", "soluções inovadoras", "360º".
+
+### 12.3 SEO técnico e GEO
+- **SEO:** E-E-A-T, 1 H1, schema `Article` + `BreadcrumbList` + `FAQPage`, canonical,
+  sitemap, alt descritivo e Core Web Vitals (LCP < 2,5 s, INP < 200 ms, CLS < 0,1).
+- **GEO:** cobrir o *query fan-out* (3–10 subconsultas) com blocos autossuficientes de
+  40 a 70 palavras, entidades nomeadas e sem pronomes vagos; FAQ de 3–5 pares
+  `h3` + `p`; data de atualização e autoria visíveis; `llms.txt`/`llms-full.txt`
+  atualizados a cada publicação; crawlers de IA liberados no `robots.txt`.
+
+### 12.4 Prospecção B2B (LinkedIn)
+ICP de R$ 5 a 80 mi/ano (15–200 funcionários), cargos de diretoria industrial/comercial
+em SP e região, cadência consultiva de 4 passos (nunca vender no 1º contato), prova
+social com os cases Derplast e SN Equipamentos e destino final
+`/posicionamento-industrial-b2b/`. É operação comercial — não altera o conteúdo do site.

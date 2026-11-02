@@ -84,21 +84,48 @@ Cloudflare. Estas regras valem para qualquer alteração feita por IA ou por pes
 
 ## 6. Conteúdo e tom (público industrial B2B)
 
-- Público: dono/diretor industrial, engenheiro de processos, comprador técnico.
-- Tom consultivo e técnico, sem jargão de marketing genérico ("alavancar", "sinergia").
+- Público: dono/diretor industrial, gerente comercial, engenheiro de processos e
+  comprador técnico (ICP: faturamento de R$ 5 a 80 mi/ano, 15 a 200 funcionários).
+- Tom consultivo, técnico e "executivo para executivo" — nunca tom de vendedor.
 - Sempre citar norma, tolerância, material ou indicador concreto quando fizer sentido
-  (ex.: DIN ISO 2768, RFQ, CAC, hora-máquina, STEP/IGES).
+  (ex.: DIN ISO 2768, RFQ, NR-12, ISO 9001, STEP/IGES, hora-máquina, CAC, CAPEX).
 - Nada de promessa de resultado garantido nem prazo de "primeira posição no Google".
-- Nunca inventar dados, cases ou números de clientes.
+- Nunca inventar dados, cases ou números de clientes (cases reais: Derplast e
+  SN Equipamentos).
+- **Linguagem sem jargão de marketing.** Banidos: "alavancar", "sinergia",
+  "disruptivo", "game changer", "mindset", "mergulhe", "desvende", "soluções
+  inovadoras", "transformação digital 360º", "escalar exponencialmente".
+  Troque por verbo + resultado mensurável: "reduzir o CAC", "aumentar a ocupação
+  do parque fabril", "encurtar o ciclo de vendas em X dias".
+- Regras completas de escaneabilidade e copywriting: **seção 13**.
 
-## 7. Publicação de artigos
+## 7. Publicação de artigos e metadados (8 itens obrigatórios)
 
 - Fluxo oficial: `node publicar-artigo.mjs ../Artigos/artigo-NN-slug.html --categoria=slug`
-- O script espera o bloco de metadados no HTML de origem:
-  `subtitulo_banner`, `Palavra-chave Principal`, `Título SEO`, `Slug / URL`,
-  `Meta Descrição`, `Resumo (Excerpt)`, `Conclusão Estratégica (Takeaway)`.
-- O template mestre é `como-vender-usinagem-sem-guerra-de-precos/index.html`;
-  a referência de layout (sem WordPress) é `template-post-padrao.html`.
+- O script lê os metadados do **arquivo-fonte** do artigo (regex em `<li><strong>…`),
+  portanto a lista abaixo precisa existir, nesta ordem, antes do marcador
+  `COPIE DAQUI PARA BAIXO`:
+
+| # | Item | Regra |
+|---|---|---|
+| 1 | **Palavra-chave Principal** | termo foco do post |
+| 2 | **Título SEO** | máximo 60 caracteres, palavra-chave à frente |
+| 3 | **Meta Descrição** | máximo 160 caracteres, com a palavra-chave |
+| 4 | **Resumo (Excerpt)** *(nome da regra: "Resumo do Post (Excerpt)")* | máximo 180 caracteres, para a listagem da categoria; o rótulo literal precisa ser `Resumo (Excerpt)` para o regex do script casar |
+| 5 | **subtitulo_banner (H2 do Banner)** | nomeado exatamente assim; confirma a promessa do H1 (não repete o H1) |
+| 6 | **Slug Amigável** | URL limpa em `kebab-case`, igual à pasta e ao canonical |
+| 7 | **Opções de Títulos H1 Extras** | mínimo 2 alternativas persuasivas com a palavra-chave |
+| 8 | **Conclusão Estratégica (Takeaway)** | **OBRIGATÓRIO e sempre o ÚLTIMO item** |
+
+- **Item 8 é bloqueante:** artigo sem `Conclusão Estratégica (Takeaway)` não deve ser
+  publicado. O takeaway sintetiza mensagem central + impacto prático + decisão
+  estratégica para a fábrica/negócio, e o `publicar-artigo.mjs` o injeta como card
+  escuro `⚡ Conclusão Estratégica` no fim do artigo (e no `llms-full.txt`).
+- O texto do takeaway deve ser autossuficiente (2 a 4 frases, 40 a 70 palavras) e
+  repetir a palavra-chave — ele é lido por IAs fora de contexto.
+- O template `template-post-padrao.html` traz o bloco dos 8 itens pronto para cópia.
+- O template mestre de layout é `como-vender-usinagem-sem-guerra-de-precos/index.html`;
+  a referência limpa (sem WordPress) é `template-post-padrao.html`.
 - Depois de publicar, o script atualiza `post-sitemap.xml`, `sitemap.xml`,
   `llms.txt`, `llms-full.txt` e o card da categoria. Confira esses 5 pontos.
 
@@ -125,3 +152,162 @@ Cloudflare. Estas regras valem para qualquer alteração feita por IA ou por pes
 - Texto em português do Brasil, UTF-8, `lang="pt-BR"`.
 - Documentação viva: `PROJECT_CONTEXT.md` (visão geral) e `PROGRESS.md` (histórico
   e pendências). Atualize os dois quando concluir algo relevante.
+
+---
+
+## 11. SEO técnico / on-page industrial
+
+Base: skill `seo-fundamentals` (E-E-A-T, Core Web Vitals, fundamentos de algoritmo).
+
+- **E-E-A-T aplicado à indústria:** experiência de chão de fábrica (exemplos reais de
+  processo), especialidade (norma, tolerância, material), autoridade (cases Derplast e
+  SN Equipamentos, menções setoriais) e confiabilidade (HTTPS, dados verificáveis,
+  autoria clara — "SOSSEO" / Reinaldo).
+- **Título:** 50–60 caracteres, palavra-chave no início, sem clickbait.
+- **Meta description:** 150–160 caracteres, com a palavra-chave e um benefício concreto.
+- **H1:** um por página, com a palavra-chave principal. H2/H3 em hierarquia lógica e
+  com termos de engenharia (não "Introdução", "Dicas", "Conclusão").
+- **Alt text:** descritivo e técnico ("centro de usinagem CNC 5 eixos usinando molde"),
+  nunca keyword stuffing.
+- **Schema obrigatório no post:** `Article` (+ `datePublished`/`dateModified`),
+  `BreadcrumbList`, `FAQPage`; `Organization`/`LocalBusiness` no domínio.
+- **Técnico:** canonical autorreferente, sitemap atualizado, `robots.txt` liberando
+  buscadores e IA, URLs limpas em `kebab-case`, HTTPS, um único domínio
+  (`sosseo.com.br` — o guard no `<head>` bloqueia prévias em `github.io`).
+- **Core Web Vitals (metas):** LCP < 2,5 s · INP < 200 ms · CLS < 0,1.
+  Imagens com `width`/`height`, `loading="lazy"` (só a do banner com
+  `fetchpriority="high"`), sem CSS/JS novo via CDN.
+- **Links internos:** toda seção relevante aponta para uma página de serviço
+  (`/posicionamento-industrial-b2b/`, `/contato/`, artigos irmãos) com âncora
+  descritiva — nunca "clique aqui".
+- **Prioridade de ranqueamento** (usar como critério de decisão): 1) conteúdo
+  relevante e profundo; 2) autoridade/backlinks; 3) page experience; 4) mobile;
+  5) fundamentos técnicos.
+
+## 12. GEO / AEO — ser citado por IA generativa
+
+Base: skill `geo-fundamentals`. SEO entrega ranking; GEO entrega **citação**
+(ChatGPT Search, Perplexity, Gemini/AI Overviews, Claude).
+
+- **Query Fan-out:** motores de IA decompõem a busca em 3 a 10 subconsultas
+  (definição, fórmula/cálculo, comparação, risco, passo a passo). Cada subconsulta
+  deve ter resposta própria em um trecho dedicado do artigo — quem cobre todos os
+  ramos do fan-out ganha a citação.
+- **Chunks autossuficientes de 40 a 70 palavras:** respondem sem depender do parágrafo
+  anterior, nomeiam a entidade ("a indústria de usinagem", "o comprador técnico") e
+  **não usam pronomes vagos** ("isso", "ele", "aquilo").
+- **FAQ obrigatório:** 3 a 5 perguntas em `h3` + resposta em `p`, cada resposta com
+  40 a 70 palavras — alimenta o `FAQPage` e o fan-out.
+- **Elementos que geram citação:** definição clara no início, números e unidades,
+  tabela comparativa, passo a passo numerado, citação/pull quote, data de atualização
+  visível e autor identificado.
+- **Entidades:** sempre nomear norma, material, processo e sigla na primeira menção
+  (DIN ISO 2768, NR-12, aço inox 316L, Inconel, RFQ, STEP/IGES). Consistência de
+  nome/endereço/telefone em todo o site consolida a entidade SOSSEO.
+- **Arquivos de IA do projeto:** `llms.txt` (índice) e `llms-full.txt` (síntese por
+  artigo: URL canônica + síntese executiva + takeaway). Todo artigo novo entra nos dois.
+- **Crawlers de IA** devem seguir liberados (`GPTBot`, `Claude-Web`,
+  `PerplexityBot`, `Googlebot`) — bloquear = perder citação.
+- **Anti-patterns:** publicar sem data, atribuição vaga ("estudos mostram"),
+  conteúdo raso, resposta espalhada em parágrafos longos, texto sem autor.
+
+## 13. Escaneabilidade e copywriting (sem jargão)
+
+Base: skill `manual_escaneabilidade_copywriting`, adaptada do caso Persan (que é
+aromatizantes) **apenas na estrutura**. Ignore o vocabulário olfativo da skill;
+o público aqui é engenheiro, comprador e dono de indústria.
+
+### 13.1 Estrutura visual (Kit de escaneabilidade)
+- **Regra 2-3-4 linhas:** todo parágrafo tem no máximo 2, 3 ou 4 linhas, variando
+  entre esses tamanhos. Nunca mais de 4. Vale para o corpo inteiro, FAQ e conclusão.
+- **Intertítulos descritivos** (`h2`/`h3`) focados na dor ou no benefício
+  ("Por que a guerra de preços destrói a margem da usinagem"), nunca genéricos.
+- **Listas:** marcadores para benefícios/características; numeradas para passo a passo.
+- **Negrito estratégico:** só em conceito-chave, termo técnico ou dado. Se tudo está
+  em negrito, nada tem destaque. Em HTML use **`<strong>`** — **nunca** deixe `**`
+  do Markdown no HTML publicado (o navegador mostra os asteriscos).
+- **Pull quote / bloco de destaque** entre o 2º e o 3º parágrafo, sintetizando o valor
+  da seção. Em HTML: `<blockquote>`.
+- **Tabela comparativa** sempre que houver comparação (commodity vs. técnico,
+  feira vs. Google orgânico, custo/mês de mídia paga vs. ativo orgânico).
+- **Respiro de 28 px** depois do banner do H1:
+  `<div style="height: 28px;" aria-hidden="true"></div>`.
+- **H2 com a palavra-chave** logo após o respiro, antes do 1º parágrafo.
+- **Bloco de 2 colunas após o 3º/4º parágrafo:** imagem hero quadrada (1024×1024
+  `.webp`) + `h3` + texto curto centralizado; empilha em 1 coluna abaixo de 768 px.
+
+### 13.2 Engenharia de frase e persuasão
+- **Pirâmide invertida radical:** o 1º parágrafo já entrega a solução da promessa do
+  H1 (resposta canônica, sem preâmbulo). O 2º aprofunda o mecanismo técnico e contrasta
+  com o modelo tradicional. Do 3º em diante vêm dados, tabelas e implementação.
+- **Bucket brigades** (pontes de atenção terminadas em dois-pontos): "Na prática:",
+  "O problema é que:", "E o resultado?", "Veja o que muda:".
+- **PAS** para abertura/seções comerciais: Problema → Agitação → Solução.
+- **AIDA** para a jornada do artigo: Atenção (H1) → Interesse (mecanismo técnico) →
+  Desejo (cenário operacional ideal) → Ação (CTA de diagnóstico).
+- **Voz ativa** e conectores lógicos ("Além disso", "Por outro lado",
+  "Consequentemente"). Frases curtas. Sem prolixidade.
+- **Precisão em vez de adjetivo:** todo número com unidade e contexto
+  ("% de ocupação do parque fabril", "R$ por hora-máquina", "dias de ciclo de venda").
+- **CTA único por bloco:** um objetivo por seção (diagnóstico, WhatsApp ou leitura
+  de outro artigo). Nunca dois CTAs competindo no mesmo parágrafo.
+
+### 13.3 Checklist antes de publicar
+- [ ] Nenhum parágrafo acima de 4 linhas
+- [ ] Nenhum jargão da lista proibida (seção 6)
+- [ ] 1 `h1`, hierarquia de `h2`/`h3` sem saltos
+- [ ] Pull quote entre 2º e 3º parágrafos
+- [ ] Pelo menos uma tabela ou lista por seção densa
+- [ ] FAQ com 3–5 pares `h3` + `p` (40–70 palavras cada)
+- [ ] Takeaway como 8º item dos metadados e card no fim do artigo
+- [ ] `**` do Markdown não sobrou no HTML
+
+## 14. Prospecção e social selling B2B (LinkedIn)
+
+Base: skill `linkedin_prospeccao_b2b`. Usar quando a tarefa envolver abordagem
+comercial, mensagens de LinkedIn, cadência outbound ou copy de conversa direta —
+não para o conteúdo do site.
+
+- **Regra de ouro:** nunca vender nem mandar link no primeiro contato. Rapport de
+  executivo para executivo; venda só no 4º passo, como diagnóstico gratuito.
+- **ICP:** indústrias de R$ 5 a 80 mi/ano (15 a 200 funcionários), em SP e região
+  (Campinas, Sorocaba, Ribeirão Preto, São José dos Campos).
+- **Cargos-alvo:** Diretor/Gerente Comercial, Diretor Industrial/Gerente de Planta,
+  CEO/Sócio-proprietário.
+- **Segmentos:** usinagem e ferramentaria, injeção plástica, metalmecânica e
+  caldeiraria, máquinas/equipamentos e automação (NR-12), embalagens industriais,
+  tratamento térmico e superficial.
+- **Cadência de 4 passos:** 1) convite com nota (máx. 300 caracteres); 2) agradecimento
+  consultivo em 24–48 h, sem oferta; 3) provocação construtiva com dado factual
+  (3–4 dias); 4) convite ao diagnóstico sem custo + link de
+  `/posicionamento-industrial-b2b/`.
+- **Objeções (responder com dado, não com desconto):** "já temos agência"
+  (escopo diferente: SEO técnico fabril), "só vendemos por indicação" (o comprador
+  novo pesquisa antes de cotar), "não é o momento" (é quando a ociosidade pesa mais).
+- **Rotina:** 20 min/dia (10–15 convites, respostas, 2 interações) → ~60 convites/semana.
+- **Feed:** 2–3 posts/semana (ter/qua/qui, 7h30–9h) sobre dor da fábrica, bastidor de
+  SEO técnico, prova social (Derplast, SN Equipamentos) e comparativos de mercado.
+  Link sempre no primeiro comentário, nunca no corpo do post.
+- **Tom:** sem emoji decorativo, sem "prezado", sem áudio não solicitado. Mensagem
+  curta, específica sobre a empresa do decisor e com uma única pergunta.
+
+## 15. Skills e regras de referência (onde consultar)
+
+As skills ficam em `c:\Users\Reinaldo\Desktop\SOSSEO_sites\.agent\` (fora deste
+repositório). Consulte-as antes de redigir ou auditar artigos:
+
+| Fonte | O que entrega | Onde foi aplicada aqui |
+|---|---|---|
+| `.agent/rules/metadados_artigos.md` | 8 metadados obrigatórios, com Takeaway como último item | seções 7 e 13.3 |
+| `.agent/skills/seo-fundamentals/SKILL.md` | E-E-A-T, Core Web Vitals, on-page, schema, medição | seção 11 |
+| `.agent/skills/geo-fundamentals/SKILL.md` | query fan-out, chunks citáveis, entidades, `llms.txt` | seção 12 |
+| `.agent/skills/manual_escaneabilidade_copywriting/SKILL.md` | regra 2-3-4, intertítulos, listas, PAS/AIDA, metadados | seções 7, 13 |
+| `.agent/skills/linkedin_prospeccao_b2b/SKILL.md` | ICP, cadência de 4 passos, objeções, rotina diária | seção 14 |
+
+- Auditorias automatizadas disponíveis nas próprias skills:
+  `python scripts/seo_checker.py <caminho>` e `python scripts/geo_checker.py <caminho>`.
+- **Adaptação obrigatória:** as skills são genéricas da agência. O vocabulário
+  olfativo/de e-commerce da Persan **não se aplica** ao sosseo.com.br — aproveite
+  apenas a estrutura de escaneabilidade e a mecânica de copywriting.
+- Conflito entre skill e este arquivo: **vale este `.clinerules`** (é a fonte de
+  verdade do projeto sosseo.com.br).

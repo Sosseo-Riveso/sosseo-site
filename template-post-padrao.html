@@ -22,10 +22,13 @@
        {{DATA_ISO}} / {{DATA_BR}}   ex.: 2026-11-02T10:00:00+00:00 / 02/11/2026
        {{IMAGEM_OG}}           URL absoluta da imagem 1200x630 (JPG)
        {{TAKEAWAY}}            texto da Conclusão Estratégica
-  3. Preencha o corpo entre os marcadores COLE O CONTEÚDO AQUI.
+  3. Preencha o BLOCO DE METADADOS abaixo (8 itens; o 8º item, Conclusão
+     Estratégica/Takeaway, é OBRIGATÓRIO). É dele que o publicar-artigo.mjs
+     extrai title, meta description, canonical, subtítulo e o card final.
+  4. Preencha o corpo entre os marcadores COLE O CONTEÚDO AQUI.
      Os demais placeholders ({{TITULO_H2_1}}, {{ITEM_LISTA_1}}, {{PERGUNTA_1}},
      {{RELACIONADO_1_SLUG}}...) aparecem no corpo, na ordem de leitura.
-  4. Caminhos: este template usa caminhos absolutos (/wp-content/...) para
+  5. Caminhos: este template usa caminhos absolutos (/wp-content/...) para
      funcionar tanto na raiz quanto em /<slug>/. O publicar-artigo.mjs gera
      caminhos relativos (../wp-content/...); ambos resolvem na Cloudflare.
 
@@ -35,7 +38,54 @@
     #ea5959 do inline do WordPress).
   - Barra lateral alinhada ao topo do artigo (#secondary sem padding-top).
   - Todo post termina com o card "⚡ Conclusão Estratégica (Takeaway)".
+  - O 8º item dos metadados é a Conclusão Estratégica (Takeaway): sem ela o
+    artigo não deve ser publicado (.agent/rules/metadados_artigos.md).
   - WhatsApp oficial: 5511974695663 (não alterar número nem texto do CTA).
+  ==========================================================================
+-->
+<!--
+  ==========================================================================
+  BLOCO DE METADADOS OBRIGATÓRIOS — 8 ITENS
+  --------------------------------------------------------------------------
+  Copie esta lista para o ARQUIVO-FONTE do artigo (antes do marcador
+  "COPIE DAQUI PARA BAIXO"). Ela fica comentada neste template de propósito:
+  metadado não deve aparecer na página publicada.
+
+  O publicar-artigo.mjs lê os pares <li><strong>Rótulo</strong> valor</li> e
+  gera: <title>, meta description, canonical, subtítulo do banner, sitemap,
+  llms.txt, llms-full.txt, card da categoria e o card escuro de Conclusão
+  Estratégica no fim do post.
+
+  ORDEM OBRIGATÓRIA: o item 8 é sempre o último e não pode faltar.
+
+  <ul class="metadados-artigo">
+    <li><strong>Palavra-chave Principal:</strong> {{PALAVRA_CHAVE}}</li>
+    <li><strong>Título SEO:</strong> {{TITULO_SEO}}</li>
+    <li><strong>Meta Descrição:</strong> {{META_DESCRIPTION}}</li>
+    <li><strong>Resumo (Excerpt):</strong> {{RESUMO_EXCERPT}}</li>
+    <li><strong>subtitulo_banner:</strong> {{SUBTITULO_BANNER}}</li>
+    <li><strong>Slug / URL:</strong> {{SLUG}}</li>
+    <li><strong>Opções de Títulos H1 Extras:</strong> {{H1_EXTRA_1}} | {{H1_EXTRA_2}}</li>
+    <li><strong>Conclusão Estratégica (Takeaway):</strong> {{TAKEAWAY}}</li>
+  </ul>
+
+  REGRAS DE CADA CAMPO
+  1. Palavra-chave Principal ..... termo foco do artigo.
+  2. Título SEO .................. máximo 60 caracteres, palavra-chave à frente.
+  3. Meta Descrição .............. máximo 160 caracteres, com a palavra-chave.
+  4. Resumo (Excerpt) ............ máximo 180 caracteres (listagem da categoria).
+                                   Nome completo do campo na regra: "Resumo do
+                                   Post (Excerpt)". Use o rótulo "Resumo
+                                   (Excerpt)" para o regex do script casar.
+  5. subtitulo_banner (H2) ....... nome exato; confirma a promessa do H1, sem
+                                   repetir o H1.
+  6. Slug / URL .................. kebab-case, igual à pasta e ao canonical.
+  7. Opções de Títulos H1 Extras . mínimo 2 alternativas persuasivas.
+  8. Conclusão Estratégica ....... OBRIGATÓRIA e última: mensagem central +
+     (Takeaway)                    impacto prático + decisão para a fábrica.
+                                   Autossuficiente, 40 a 70 palavras, com a
+                                   palavra-chave (é citada por IA fora de
+                                   contexto e vira card no fim do artigo).
   ==========================================================================
 -->
 <script id="sosseo-canonical-domain-guard">

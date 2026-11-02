@@ -12,6 +12,22 @@ Migration WordPress (Turbocloud) → GitHub + Cloudflare em fase de teste/monito
 
 ## 📅 Histórico
 
+### 2026-11-02 — Skills históricas B2B incorporadas às regras
+- `.clinerules` ampliado para 15 seções com base em
+  `.agent/rules/metadados_artigos.md` e nas skills `seo-fundamentals`,
+  `geo-fundamentals`, `manual_escaneabilidade_copywriting` e
+  `linkedin_prospeccao_b2b`.
+- Metadados agora documentados como **8 itens obrigatórios**, com a
+  `Conclusão Estratégica (Takeaway)` fixada como **8º e último item bloqueante**.
+- Novas seções: 11 (SEO técnico on-page + Core Web Vitals), 12 (GEO/AEO — query
+  fan-out, chunks citáveis, `llms.txt`), 13 (escaneabilidade: regra 2-3-4, pull
+  quote, PAS/AIDA, jargão proibido), 14 (prospecção LinkedIn B2B: ICP, cadência de
+  4 passos, objeções) e 15 (mapa das skills e adaptações).
+- `template-post-padrao.html` recebeu o **bloco comentado dos 8 metadados**
+  (pronto para copiar no arquivo-fonte, sem poluir a página publicada).
+- `PROJECT_CONTEXT.md` ganhou a seção 12 "Padrão editorial — SEO, GEO e
+  escaneabilidade B2B". Nenhuma página em produção foi alterada.
+
 ### 2026-11-02 — Kit de governança, deploy e template
 - Criado `.assetsignore` documentado: `wp-content/plugins/**`, `wp-content/themes/**`,
   `wp-includes/**` e `wp-content/uploads/**` explicitamente **fora** da lista de
