@@ -22,7 +22,8 @@ const CATEGORY_MAP = {
   'google-perfil-de-empresas': 'Google Perfil de Empresas',
   'google-ads': 'Google Ads',
   'trafego-pago': 'Tráfego Pago',
-  'marketing': 'Marketing'
+  'marketing': 'Marketing',
+  'novos-sites-sosseo': 'Novos Sites SOSSEO'
 };
 
 function stripTags(str) {

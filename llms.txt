@@ -43,7 +43,7 @@
 
 ---
 
-## 3. Acervo Completo de Artigos Técnicos (40 Artigos Publicados)
+## 3. Acervo Completo de Artigos Técnicos (41 Artigos Publicados)
 
 ### 3.1. Engenharia de Demanda Industrial B2B & Cases Técnicos
 1. [SEO e GEO para Ferramentaria e Injeção Plástica: Como Captar Projetos e RFQs](https://sosseo.com.br/seo-para-ferramentaria-e-injecao-plastica/): Estudo técnico de posicionamento para matrizarias CNC e parques de injeção termoplástica (Case Portal Molde Injeção).
@@ -94,3 +94,6 @@
 38. [Tag do Google e Pixel do Facebook: Como Rastrear Conversões com Precisão](https://sosseo.com.br/tag-do-google-e-pixel-do-facebook/)
 39. [Como Encontrar e Qualificar o Público-Alvo Ideal na Internet](https://sosseo.com.br/como-encontrar-o-publico-alvo/)
 40. [Como Aumentar os Lucros da Empresa Usando a Internet com Estratégia](https://sosseo.com.br/como-aumentar-os-lucros-com-a-internet/)
+
+### 3.6. Estudos de Caso — Novos Sites SOSSEO
+41. [Case Baden Rodas e Pneus: SEO Técnico e GEO em Campinas](https://sosseo.com.br/case-baden-rodas-e-pneus-seo-tecnico-e-geo-em-campinas/): Estudo de caso do novo site da rede com duas unidades em Campinas (Av. Baden Powell, 1412 e R. Nicarágua, 496): 46 páginas em HTML semântico, grafo JSON-LD AutoRepair multiunidade com CNPJ 31.319.526/0001-62, NAP individualizado por loja, GEO para ChatGPT Search, Perplexity e Google AI Overviews, Consent Mode v2 (LGPD) e indexação via IndexNow.

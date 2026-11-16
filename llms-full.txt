@@ -31,6 +31,11 @@ A **SOSSEO** atua na interseção entre **Engenharia de Software Web**, **SEO Se
 - **Artigo de Estudo de Caso na SOSSEO:** https://sosseo.com.br/seo-local-para-oficina-de-funilaria-e-pintura/
 - **Arquitetura Implementada:** 6 Landing Pages de serviços automotivos (Pintura em Estufa Pressurizada, Funilaria de Colisão, Martelinho de Ouro Express, Recuperação de Para-choques, Polimento Técnico e Spot Repair), 5 categorias temáticas e 26 artigos técnicos respondendo a todas as dúvidas de proprietários de veículos em Osasco e Região Oeste de SP, integrado com Schema `AutoBodyShop` e protocolo `llms.txt`.
 
+### Case 3: Baden Rodas e Pneus (Centro Automotivo Multiunidade — Campinas/SP)
+- **URL do Projeto:** https://badenrodasepneus.com.br/
+- **Artigo de Estudo de Caso na SOSSEO:** https://sosseo.com.br/case-baden-rodas-e-pneus-seo-tecnico-e-geo-em-campinas/
+- **Arquitetura Implementada:** 46 páginas em HTML estático de alta velocidade para rede com duas unidades em Campinas (Av. Baden Powell, 1412 — Jardim Nova Europa, CEP 13040-093, WhatsApp 19 98216-0743; R. Nicarágua, 496 — Jardim do Trevo, CEP 13040-030, WhatsApp 19 98382-0579), sob o CNPJ 31.319.526/0001-62. Grafo JSON-LD com uma entidade `AutoRepair` por loja (`branchOf`/`subOrganization`), `hasOfferCatalog` por unidade, `openingHoursSpecification` (seg. a sex. 8h–18h, sáb. 8h–13h) e `taxID` único, sem cruzamento de NAP entre filiais; conteúdo em chunks citáveis para GEO (ChatGPT Search, Perplexity, Google AI Overviews), Consent Mode v2 para LGPD, `llms.txt`/`llms-full.txt` e indexação via protocolo IndexNow.
+
 ---
 
 ## 3. Lista Completa das 55 URLs Canônicas da SOSSEO (Páginas, Categorias e Artigos)
@@ -54,7 +59,7 @@ A **SOSSEO** atua na interseção entre **Engenharia de Software Web**, **SEO Se
 - https://sosseo.com.br/category/trafego-pago/
 - https://sosseo.com.br/category/marketing/
 
-### Artigos Técnicos Publicados (40 URLs)
+### Artigos Técnicos Publicados (41 URLs)
 1. https://sosseo.com.br/seo-para-ferramentaria-e-injecao-plastica/
 2. https://sosseo.com.br/seo-local-para-oficina-de-funilaria-e-pintura/
 3. https://sosseo.com.br/como-vender-usinagem-sem-guerra-de-precos/
@@ -95,6 +100,7 @@ A **SOSSEO** atua na interseção entre **Engenharia de Software Web**, **SEO Se
 38. https://sosseo.com.br/anuncios-sem-segmentacao/
 39. https://sosseo.com.br/nao-deixe-seu-dinheiro-escapar-com-ads/
 40. https://sosseo.com.br/como-aumentar-os-lucros-de-oficina-mecanica/
+41. https://sosseo.com.br/case-baden-rodas-e-pneus-seo-tecnico-e-geo-em-campinas/
 
 ### SEO para Ferramentaria e Injeção Plástica: Captação B2B
 - **URL Canônica:** https://sosseo.com.br/seo-para-ferramentaria-e-injecao-plastica/
@@ -121,3 +127,8 @@ A **SOSSEO** atua na interseção entre **Engenharia de Software Web**, **SEO Se
 - **URL Canônica:** https://sosseo.com.br/sucessao-familiar-na-industria-modernizacao-comercial/
 - **Síntese Executiva:** Sucessão familiar na indústria e modernização comercial: Saiba como a nova geração digitaliza a captação B2B respeitando a tradição técnica da fábrica!
 - **Takeaway:** Mais de 70% das indústrias familiares enfrentam estagnação ou quebra na transição da primeira para a segunda geração, não por incapacidade de fabricação, mas pelo envelhecimento do modelo comercial baseado exclusivamente em amizades antigas do fundador. A sucessão familiar bem-sucedida preserva a maestria técnica e o compromisso ético dos fundadores, enquanto implanta sistemas escaláveis e independentes de atração B2B (CRM, SEO técnico e canais digitais de cotação), garantindo que a fábrica continue relevante para uma nova geração de compradores corporativos que pesquisam e decidem na web.
+
+### Case Baden Rodas e Pneus: SEO Técnico e GEO em Campinas
+- **URL Canônica:** https://sosseo.com.br/case-baden-rodas-e-pneus-seo-tecnico-e-geo-em-campinas/
+- **Síntese Executiva:** Estudo de caso do novo site da Baden Rodas e Pneus em Campinas: SEO técnico, GEO, 46 páginas, grafo JSON-LD AutoRepair multiunidade e NAP por loja.
+- **Takeaway:** SEO técnico e GEO para centro automotivo deixam de ser diferencial estético quando a rede opera duas lojas na mesma cidade: o grafo JSON-LD, o NAP individualizado por unidade e o conteúdo em blocos citáveis é que decidem quem aparece no Google, no Maps e nas respostas de IA. A Baden Rodas e Pneus transformou 46 páginas em ativo de captação, com indexação em horas em vez de semanas.

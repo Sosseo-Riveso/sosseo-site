@@ -12,6 +12,35 @@ Migration WordPress (Turbocloud) → GitHub + Cloudflare em fase de teste/monito
 
 ## 📅 Histórico
 
+### 2026-11-16 — Blog: estudo de caso do site Baden Rodas e Pneus
+- Publicado o artigo/estudo de caso `case-baden-rodas-e-pneus-seo-tecnico-e-geo-em-campinas/`
+  (categoria `novos-sites-sosseo`), sobre o novo site oficial da **Baden Rodas e Pneus**
+  (`https://badenrodasepneus.com.br/`), rede com duas unidades em Campinas/SP.
+- Conteúdo: 46 páginas em HTML estático, grafo JSON-LD `AutoRepair` por loja
+  (`branchOf`/`subOrganization`, CNPJ 31.319.526/0001-62, NAP individualizado,
+  horários 8h–18h e sábado 8h–13h), GEO (chunks citáveis, query fan-out, `llms.txt`),
+  Consent Mode v2 (LGPD) e indexação via IndexNow.
+- Link editorial contextual **dofollow** para `https://badenrodasepneus.com.br/`
+  no corpo do post (âncora "novo site oficial da Baden Rodas e Pneus em Campinas"),
+  sem `nofollow`/`ugc`/`sponsored`; links internos para os clusters de criação de
+  sites em Campinas, oficina mecânica, autoridade e diagnóstico de indexação.
+- JSON-LD reescrito no post (o `publicar-artigo.mjs` não casava o bloco do template
+  mestre `saswp-schema-markup-output`): `Article` + `WebPage`/`FAQPage` + `ImageObject`
+  + `BreadcrumbList` (Início → Novos Sites SOSSEO → post) + `WebSite` + `Person`,
+  com `about`/`mentions` apontando para a Baden (`AutoRepair` das duas lojas).
+  Zero `@id` órfão na página.
+- Página de listagem `category/novos-sites-sosseo/` recebeu o card novo (imagem 300×300);
+  `post-sitemap.xml` (URL + lastmod 2026-11-16 + imagens), `llms.txt` (item 41, seção 3.6)
+  e `llms-full.txt` (Case 3 + URL 41) atualizados. `publicar-artigo.mjs` ganhou o
+  mapeamento `novos-sites-sosseo` → "Novos Sites SOSSEO".
+- Validadores na página nova: **SEO 0 problemas** (`scripts/seo_checker.py`) e
+  **GEO 100%** (`scripts/geo_checker.py`). Auditoria do site inteiro segue com os
+  **141 achados legados** (73 páginas antigas), sem regressão: o post novo não aparece
+  na lista de afetados. `scripts/` só tem `seo_checker.py` e `geo_checker.py` — não
+  existe `validar_ontologia.py` nem `validar_grafo.py` neste repositório.
+- Imagens novas em `wp-content/uploads/2026/10/`: fachadas do Jardim do Trevo e do
+  Jardim Nova Europa em 1024×1024 `.webp` (+ variante 300×300 para o card).
+
 ### 2026-11-02 — Auditores SEO e GEO (`scripts/`)
 - Criada a pasta `scripts/` (ferramenta local, fora do deploy) com dois validadores
   adaptados das skills `seo-fundamentals` e `geo-fundamentals`:
