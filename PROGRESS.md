@@ -37,6 +37,18 @@ Migration WordPress (Turbocloud) → GitHub + Cloudflare em fase de teste/monito
 - Validação: `node scripts/validar-ga4-sosseo.mjs` (6 cenários: externo limpo, interno,
   recusa e aceite prévios, remoção do interno) em **0 erros**; SEO segue com os mesmos
   **141 achados legados** e GEO **91%** (baseline comparado com worktree do `HEAD`).
+- Produção (Chrome headless com perfil limpo, `scripts/testar-ga4-navegador.mjs`):
+  hit `GET /g/collect?v=2&tid=G-ZZMDPL7644&en=page_view` com **status 204**,
+  `gcs=G101` e **`tt=external`**; com `?interno=sosseo`, `tt=internal`, o parâmetro é
+  removido da URL (`/contato/`) e `sosseo_interno_v1=1` fica no `localStorage`.
+  **Atenção:** o GA4 publica o `traffic_type` do `config` no parâmetro nativo `tt`
+  do hit (não como `ep.traffic_type`) — não "corrija" isso trocando a config.
+- Produção (`scripts/testar-ga4-conversoes.mjs`): banner aparece no 1º acesso,
+  "Só o essencial" grava `denied` e aplica `consent update`, o botão
+  "Revisar preferências" reabre o banner e "Aceitar todos" grava `granted`;
+  submit de formulário gera **1** `generate_lead` (`lead_source: site_form`) e **1**
+  hit `en=generate_lead` para o GA4. WhatsApp usa o mesmo caminho
+  (`lead_source: whatsapp_modal`) em todas as páginas com modal.
 
 ### 2026-11-16 — Blog: estudo de caso do site Baden Rodas e Pneus
 - Publicado o artigo/estudo de caso `case-baden-rodas-e-pneus-seo-tecnico-e-geo-em-campinas/`
