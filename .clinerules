@@ -131,8 +131,10 @@ Cloudflare. Estas regras valem para qualquer alteração feita por IA ou por pes
 
 ## 8. Performance, analytics e privacidade
 
-- GTM `GTM-MWBLQ22S` e Meta Pixel `1189104682466848` já estão no `<head>`:
-  não duplicar.
+- Analytics: **GA4 `G-ZZMDPL7644`** direto no `<head>` de todas as páginas públicas
+  (bootstrap inline + 1 loader `gtag/js`, Consent Mode v2, filtro `?interno=sosseo`) e
+  Meta Pixel `1189104682466848` já estão no `<head>`: **não duplicar** e **não**
+  reintroduzir o container antigo do GTM `GTM-MWBLQ22S` (removido em 18/11/2026).
 - CSS/JS de `/wp-content/` e `/wp-includes/` têm cache de 1 ano (`immutable`).
   Se trocar um arquivo desses, renomeie ou peça purge — senão o visitante fica
   com a versão antiga.

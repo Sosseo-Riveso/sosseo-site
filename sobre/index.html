@@ -14,13 +14,65 @@
 })();
 </script>
 <meta charset="UTF-8">
-<!-- Google Tag Manager (SOSSEO) -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MWBLQ22S');</script>
-<!-- End Google Tag Manager -->
+<!-- Google Analytics 4 (G-ZZMDPL7644) - Consent Mode v2 / LGPD -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+(function () {
+  var CONSENT_KEY = 'sosseo_consent_v1';
+  var INTERNAL_KEY = 'sosseo_interno_v1';
+  var choice = null;
+  try { choice = window.localStorage.getItem(CONSENT_KEY); } catch (e) {}
+
+  // Consent Mode v2: medicao anonima ativa por padrao; publicidade bloqueada ate o aceite.
+  gtag('consent', 'default', {
+    analytics_storage: choice === 'denied' ? 'denied' : 'granted',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    wait_for_update: 500
+  });
+
+  // Filtro de trafego interno: ?interno=sosseo ativa; ?interno=0 remove.
+  var trafficType = 'external';
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var interno = params.get('interno');
+    if (interno === 'sosseo') {
+      window.localStorage.setItem(INTERNAL_KEY, '1');
+    } else if (interno === '0') {
+      window.localStorage.removeItem(INTERNAL_KEY);
+    }
+    if (window.localStorage.getItem(INTERNAL_KEY) === '1') {
+      trafficType = 'internal';
+    }
+    if (interno !== null) {
+      params.delete('interno');
+      var query = params.toString();
+      window.history.replaceState({}, '', window.location.pathname + (query ? '?' + query : '') + window.location.hash);
+    }
+  } catch (e) {}
+
+  // Visitante que ja aceitou: libera os 4 sinais antes do config.
+  if (choice === 'granted') {
+    gtag('consent', 'update', {
+      analytics_storage: 'granted',
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
+    });
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZZMDPL7644', {
+    anonymize_ip: true,
+    send_page_view: true,
+    traffic_type: trafficType
+  });
+})();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZMDPL7644"></script>
 <!-- Meta Pixel Code (SOSSEO) -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -39,8 +91,6 @@ fbq('track', 'PageView');
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11"> 
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-	<!-- Google Tag Manager -->
-	<!-- End Google Tag Manager -->
 	
 	<!-- This site is optimized with the Yoast SEO plugin v28.7 - https://yoast.com/product/yoast-seo-wordpress/ -->
 	<title>Sobre a SOSSEO - Consultoria SEO e Criação de Sites em Osasco</title>
@@ -467,10 +517,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </head>
 
 <body   class="wp-singular page-template-default page page-id-6 wp-custom-logo wp-embed-responsive wp-theme-astra wp-child-theme-astra-child ast-desktop ast-plain-container ast-no-sidebar astra-4.14.0 ast-single-post ast-inherit-site-logo-transparent ast-hfb-header ast-normal-title-enabled elementor-default elementor-kit-1002">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWBLQ22S"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
 	<script data-cfasync="false">
 			(function(){var mq=window.matchMedia('(max-width:921.99px)');function apply(isMobile){var b=document.body.classList;if(isMobile){b.add('ast-header-break-point');b.remove('ast-desktop');}else{b.remove('ast-header-break-point');b.add('ast-desktop');}}apply(mq.matches);if(mq.addEventListener){mq.addEventListener('change',function(e){apply(e.matches);});}else if(mq.addListener){mq.addListener(function(e){apply(e.matches);});}})();
@@ -1525,8 +1571,9 @@ class="site-footer" id="colophon"   itemid="#colophon">
     if (typeof window.fbq === 'function') {
       try { window.fbq('track', 'Lead', { content_name: servico, content_category: perfil }); } catch(e) {}
     }
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'generate_lead', lead_source: 'whatsapp_modal', service: servico, profile: perfil });
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', { lead_source: 'whatsapp_modal', service: servico, profile: perfil });
+    }
 
     // 2. Abre a conversa no WhatsApp
     var texto = 'Olá Reinaldo! Sou ' + nome + ' (' + perfil + ') e gostaria de conversar sobre ' + servico + ' para nossa empresa.' + (msg ? ' Observação: ' + msg : '');
@@ -1600,8 +1647,9 @@ class="site-footer" id="colophon"   itemid="#colophon">
       if (typeof window.fbq === 'function') {
         try { window.fbq('track', 'Lead', { content_name: servico }); } catch(err) {}
       }
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'generate_lead', lead_source: 'site_form', service: servico });
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', { lead_source: 'site_form', service: servico });
+      }
 
       form.reset();
       var prevMsg = form.parentNode.querySelector('.sosseo-form-success-box');
@@ -1653,8 +1701,7 @@ class="site-footer" id="colophon"   itemid="#colophon">
 					} );
 				} )();
 			</script>
-			<noscript><img height="1" width="1" style="display: none;" src="https://www.facebook.com/tr?id=1189104682466848&ev=PageView&noscript=1&cd%5Bpage_title%5D=Sobre+SOSSOE&cd%5Bpost_type%5D=page&cd%5Bpost_id%5D=6&cd%5Bplugin%5D=PixelYourSite&cd%5Buser_role%5D=guest&cd%5Bevent_url%5D=sosseo.com.br%2Fsobre%2F" alt=""></noscript>
-<style id="core-block-supports-inline-css">
+			<style id="core-block-supports-inline-css">
 .wp-elements-1 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-5);}.wp-elements-2 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--luminous-vivid-amber);}.wp-elements-3 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-5);}.wp-elements-4 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-5);}.wp-elements-5 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-5);}.wp-elements-6 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-5);}.wp-container-core-group-is-layout-93c9d35e{flex-wrap:nowrap;gap:var(--wp--preset--spacing--20);align-items:center;}.wp-elements-7 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-4);}.wp-container-core-group-is-layout-f2270523{gap:var(--wp--preset--spacing--20);align-items:center;}.wp-elements-8 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-6);}.wp-elements-9 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-4);}.wp-elements-10 a:where(:not(.wp-element-button)){color:#e3be59;}.wp-elements-11 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-5);}.wp-elements-12 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--white);}.wp-elements-13 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--white);}.wp-elements-14 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-5);}
 /*# sourceURL=core-block-supports-inline-css */
 </style>
@@ -1672,11 +1719,6 @@ var astra_sticky_sidebar = {"sticky_sidebar_on":"1","header_above_height":{"desk
 <script>
 			/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
 			</script>
-			
-<!-- AccelerateWP Debug: Query string URL is excluded.
-Array
-(
-    [nowprocket] =&gt; 1
-)
- -->	</body>
+	<script src="/js/consentimento-cookies-sosseo.js" defer></script>
+	</body>
 </html>

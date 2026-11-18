@@ -121,7 +121,8 @@ sosseo/
 ## 5. Anatomia de um artigo (o que não pode variar)
 
 1. **`<head>` SEO** — title, description, canonical, robots, OpenGraph (JPG 1200×630),
-   Twitter Card, JSON-LD `Article` + `FAQPage` + `BreadcrumbList`, GTM e Meta Pixel.
+   Twitter Card, JSON-LD `Article` + `FAQPage` + `BreadcrumbList`, GA4 `G-ZZMDPL7644`
+   (Consent Mode v2) e Meta Pixel.
 2. **Banner do topo (H1)** — 1 coluna, fundo `radial-gradient` azul, H1 branco ~29 px,
    subtítulo amarelo, linha "Atualizado em · Por SOSSEO · Categoria".
 3. **Respiro de 28 px + H2 com a palavra-chave** antes do primeiro parágrafo.
@@ -188,10 +189,18 @@ não devem ser alterados sem pedido explícito.
 
 ## 9. Analytics e rastreamento
 
-- Google Tag Manager: `GTM-MWBLQ22S` (head + noscript no body).
-- Meta Pixel: `1189104682466848` (PageView).
-- PixelYourSite e tags antigas existem em algumas páginas legadas — ao criar página
-  nova, use apenas GTM + Pixel para não duplicar eventos.
+- **Google Analytics 4:** `G-ZZMDPL7644`, instalado direto no `<head>` de todas as páginas
+  públicas (bootstrap inline + 1 loader `gtag/js`), com **Consent Mode v2** e filtro de
+  tráfego interno `?interno=sosseo`.
+- **Meta Pixel:** `1189104682466848` (PageView), na home carregado após a primeira interação.
+- **Banner de cookies:** `/js/consentimento-cookies-sosseo.js` — "Aceitar todos" /
+  "Só o essencial" aplicam `gtag('consent','update')`; a revisão fica na Política de
+  Privacidade (botão `#sosseoRevisarCookies`).
+- **Eventos padrão:** `page_view` (config) e `generate_lead` (modal de WhatsApp e
+  formulário), disparado uma única vez por contato.
+- O container antigo do GTM (`GTM-MWBLQ22S`), o pixel `noscript` duplicado do
+  PixelYourSite e o comentário `AccelerateWP` foram removidos em 18/11/2026.
+  Não reintroduza: um único loader e um único `config` por página.
 
 ---
 

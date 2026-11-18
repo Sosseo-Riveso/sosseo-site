@@ -15,26 +15,79 @@
 </script>
 <meta charset="UTF-8">
 <link rel="preload" as="image" href="./wp-content/uploads/2021/03/Construcao-de-Sites-para-pequenas-e-medias-empresas.jpg" fetchpriority="high">
-<!-- Google Tag Manager & Meta Pixel (Deferred on Interaction for PageSpeed 100) -->
+<!-- Google Analytics 4 (G-ZZMDPL7644) - Consent Mode v2 / LGPD -->
 <script>
 window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+(function () {
+  var CONSENT_KEY = 'sosseo_consent_v1';
+  var INTERNAL_KEY = 'sosseo_interno_v1';
+  var choice = null;
+  try { choice = window.localStorage.getItem(CONSENT_KEY); } catch (e) {}
+
+  // Consent Mode v2: medicao anonima ativa por padrao; publicidade bloqueada ate o aceite.
+  gtag('consent', 'default', {
+    analytics_storage: choice === 'denied' ? 'denied' : 'granted',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    wait_for_update: 500
+  });
+
+  // Filtro de trafego interno: ?interno=sosseo ativa; ?interno=0 remove.
+  var trafficType = 'external';
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var interno = params.get('interno');
+    if (interno === 'sosseo') {
+      window.localStorage.setItem(INTERNAL_KEY, '1');
+    } else if (interno === '0') {
+      window.localStorage.removeItem(INTERNAL_KEY);
+    }
+    if (window.localStorage.getItem(INTERNAL_KEY) === '1') {
+      trafficType = 'internal';
+    }
+    if (interno !== null) {
+      params.delete('interno');
+      var query = params.toString();
+      window.history.replaceState({}, '', window.location.pathname + (query ? '?' + query : '') + window.location.hash);
+    }
+  } catch (e) {}
+
+  // Visitante que ja aceitou: libera os 4 sinais antes do config.
+  if (choice === 'granted') {
+    gtag('consent', 'update', {
+      analytics_storage: 'granted',
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
+    });
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZZMDPL7644', {
+    anonymize_ip: true,
+    send_page_view: true,
+    traffic_type: trafficType
+  });
+})();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZMDPL7644"></script>
+<!-- Meta Pixel (SOSSEO) - carregado apos interacao para preservar o PageSpeed -->
+<script>
 !function(f){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}(window);
 fbq('init', '1189104682466848');
 fbq('track', 'PageView');
 (function(){
   var loaded = false;
-  function loadThirdParty() {
+  function loadPixel() {
     if (loaded) return;
     loaded = true;
     var events = ['scroll','mousemove','touchstart','pointerdown','keydown','click'];
     for (var i = 0; i < events.length; i++) {
-      window.removeEventListener(events[i], loadThirdParty, {passive: true});
+      window.removeEventListener(events[i], loadPixel, {passive: true});
     }
-    window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-    var g = document.createElement('script');
-    g.async = true;
-    g.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-MWBLQ22S';
-    document.head.appendChild(g);
     var fb = document.createElement('script');
     fb.async = true;
     fb.src = 'https://connect.facebook.net/en_US/fbevents.js';
@@ -42,17 +95,15 @@ fbq('track', 'PageView');
   }
   var evs = ['scroll','mousemove','touchstart','pointerdown','keydown','click'];
   for (var j = 0; j < evs.length; j++) {
-    window.addEventListener(evs[j], loadThirdParty, {passive: true});
+    window.addEventListener(evs[j], loadPixel, {passive: true});
   }
 })();
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1189104682466848&ev=PageView&noscript=1" alt=""/></noscript>
-<!-- End Google Tag Manager & Meta Pixel -->
+<!-- End Meta Pixel -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11"> 
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-	<!-- Google Tag Manager -->
-	<!-- End Google Tag Manager -->
 	
 	<!-- This site is optimized with the Yoast SEO plugin v28.7 - https://yoast.com/product/yoast-seo-wordpress/ -->
 	<title>Criação de Sites em Osasco para Pequenas e Médias Empresas - SOSSEO</title>
@@ -646,9 +697,6 @@ Version: 1.0.0
 </head>
 
 <body   class="home wp-singular page-template-default page page-id-5665 wp-custom-logo wp-embed-responsive wp-theme-astra wp-child-theme-astra-child ast-desktop ast-plain-container ast-no-sidebar astra-4.14.0 ast-single-post ast-inherit-site-logo-transparent ast-hfb-header elementor-default elementor-kit-1002">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWBLQ22S" title="Google Tag Manager" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
 	<script data-cfasync="false">
 			(function(){var mq=window.matchMedia('(max-width:921.99px)');function apply(isMobile){var b=document.body.classList;if(isMobile){b.add('ast-header-break-point');b.remove('ast-desktop');}else{b.remove('ast-header-break-point');b.add('ast-desktop');}}apply(mq.matches);if(mq.addEventListener){mq.addEventListener('change',function(e){apply(e.matches);});}else if(mq.addListener){mq.addListener(function(e){apply(e.matches);});}})();
@@ -2873,8 +2921,9 @@ class="site-footer" id="colophon"   itemid="#colophon">
     if (typeof window.fbq === 'function') {
       try { window.fbq('track', 'Lead', { content_name: servico, content_category: perfil }); } catch(e) {}
     }
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'generate_lead', lead_source: 'whatsapp_modal', service: servico, profile: perfil });
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', { lead_source: 'whatsapp_modal', service: servico, profile: perfil });
+    }
 
     // 2. Abre a conversa no WhatsApp
     var texto = 'Olá Reinaldo! Sou ' + nome + ' (' + perfil + ') e gostaria de conversar sobre ' + servico + ' para nossa empresa.' + (msg ? ' Observação: ' + msg : '');
@@ -2948,8 +2997,9 @@ class="site-footer" id="colophon"   itemid="#colophon">
       if (typeof window.fbq === 'function') {
         try { window.fbq('track', 'Lead', { content_name: servico }); } catch(err) {}
       }
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'generate_lead', lead_source: 'site_form', service: servico });
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', { lead_source: 'site_form', service: servico });
+      }
 
       form.reset();
       var prevMsg = form.parentNode.querySelector('.sosseo-form-success-box');
@@ -3001,8 +3051,7 @@ class="site-footer" id="colophon"   itemid="#colophon">
 					} );
 				} )();
 			</script>
-			<noscript><img height="1" width="1" style="display: none;" src="https://www.facebook.com/tr?id=1189104682466848&ev=PageView&noscript=1&cd%5Bpage_title%5D=Cria%C3%A7%C3%A3o+de+Sites+em+Osasco+para+Pequenas+e+M%C3%A9dias+Empresas&cd%5Bpost_type%5D=page&cd%5Bpost_id%5D=5665&cd%5Bplugin%5D=PixelYourSite&cd%5Buser_role%5D=guest&cd%5Bevent_url%5D=sosseo.com.br%2F" alt=""></noscript>
-<style id="core-block-supports-inline-css">
+			<style id="core-block-supports-inline-css">
 .wp-elements-1 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-5);}.wp-container-core-columns-is-layout-7387b849{flex-wrap:nowrap;}.wp-elements-2 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-6);}.wp-elements-3 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-4);}.wp-elements-4 a:where(:not(.wp-element-button)){color:#e3be59;}.wp-elements-5 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-5);}.wp-elements-6 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--white);}.wp-elements-7 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--white);}.wp-elements-8 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ast-global-color-5);}
 /*# sourceURL=core-block-supports-inline-css */
 </style>
@@ -3039,11 +3088,6 @@ var kadence_blocks_parallax = {"speed":"-0.1"};
 			<script>
 			/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
 			</script>
-			
-<!-- AccelerateWP Debug: Query string URL is excluded.
-Array
-(
-    [nowprocket] =&gt; 1
-)
- -->	</body>
+	<script src="/js/consentimento-cookies-sosseo.js" defer></script>
+	</body>
 </html>

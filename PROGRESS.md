@@ -12,6 +12,32 @@ Migration WordPress (Turbocloud) → GitHub + Cloudflare em fase de teste/monito
 
 ## 📅 Histórico
 
+### 2026-11-18 — GA4 `G-ZZMDPL7644` no lugar do GTM + Consent Mode v2
+- Instalado o **Google Analytics 4 `G-ZZMDPL7644`** direto no `<head>` das **72 páginas
+  públicas** (mais o `template-post-padrao.html`): bootstrap inline (Consent Mode v2,
+  `wait_for_update: 500`), filtro de tráfego interno `?interno=sosseo` (localStorage +
+  `history.replaceState`) e **1 único loader** `gtag/js` por página.
+- Consent default: `analytics_storage` liberado (ou `denied` se já houve recusa);
+  `ad_storage`, `ad_user_data` e `ad_personalization` sempre `denied` até o aceite.
+  `gtag('js', new Date())` imediatamente antes de
+  `gtag('config','G-ZZMDPL7644',{anonymize_ip:true,send_page_view:true,traffic_type})`.
+- Limpeza do export WordPress: container **`GTM-MWBLQ22S`** (snippet do head, `noscript`
+  do body e loader diferido da home) removido em 72 arquivos; comentários vazios
+  `<!-- Google Tag Manager -->` eliminados; comentário `AccelerateWP Debug` removido de
+  68 páginas; `<noscript>` duplicado do **PixelYourSite** removido de 68 páginas.
+- Conversões migradas de `dataLayer.push({event:'generate_lead'})` para
+  `gtag('event','generate_lead',{lead_source,service,profile})` no modal de WhatsApp
+  (`lead_source: 'whatsapp_modal'`) e no envio dos formulários (`lead_source: 'site_form'`),
+  sem duplicar eventos. Meta Pixel `1189104682466848` mantido (PageView + Lead).
+- Novo `/js/consentimento-cookies-sosseo.js` (banner "Aceitar todos" / "Só o essencial",
+  `gtag('consent','update')`, `#sosseoRevisarCookies`) referenciado antes do `</body>`
+  em todas as páginas públicas; `_headers` ganhou cache de 7 dias para `/js/*`.
+- Política de Privacidade: seção de cookies reescrita (GA4, Consent Mode v2, IP
+  anonimizado) com botão **"Revisar preferências de cookies"**.
+- Validação: `node scripts/validar-ga4-sosseo.mjs` (6 cenários: externo limpo, interno,
+  recusa e aceite prévios, remoção do interno) em **0 erros**; SEO segue com os mesmos
+  **141 achados legados** e GEO **91%** (baseline comparado com worktree do `HEAD`).
+
 ### 2026-11-16 — Blog: estudo de caso do site Baden Rodas e Pneus
 - Publicado o artigo/estudo de caso `case-baden-rodas-e-pneus-seo-tecnico-e-geo-em-campinas/`
   (categoria `novos-sites-sosseo`), sobre o novo site oficial da **Baden Rodas e Pneus**

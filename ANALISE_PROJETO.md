@@ -65,7 +65,9 @@ sosseo-site/
 - **Lead Gate / WhatsApp Modal (`sosseo-wa-overlay`):** intercepta todos os cliques em `wa.me`/`whatsapp.com`, abre modal pedindo **perfil da empresa** e **serviço desejado** (radio buttons) antes de liberar o WhatsApp.
 - **Envio** via `sosseo-crm.sosseosites.workers.dev/api/leads` (JSON com dados do lead + origem).
 - **WhatsApp alvo:** `5511974695663` (número da SOSSEO).
-- **Google Tag Manager (`GTM-MWBLQ22S`)** + **Meta Pixel (fbq `1189104682466848`)** — carregados **somente após interação** (otimização de PageSpeed).
+- **Google Analytics 4 (`G-ZZMDPL7644`) + Meta Pixel (`1189104682466848`)** — GA4 com
+  Consent Mode v2 e banner de cookies (`/js/consentimento-cookies-sosseo.js`); na home o
+  Meta Pixel é carregado **somente após interação** (otimização de PageSpeed).
 
 ### CRM da agência (`painel-leads/`)
 - **`painel-leads/index.html` + `app.js` + `style.css`** — um **CRM comercial completo da agência** (não por-site):
