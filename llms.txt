@@ -97,3 +97,4 @@
 
 ### 3.6. Estudos de Caso — Novos Sites SOSSEO
 41. [Case Baden Rodas e Pneus: SEO Técnico e GEO em Campinas](https://sosseo.com.br/case-baden-rodas-e-pneus-seo-tecnico-e-geo-em-campinas/): Estudo de caso do novo site da rede com duas unidades em Campinas (Av. Baden Powell, 1412 e R. Nicarágua, 496): 46 páginas em HTML semântico, grafo JSON-LD AutoRepair multiunidade com CNPJ 31.319.526/0001-62, NAP individualizado por loja, GEO para ChatGPT Search, Perplexity e Google AI Overviews, Consent Mode v2 (LGPD) e indexação via IndexNow.
+42. [Câmbio Automático Piracicaba: Guia e Case de SEO e GEO](https://sosseo.com.br/criacao-de-site-e-seo-para-cambio-automatico-em-piracicaba/): Projeto SOSSEO do centro técnico de transmissões de Piracicaba, com arquitetura por sintoma (tranco, luz no painel, patinação e fluido), diagnóstico computadorizado, dados estruturados e conteúdo citável por IA para Google, Maps e respostas generativas.

@@ -12,6 +12,34 @@ Migration WordPress (Turbocloud) → GitHub + Cloudflare em fase de teste/monito
 
 ## 📅 Histórico
 
+### 2026-11-19 — Novo post: câmbio automático em Piracicaba + menu "Novos Sites SOSSEO" corrigido
+- Publicado `criacao-de-site-e-seo-para-cambio-automatico-em-piracicaba/`
+  (categoria `novos-sites-sosseo`), sobre o polo industrial e logístico de Piracicaba/RMP
+  e o posicionamento do centro técnico de transmissões no Google, Maps e IAs.
+- Conteúdo: H1 único, 10 H2, tabela comparativa de sintomas por arquitetura (convencional,
+  CVT, DSG/Powershift, automatizado), matriz de captação, 5 FAQs em `h3`+`p`, card
+  `⚡ Conclusão Estratégica` e bloco de silo com links para Campinas, Osasco e Baden.
+- Backlinks editoriais **dofollow** (`rel="noopener"`, sem `nofollow`): home
+  `https://cambioautomaticopiracicaba.com.br` (âncora "centro técnico de câmbio automático
+  em Piracicaba") e guia `/guia/tranco-cambio-automatico-piracicaba` (âncora "guia técnico
+  sobre tranco no câmbio automático em Piracicaba") — exatamente 2 links externos no corpo.
+- JSON-LD reescrito: `Article` (`author` = Person Reinaldo, `publisher` = `#organization`),
+  `WebPage`+`FAQPage`, `ImageObject`, `BreadcrumbList`, `WebSite`, `Person` e
+  `Organization`/`LocalBusiness` com `name`/`logo`/`sameAs` (sem NAP na entidade mãe).
+- Menu: a categoria `novos-sites-sosseo` listava o case Baden, mas o dropdown do menu
+  "Novos Sites SOSSEO" tinha apenas 7 cases. Inseridos `Câmbio Automático Piracicaba`
+  e `Baden Rodas e Pneus (Campinas)` nas 125 submenus (desktop + mobile) de 63 páginas,
+  com prefixo relativo correto em cada nível (`./`, `../`, `../../`).
+- Card de Piracicaba adicionado no topo de `/category/novos-sites-sosseo/`
+  (post 6812, imagem 1024×1024 com variantes 150/300/480/768 em `uploads/2026/11/`).
+- Índices: `post-sitemap.xml` (URL + 2 imagens), `sitemap.xml` (lastmod do post-sitemap),
+  `llms.txt` (item 42) e `llms-full.txt` (Case 4 + síntese executiva/takeaway).
+- Links recíprocos adicionados nos silos dos posts de câmbio de Campinas e Osasco.
+- Validação: SEO sem novos achados no artigo novo (0 issues), GEO 100% na página nova,
+  JSON-LD válido nos 2 blocos e 72 links internos relativos resolvidos.
+
+
+
 ### 2026-11-18 — GA4 `G-ZZMDPL7644` no lugar do GTM + Consent Mode v2
 - Instalado o **Google Analytics 4 `G-ZZMDPL7644`** direto no `<head>` das **72 páginas
   públicas** (mais o `template-post-padrao.html`): bootstrap inline (Consent Mode v2,

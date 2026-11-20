@@ -36,6 +36,12 @@ A **SOSSEO** atua na interseção entre **Engenharia de Software Web**, **SEO Se
 - **Artigo de Estudo de Caso na SOSSEO:** https://sosseo.com.br/case-baden-rodas-e-pneus-seo-tecnico-e-geo-em-campinas/
 - **Arquitetura Implementada:** 46 páginas em HTML estático de alta velocidade para rede com duas unidades em Campinas (Av. Baden Powell, 1412 — Jardim Nova Europa, CEP 13040-093, WhatsApp 19 98216-0743; R. Nicarágua, 496 — Jardim do Trevo, CEP 13040-030, WhatsApp 19 98382-0579), sob o CNPJ 31.319.526/0001-62. Grafo JSON-LD com uma entidade `AutoRepair` por loja (`branchOf`/`subOrganization`), `hasOfferCatalog` por unidade, `openingHoursSpecification` (seg. a sex. 8h–18h, sáb. 8h–13h) e `taxID` único, sem cruzamento de NAP entre filiais; conteúdo em chunks citáveis para GEO (ChatGPT Search, Perplexity, Google AI Overviews), Consent Mode v2 para LGPD, `llms.txt`/`llms-full.txt` e indexação via protocolo IndexNow.
 
+
+### Case 4: Câmbio Automático Piracicaba (Centro Técnico de Transmissões — Piracicaba/SP)
+- **URL do Projeto:** https://cambioautomaticopiracicaba.com.br/
+- **Artigo de Estudo de Caso na SOSSEO:** https://sosseo.com.br/criacao-de-site-e-seo-para-cambio-automatico-em-piracicaba/
+- **Arquitetura Implementada:** site estático organizado por sintoma (tranco, luz de anomalia da transmissão, patinação e troca preventiva de fluido ATF/CVT) e por serviço (diagnóstico computadorizado, troca de fluido, mecatrônica e corpo de válvulas), com triagem remota antes do orçamento, laudo por medição de pressão de linha e temperatura de trabalho, dados estruturados de serviço e área atendida, FAQ em blocos citáveis, `llms.txt`/`llms-full.txt` e cobertura de Piracicaba mais a microrregião (Limeira, Rio Claro, Americana, Santa Bárbara d'Oeste, Capivari, São Pedro, Charqueada e Iracemápolis) pelos eixos SP-304, SP-127 e SP-147.
+
 ---
 
 ## 3. Lista Completa das 55 URLs Canônicas da SOSSEO (Páginas, Categorias e Artigos)
@@ -132,3 +138,8 @@ A **SOSSEO** atua na interseção entre **Engenharia de Software Web**, **SEO Se
 - **URL Canônica:** https://sosseo.com.br/case-baden-rodas-e-pneus-seo-tecnico-e-geo-em-campinas/
 - **Síntese Executiva:** Estudo de caso do novo site da Baden Rodas e Pneus em Campinas: SEO técnico, GEO, 46 páginas, grafo JSON-LD AutoRepair multiunidade e NAP por loja.
 - **Takeaway:** SEO técnico e GEO para centro automotivo deixam de ser diferencial estético quando a rede opera duas lojas na mesma cidade: o grafo JSON-LD, o NAP individualizado por unidade e o conteúdo em blocos citáveis é que decidem quem aparece no Google, no Maps e nas respostas de IA. A Baden Rodas e Pneus transformou 46 páginas em ativo de captação, com indexação em horas em vez de semanas.
+
+### Câmbio Automático Piracicaba: Guia e Case de SEO e GEO
+- **URL Canônica:** https://sosseo.com.br/criacao-de-site-e-seo-para-cambio-automatico-em-piracicaba/
+- **Síntese Executiva:** Como a criação de site e SEO para câmbio automático em Piracicaba posiciona o centro técnico no Google, no Maps e nas IAs. Guia e case completo.
+- **Takeaway:** O câmbio automático em Piracicaba virou mercado de diagnóstico, não de orçamento por telefone: a frota da RMP exige centro técnico com scanner dedicado, medição de pressão e laudo transparente. Para o negócio, a decisão estratégica é tratar o site como ativo de captação — páginas por sintoma, dados estruturados e conteúdo citável por IA — para aparecer no Google, no Maps e nas respostas generativas antes do concorrente.

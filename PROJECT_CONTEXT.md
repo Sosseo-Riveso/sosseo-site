@@ -1,7 +1,7 @@
 # PROJECT_CONTEXT — SOSSEO (sosseo.com.br)
 
 > Documento de contexto do projeto para pessoas e agentes de IA.
-> Última atualização: 16/11/2026 · Complementa `.clinerules` e `PROGRESS.md`.
+> Última atualização: 19/11/2026 · Complementa `.clinerules` e `PROGRESS.md`.
 
 ---
 
