@@ -352,3 +352,17 @@ body {
 }
 .trash-actions .btn { min-width: 150px; font-size: 14px; }
 #btnRestoreChecked:disabled { opacity: .5; cursor: not-allowed; }
+
+/* --- Sites com endpoint protegido: botão de token por coluna ------------- */
+.column-head h2 { flex: 1 1 auto; }
+.token-btn {
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+.token-btn:hover { background: #f1f5f9; }

@@ -1281,3 +1281,346 @@ window.addEventListener('DOMContentLoaded', () => {
     initCRMData();
   }
 });
+
+// ==========================================
+// 11. SITES MONITORADOS (fonte: /js/sites-sosseo.js)
+// Consulta somente leitura em cada site. Nenhum token é versionado:
+// o operador digita e o valor fica no localStorage deste navegador.
+// ==========================================
+const SITE_TOKEN_PREFIX = 'sosseo_site_token_';
+let currentSiteKey = null;
+let currentSiteLeads = [];
+let siteStatusCache = {};
+
+function getPanelSites() {
+  return Array.isArray(window.SOSSEO_SITES) ? window.SOSSEO_SITES : [];
+}
+
+function getSiteToken(key) {
+  try { return localStorage.getItem(SITE_TOKEN_PREFIX + key) || ''; } catch (e) { return ''; }
+}
+
+function storeSiteToken(key, value) {
+  try {
+    if (value) localStorage.setItem(SITE_TOKEN_PREFIX + key, value);
+    else localStorage.removeItem(SITE_TOKEN_PREFIX + key);
+  } catch (e) {}
+}
+
+function siteAuthLabel(site) {
+  if (site.auth === 'public') return 'Endpoint público';
+  if (site.auth === 'token') return 'Token no parâmetro (?token=)';
+  return 'Token Bearer (Authorization)';
+}
+
+function openSitesModal() {
+  const modal = document.getElementById('sites-modal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+  renderSitesList();
+  refreshSitesStatus();
+}
+
+function renderSitesList() {
+  const wrap = document.getElementById('sites-list');
+  if (!wrap) return;
+  const sites = getPanelSites();
+  wrap.innerHTML = '';
+
+  sites.forEach(function (site) {
+    const card = document.createElement('div');
+    card.className = 'site-card';
+    card.id = 'site-card-' + site.key;
+
+    const temToken = !!getSiteToken(site.key);
+    const precisaToken = site.auth !== 'public';
+    const painelLink = site.painelUrl
+      ? '<a class="btn btn-secondary" href="' + escapeHtml(site.painelUrl) + '" target="_blank" rel="noopener" title="Abrir o CRM deste site">CRM do site ↗</a>'
+      : '';
+
+    card.innerHTML =
+      '<div class="site-card-head">' +
+        '<span class="site-dot" id="site-dot-' + site.key + '"></span>' +
+        '<div class="site-ident">' +
+          '<div class="site-name">' + escapeHtml(site.nome) + '</div>' +
+          '<a class="site-domain" href="' + escapeHtml(site.siteUrl) + '" target="_blank" rel="noopener">' + escapeHtml(site.dominio) + '</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="site-meta">' + escapeHtml(site.segmento || '') + ' · ' + escapeHtml(siteAuthLabel(site)) + '</div>' +
+      (precisaToken
+        ? '<div class="site-token-row">' +
+            '<input type="password" class="form-control site-token-input" id="site-token-' + site.key + '" autocomplete="off" ' +
+              'placeholder="' + (temToken ? '•••••• token salvo neste navegador' : 'Token de leitura (exigido pelo site)') + '">' +
+            '<button type="button" class="btn btn-secondary" onclick="saveSiteToken(\'' + site.key + '\')" title="Salvar o token apenas neste navegador">Salvar</button>' +
+            (temToken ? '<button type="button" class="btn btn-secondary" onclick="clearSiteToken(\'' + site.key + '\')" title="Remover o token deste navegador">Limpar</button>' : '') +
+          '</div>'
+        : '') +
+      '<div class="site-actions">' +
+        painelLink +
+        '<button type="button" class="btn btn-primary" onclick="loadSiteLeads(\'' + site.key + '\')">Ver leads</button>' +
+      '</div>' +
+      '<div class="site-status" id="site-status-' + site.key + '">Aguardando verificação…</div>';
+
+    wrap.appendChild(card);
+  });
+
+  const summary = document.getElementById('sites-summary');
+  if (summary) {
+    summary.textContent = sites.length + ' sites cadastrados · ' +
+      sites.filter(function (s) { return s.auth === 'public'; }).length + ' sem token · ' +
+      sites.filter(function (s) { return s.auth !== 'public'; }).length + ' com token de leitura';
+  }
+}
+
+function saveSiteToken(key) {
+  const input = document.getElementById('site-token-' + key);
+  if (!input) return;
+  const valor = (input.value || '').trim();
+  if (!valor) {
+    alert('Digite o token de leitura antes de salvar.');
+    return;
+  }
+  storeSiteToken(key, valor);
+  input.value = '';
+  input.placeholder = '•••••• token salvo neste navegador';
+  renderSitesList();
+  refreshSitesStatus();
+  addAuditLog('site_token', 'Configurou token local de leitura do site ' + key + '.');
+}
+
+function clearSiteToken(key) {
+  storeSiteToken(key, '');
+  renderSitesList();
+  refreshSitesStatus();
+  addAuditLog('site_token', 'Removeu o token local de leitura do site ' + key + '.');
+}
+
+function setSiteStatus(key, state, text) {
+  const dot = document.getElementById('site-dot-' + key);
+  const label = document.getElementById('site-status-' + key);
+  const map = { online: 'on', auth: 'warn', invalid: 'err', offline: 'err', pending: 'wait' };
+  if (dot) dot.className = 'site-dot ' + (map[state] || 'wait');
+  if (label) {
+    label.textContent = text;
+    label.className = 'site-status ' + (state === 'online' ? 'ok' : (state === 'auth' || state === 'pending' ? 'warn' : 'err'));
+  }
+}
+
+function buildSiteRequestUrl(site, token) {
+  const url = site.leadsApi;
+  if (site.auth === 'token' && token) {
+    return url + (url.indexOf('?') === -1 ? '?' : '&') + 'token=' + encodeURIComponent(token);
+  }
+  return url;
+}
+
+async function fetchSiteLeads(site, timeoutMs) {
+  const token = getSiteToken(site.key);
+  if (site.auth !== 'public' && !token) {
+    const erro = new Error('token-ausente');
+    erro.code = 'token';
+    throw erro;
+  }
+
+  const ctrl = new AbortController();
+  const timer = setTimeout(function () { ctrl.abort(); }, timeoutMs || 12000);
+  const opts = { signal: ctrl.signal, headers: {}, cache: 'no-store' };
+  if (site.auth === 'bearer' && token) opts.headers.Authorization = 'Bearer ' + token;
+
+  try {
+    const res = await fetch(buildSiteRequestUrl(site, token), opts);
+    if (res.status === 401 || res.status === 403) {
+      const erro = new Error('nao-autorizado');
+      erro.code = 'invalid';
+      throw erro;
+    }
+    if (!res.ok) {
+      const erro = new Error('HTTP ' + res.status);
+      erro.code = 'http';
+      throw erro;
+    }
+    const json = await res.json();
+    const lista = Array.isArray(json) ? json : (Array.isArray(json.leads) ? json.leads : []);
+    return lista.filter(function (l) { return l && typeof l === 'object'; });
+  } catch (erro) {
+    if (erro.name === 'AbortError') {
+      const e = new Error('timeout');
+      e.code = 'offline';
+      throw e;
+    }
+    throw erro;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function refreshSitesStatus() {
+  const sites = getPanelSites();
+  await Promise.all(sites.map(async function (site) {
+    if (site.auth !== 'public' && !getSiteToken(site.key)) {
+      siteStatusCache[site.key] = { state: 'auth', total: 0 };
+      setSiteStatus(site.key, 'auth', 'Token não configurado — cole o token acima para consultar.');
+      return;
+    }
+    setSiteStatus(site.key, 'pending', 'Verificando conexão…');
+    try {
+      const lista = await fetchSiteLeads(site, 10000);
+      siteStatusCache[site.key] = { state: 'online', total: lista.length };
+      setSiteStatus(site.key, 'online', 'Online · ' + lista.length + ' lead(s) na origem.');
+    } catch (erro) {
+      if (erro.code === 'invalid') {
+        siteStatusCache[site.key] = { state: 'invalid', total: 0 };
+        setSiteStatus(site.key, 'invalid', 'Token inválido ou expirado (401).');
+      } else if (erro.code === 'token') {
+        siteStatusCache[site.key] = { state: 'auth', total: 0 };
+        setSiteStatus(site.key, 'auth', 'Token não configurado.');
+      } else {
+        siteStatusCache[site.key] = { state: 'offline', total: 0 };
+        setSiteStatus(site.key, 'offline', 'Sem resposta agora (' + (erro.message === 'timeout' ? 'timeout' : erro.message) + ').');
+      }
+    }
+  }));
+}
+
+function siteLeadDate(value) {
+  if (!value) return '';
+  const d = typeof value === 'number' ? new Date(value) : new Date(value);
+  if (isNaN(d.getTime())) return '';
+  return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+}
+
+function normalizeSiteLead(site, l) {
+  const veiculo = [l.veiculo || l.vehicle || '', l.ano || ''].filter(Boolean).join(' ');
+  return {
+    site: site.nome,
+    siteKey: site.key,
+    id: String(l.id || ''),
+    nome: String(l.nome || l.contact || l.company || 'Sem nome'),
+    telefone: String(l.whatsapp || l.telefone || l.phone || ''),
+    cidade: String(l.cidade || l.bairro || ''),
+    unidade: String(l.unidadeNome || l.unidade || ''),
+    veiculo: String(veiculo),
+    servico: String(l.servico || l.service || ''),
+    sintoma: String(l.sintoma || ''),
+    mensagem: String(l.mensagem || l.observacao || l.notes || ''),
+    origem: String(l.origem || ''),
+    data: siteLeadDate(l.criadoEm || l.timestamp || l.createdAt || l.data)
+  };
+}
+
+async function loadSiteLeads(key) {
+  const site = getPanelSites().find(function (s) { return s.key === key; });
+  if (!site) return;
+
+  const panel = document.getElementById('site-leads-panel');
+  const wrap = document.getElementById('site-leads-table-wrap');
+  const titulo = document.getElementById('site-leads-title');
+  const sub = document.getElementById('site-leads-sub');
+  if (!panel || !wrap) return;
+
+  panel.style.display = 'block';
+  if (titulo) titulo.textContent = 'Leads · ' + site.nome;
+  if (sub) sub.textContent = site.dominio + ' — consulta somente leitura (' + siteLeadAuthTexto(site) + ')';
+  wrap.innerHTML = '<div class="site-leads-empty">Buscando leads em ' + escapeHtml(site.dominio) + '…</div>';
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  try {
+    const lista = await fetchSiteLeads(site, 15000);
+    currentSiteKey = key;
+    currentSiteLeads = lista.map(function (l) { return normalizeSiteLead(site, l); });
+    setSiteStatus(key, 'online', 'Online · ' + lista.length + ' lead(s) na origem.');
+    renderSiteLeadsTable();
+    addAuditLog('site_leads', 'Consultou ' + lista.length + ' lead(s) do site ' + site.dominio + '.');
+  } catch (erro) {
+    currentSiteKey = key;
+    currentSiteLeads = [];
+    let msg = 'Não foi possível consultar este site agora.';
+    if (erro.code === 'token') msg = 'Este site exige token de leitura. Salve o token no cartão acima e tente novamente.';
+    else if (erro.code === 'invalid') msg = 'Token inválido ou expirado (HTTP 401). Atualize o token no cartão acima.';
+    else if (erro.message === 'timeout') msg = 'O site não respondeu no tempo esperado (timeout).';
+    else if (erro.message) msg = 'Falha na consulta: ' + erro.message;
+    wrap.innerHTML = '<div class="site-leads-empty err">' + escapeHtml(msg) + '</div>';
+    setSiteStatus(key, erro.code === 'invalid' ? 'invalid' : (erro.code === 'token' ? 'auth' : 'offline'), msg);
+  }
+}
+
+function siteLeadAuthTexto(site) {
+  if (site.auth === 'public') return 'endpoint público';
+  if (site.auth === 'token') return 'token no parâmetro';
+  return 'token Bearer';
+}
+
+function renderSiteLeadsTable() {
+  const wrap = document.getElementById('site-leads-table-wrap');
+  if (!wrap) return;
+
+  if (!currentSiteLeads.length) {
+    wrap.innerHTML = '<div class="site-leads-empty">Nenhum lead registrado na origem deste site.</div>';
+    return;
+  }
+
+  const limite = 200;
+  const visiveis = currentSiteLeads.slice(0, limite);
+  let html = '<table class="site-leads-table"><thead><tr>' +
+    '<th>Data</th><th>Nome</th><th>Telefone</th><th>Cidade / Unidade</th><th>Veículo / Serviço</th><th>Sintoma / Mensagem</th>' +
+    '</tr></thead><tbody>';
+
+  visiveis.forEach(function (l) {
+    const local = [l.cidade, l.unidade].filter(Boolean).join(' · ');
+    const alvo = [l.veiculo, l.servico].filter(Boolean).join(' · ');
+    const texto = [l.sintoma, l.mensagem].filter(Boolean).join(' — ');
+    html += '<tr>' +
+      '<td class="nowrap">' + escapeHtml(l.data || '—') + '</td>' +
+      '<td><strong>' + escapeHtml(l.nome) + '</strong>' + (l.origem ? '<div class="site-lead-origem">' + escapeHtml(l.origem) + '</div>' : '') + '</td>' +
+      '<td class="nowrap">' + escapeHtml(l.telefone || '—') + '</td>' +
+      '<td>' + escapeHtml(local || '—') + '</td>' +
+      '<td>' + escapeHtml(alvo || '—') + '</td>' +
+      '<td class="site-lead-msg">' + escapeHtml(texto || '—') + '</td>' +
+      '</tr>';
+  });
+
+  html += '</tbody></table>';
+  if (currentSiteLeads.length > limite) {
+    html += '<div class="site-leads-empty">Exibindo os ' + limite + ' primeiros de ' + currentSiteLeads.length + ' leads. O CSV do site inclui todos.</div>';
+  }
+  wrap.innerHTML = html;
+}
+
+function closeSiteLeadsPanel() {
+  const panel = document.getElementById('site-leads-panel');
+  if (panel) panel.style.display = 'none';
+  currentSiteKey = null;
+  currentSiteLeads = [];
+}
+
+function csvSafe(value) {
+  return '"' + String(value == null ? '' : value).replace(/"/g, '""') + '"';
+}
+
+function exportSiteLeadsCSV() {
+  if (!currentSiteLeads.length) {
+    alert('Consulte os leads de um site antes de exportar.');
+    return;
+  }
+  const site = getPanelSites().find(function (s) { return s.key === currentSiteKey; });
+  const nomeSite = site ? site.dominio : currentSiteKey;
+
+  let csv = 'Site,Data,Nome,Telefone,Cidade,Unidade,Veiculo,Servico,Sintoma,Mensagem,Origem\n';
+  currentSiteLeads.forEach(function (l) {
+    csv += [l.site, l.data, l.nome, l.telefone, l.cidade, l.unidade, l.veiculo, l.servico, l.sintoma, l.mensagem, l.origem]
+      .map(csvSafe).join(',') + '\n';
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.setAttribute('download', 'leads_' + currentSiteKey + '_' + new Date().toISOString().slice(0, 10) + '.csv');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  addAuditLog('site_leads_csv', 'Exportou CSV com ' + currentSiteLeads.length + ' lead(s) do site ' + nomeSite + '.');
+}
+
+
+
+

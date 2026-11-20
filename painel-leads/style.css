@@ -950,3 +950,208 @@ body {
   gap: 3px;
 }
 
+/* ==========================================================================
+   SITES MONITORADOS (modal "🌐 Sites")
+   Grade de cartões com status por site + tabela somente leitura de leads.
+   ========================================================================== */
+.sites-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.sites-toolbar-info {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.sites-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.site-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--bg-card);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.site-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.site-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--border-subtle);
+  margin-top: 5px;
+  flex: 0 0 auto;
+}
+
+.site-dot.on { background-color: var(--accent-green); }
+.site-dot.warn { background-color: var(--accent-amber); }
+.site-dot.err { background-color: var(--accent-rose); }
+.site-dot.wait { background-color: var(--border-subtle); }
+
+.site-ident { min-width: 0; }
+
+.site-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.site-domain {
+  font-size: 11px;
+  color: var(--accent-blue);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.site-domain:hover { text-decoration: underline; }
+
+.site-meta {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.site-token-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.site-token-input {
+  flex: 1 1 150px;
+  min-width: 0;
+  font-size: 11px;
+  padding: 4px 6px;
+}
+
+.site-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.site-status {
+  font-size: 10.5px;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+.site-status.ok { color: var(--accent-green); font-weight: 600; }
+.site-status.warn { color: var(--accent-amber); }
+.site-status.err { color: var(--accent-rose); }
+
+.site-leads-panel {
+  margin-top: 14px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+}
+
+.site-leads-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.site-leads-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.site-leads-sub {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.site-leads-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.site-leads-table-wrap {
+  max-height: 46vh;
+  overflow: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+
+.site-leads-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.site-leads-table th {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.site-leads-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+  color: var(--text-secondary);
+}
+
+.site-leads-table tr:last-child td { border-bottom: none; }
+.site-leads-table strong { color: var(--text-primary); }
+.site-leads-table td.nowrap { white-space: nowrap; }
+
+.site-lead-origem {
+  font-size: 9.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.site-lead-msg { max-width: 260px; }
+
+.site-leads-empty {
+  padding: 12px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.site-leads-empty.err { color: var(--accent-rose); }
+
+@media (max-width: 768px) {
+  .sites-grid { grid-template-columns: minmax(0, 1fr); }
+  .site-leads-table-wrap { max-height: 52vh; }
+  .site-lead-msg { max-width: 180px; }
+}
+
+

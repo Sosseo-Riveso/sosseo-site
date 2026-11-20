@@ -23,7 +23,13 @@ const SITES = [
   { key: 'sosseo',           abv: 'SOSSEO',        full: 'SOSSEO (Agência)',
     url: 'https://sosseo-crm.sosseosites.workers.dev/api/leads' },
   { key: 'psicanalise',      abv: 'Psi Alma',      full: 'Psicanálise Alma e Luz',
-    url: 'https://psicanalisealmaeluz.com.br/api/triagem' }
+    url: 'https://psicanalisealmaeluz.com.br/api/triagem' },
+  { key: 'baden',            abv: 'Baden Pneus',   full: 'Baden Rodas e Pneus',
+    url: 'https://badenrodasepneus.com.br/api/lead', auth: 'token',
+    domain: 'https://badenrodasepneus.com.br/' },
+  { key: 'cambio-piracicaba',abv: 'Câmbio Pirac',  full: 'Câmbio Automático Piracicaba',
+    url: 'https://cambioautomaticopiracicaba.com.br/api/triagem', auth: 'bearer',
+    domain: 'https://cambioautomaticopiracicaba.com.br/' }
 ];
 
 const STORAGE_KEY = 'crm_geral_sosseo_v2';
@@ -261,6 +267,9 @@ function siteOf(l) {
   if (src.includes('fg') || src.includes('funilaria'))    return SITES[5];
   if (src.includes('sosseo') || src.includes('agencia'))  return SITES[6];
   if (src.includes('psic') || src.includes('alma'))       return SITES[7];
+  // Sites adicionados depois (busca por key evita depender da posição no array)
+  if (src.includes('baden') || src.includes('pneus'))     return SITES.find(s => s.key === 'baden') || SITES[0];
+  if (src.includes('piracicaba'))                         return SITES.find(s => s.key === 'cambio-piracicaba') || SITES[0];
   return SITES[0];
 }
 
@@ -269,11 +278,29 @@ function siteOf(l) {
 let allLeads = [];
 let sourceErrors = {};
 
+function siteToken(key) {
+  try { return localStorage.getItem('sosseo_site_token_' + key) || ''; } catch (e) { return ''; }
+}
+
 async function fetchSource(site) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 20000);
+  const token = siteToken(site.key);
+  let url = site.url;
+  // Sites com endpoint protegido: sem token no navegador, nem tenta (evita 401).
+  if (site.auth && site.auth !== 'public' && !token) {
+    sourceErrors[site.key] = 'token não configurado';
+    clearTimeout(timer);
+    return [];
+  }
+  const opts = { signal: ctrl.signal, cache: 'no-store', headers: {} };
+  if (token && site.auth === 'bearer') opts.headers.Authorization = 'Bearer ' + token;
+  if (token && site.auth === 'token') {
+    url += (url.indexOf('?') === -1 ? '?' : '&') + 'token=' + encodeURIComponent(token);
+  }
   try {
-    const res = await fetch(site.url, { signal: ctrl.signal });
+    const res = await fetch(url, opts);
+    if (res.status === 401 || res.status === 403) throw new Error('token inválido (HTTP ' + res.status + ')');
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
     let list = Array.isArray(json) ? json : (Array.isArray(json.leads) ? json.leads : []);
@@ -437,14 +464,40 @@ function buildEntradaColumn() {
 function buildSiteColumn(site, archivedLeads) {
   const col = document.createElement('section');
   col.className = 'column';
+  const precisaToken = !!(site.auth && site.auth !== 'public');
+  const temToken = precisaToken && !!siteToken(site.key);
+  const tokenBtn = precisaToken
+    ? '<button class="token-btn" type="button" title="' +
+        (temToken ? 'Token configurado neste navegador — clique para trocar' : 'Configurar token de leitura deste site') +
+      '">' + (temToken ? '🔑✓' : '🔑') + '</button>'
+    : '';
   col.innerHTML =
     '<header class="column-head"><h2>' + esc(site.abv) + '</h2>' +
-    '<span class="count">' + archivedLeads.length + '</span></header>';
+    '<span class="count">' + archivedLeads.length + '</span>' + tokenBtn + '</header>';
   const body = document.createElement('div');
   body.className = 'column-body';
 
+  if (precisaToken) {
+    const btn = col.querySelector('.token-btn');
+    if (btn) btn.addEventListener('click', function () {
+      const novo = window.prompt(
+        'Token de leitura de ' + (site.full || site.abv) +
+        '\n(o valor fica apenas neste navegador e não é gravado no repositório)',
+        siteToken(site.key)
+      );
+      if (novo === null) return;
+      try {
+        if (novo.trim()) localStorage.setItem('sosseo_site_token_' + site.key, novo.trim());
+        else localStorage.removeItem('sosseo_site_token_' + site.key);
+      } catch (e) {}
+      refreshAll();
+    });
+  }
+
   if (archivedLeads.length === 0) {
-    body.innerHTML = '<div class="empty-state">Sem leads</div>';
+    body.innerHTML = '<div class="empty-state">' +
+      (precisaToken && !temToken ? 'Sem leads · 🔑 configure o token para puxar deste site' : 'Sem leads') +
+      '</div>';
   } else {
     archivedLeads.forEach(l => {
       const d = new Date(l._ts);

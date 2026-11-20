@@ -20,7 +20,7 @@
   <title>SOSSEO CRM - Gestão Comercial de Leads</title>
   <link rel="icon" type="image/png" href="/painel-leads/favicon.png?v=3">
   <link rel="apple-touch-icon" href="/painel-leads/favicon.png?v=3">
-  <link rel="stylesheet" href="/painel-leads/style.css">
+  <link rel="stylesheet" href="/painel-leads/style.css?v=2">
 </head>
 <body>
 
@@ -42,6 +42,9 @@
       </button>
       <button class="btn btn-secondary" onclick="exportToCSV()" title="Exportar leads em planilha CSV">
         📥 CSV
+      </button>
+      <button class="btn btn-secondary" onclick="openSitesModal()" title="Sites monitorados: status, CRM de cada site e consulta de leads por site">
+        🌐 Sites
       </button>
       <button class="btn btn-secondary" onclick="openLogsModal()" title="Auditoria Geral: Log cronológico de todas as ações de todos os leads (Últimos 30 dias)">
         📋 Auditoria Geral (30d)
@@ -541,6 +544,42 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 
+  <!-- Modal: Sites monitorados (status + consulta de leads por site) -->
+  <div class="modal-overlay" id="sites-modal">
+    <div class="modal-content" style="max-width: 940px;">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">🌐 Sites monitorados</div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+            Consulta somente leitura nos endpoints de cada site. Os tokens de leitura ficam apenas neste navegador (localStorage) e nunca são versionados.
+          </div>
+        </div>
+        <button class="btn-close" onclick="closeModal('sites-modal')">&times;</button>
+      </div>
+
+      <div class="sites-toolbar">
+        <span class="sites-toolbar-info" id="sites-summary">Carregando sites…</span>
+        <button type="button" class="btn btn-secondary" onclick="refreshSitesStatus()" title="Verificar novamente a conexão de cada site">🔄 Verificar conexões</button>
+      </div>
+
+      <div class="sites-grid" id="sites-list"></div>
+
+      <div class="site-leads-panel" id="site-leads-panel" style="display: none;">
+        <div class="site-leads-head">
+          <div>
+            <div class="site-leads-title" id="site-leads-title">Leads do site</div>
+            <div class="site-leads-sub" id="site-leads-sub"></div>
+          </div>
+          <div class="site-leads-actions">
+            <button type="button" class="btn btn-secondary" onclick="exportSiteLeadsCSV()" title="Baixar a lista exibida em CSV">📥 CSV do site</button>
+            <button type="button" class="btn btn-secondary" onclick="closeSiteLeadsPanel()">Fechar lista</button>
+          </div>
+        </div>
+        <div class="site-leads-table-wrap" id="site-leads-table-wrap"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal/Tela de Login de Segurança -->
   <div class="login-overlay" id="login-modal" style="display: none;">
     <div class="login-box">
@@ -573,6 +612,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 
-  <script src="/painel-leads/app.js"></script>
+  <script src="/js/sites-sosseo.js?v=1"></script>
+  <script src="/painel-leads/app.js?v=2"></script>
 </body>
 </html>

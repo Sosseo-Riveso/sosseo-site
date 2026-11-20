@@ -12,6 +12,37 @@ Migration WordPress (Turbocloud) → GitHub + Cloudflare em fase de teste/monito
 
 ## 📅 Histórico
 
+### 2026-11-20 — Painel de leads: Baden Rodas e Câmbio Piracicaba integrados
+- Criado `js/sites-sosseo.js` (`window.SOSSEO_SITES`) como **registro central** dos
+  10 sites monitorados, já com `badenrodasepneus.com.br` (auth `?token=`) e
+  `cambioautomaticopiracicaba.com.br` (auth `Bearer`), além de nome, segmento,
+  `siteUrl`, `painelUrl`, endpoint de leads e esquema de autenticação.
+- `/painel-leads/`: novo botão **🌐 Sites** com modal "Sites monitorados" —
+  status por site (online/token/sem resposta), link direto para o site e para o
+  CRM próprio de cada um, campo de token salvo **só no localStorage** e consulta
+  **somente leitura** dos leads por site, com tabela e **CSV por site**.
+- `/painel-geral/`: `SITES` recebeu `baden` e `cambio-piracicaba` (append, sem
+  deslocar os índices antigos); `siteOf()` mapeia os dois por `key`;
+  `fetchSource()` passou a enviar `Authorization: Bearer`/`?token=` quando o
+  token local existe e a pular a coleta (sem erro) quando não existe; cada
+  coluna protegida ganhou o botão 🔑 para configurar o token.
+- Segurança: `_headers` agora envia `X-Robots-Tag: noindex, nofollow, noarchive,
+  nosnippet` + `Cache-Control: no-store` em `/painel-leads/*` e
+  `/painel-geral/*`; `robots.txt` bloqueia `/painel-geral` (já bloqueava
+  `/painel-leads`). Nenhum token, senha ou chave foi versionado.
+- Cache-busting: `style.css?v=9` e `app.js?v=9` no painel-geral; `style.css?v=2`,
+  `app.js?v=2` e `sites-sosseo.js?v=1` no painel-leads.
+- Validação: `node --check` nos 3 JS; smoke test headless (Puppeteer + servidor
+  local) com **0 erros de página**, 10 cards de site, 8 campos de token, 1 coluna
+  em 390 px sem overflow horizontal, filtro por serviço e exportação CSV do
+  kanban intactos; `seo_checker` segue com os 141 achados legados e `geo_checker`
+  em 92% (sem regressão).
+- Observação de segurança (fora deste repositório): o `GET /api/leads` do worker
+  `sosseo-crm` responde sem autenticação. O risco é pré-existente e deve ser
+  tratado no worker (exigir sessão/token), sem alterar o painel.
+
+
+
 ### 2026-11-19 — Novo post: câmbio automático em Piracicaba + menu "Novos Sites SOSSEO" corrigido
 - Publicado `criacao-de-site-e-seo-para-cambio-automatico-em-piracicaba/`
   (categoria `novos-sites-sosseo`), sobre o polo industrial e logístico de Piracicaba/RMP

@@ -1,7 +1,7 @@
 # PROJECT_CONTEXT — SOSSEO (sosseo.com.br)
 
 > Documento de contexto do projeto para pessoas e agentes de IA.
-> Última atualização: 19/11/2026 · Complementa `.clinerules` e `PROGRESS.md`.
+> Última atualização: 20/11/2026 · Complementa `.clinerules` e `PROGRESS.md`.
 
 ---
 
@@ -208,12 +208,28 @@ não devem ser alterados sem pedido explícito.
 
 | Painel | URL | Função |
 |---|---|---|
-| CRM Geral | `/painel-geral/` | agrega leads de todos os sites da agência |
-| CRM SOSSEO | `/painel-leads/` | Kanban comercial da agência |
+| CRM Geral | `/painel-geral/` | agrega leads de todos os sites da agência (1 coluna por site) |
+| CRM SOSSEO | `/painel-leads/` | Kanban comercial da agência + módulo **🌐 Sites monitorados** |
 
 - Autenticação no worker `sosseo-crm` (`POST /api/auth/login`) — **sem fallback local**.
 - Chaves de sessão/dados no `localStorage`:
   `crm_geral_sosseo_session` e `crm_geral_sosseo_v2`.
+- **Registro de sites:** `js/sites-sosseo.js` (`window.SOSSEO_SITES`) é a fonte
+  única (nome, domínio, site, CRM do site, endpoint de leads e esquema de auth).
+  Hoje: Câmbio Campinas/Osasco/**Piracicaba**, **Baden Rodas e Pneus**,
+  Mecânica Campinas/Osasco, FG Car, Portal Molde Injeção, Psicanálise e SOSSEO.
+- **Consulta por site:** o módulo 🌐 Sites do `/painel-leads/` lê cada endpoint
+  em modo somente leitura, mostra status, permite exportar CSV por site e nunca
+  importa os leads de terceiros para o CRM da agência.
+- **Tokens de leitura:** os endpoints dos sites de cliente exigem token
+  (`Authorization: Bearer` no Câmbio Piracicaba; `?token=` na Baden). O valor é
+  digitado pelo operador e fica **apenas** no `localStorage`
+  (`sosseo_site_token_<key>`). Nenhum token é versionado.
+- **Indexação/cache:** `_headers` envia `X-Robots-Tag: noindex, nofollow,
+  noarchive, nosnippet` e `Cache-Control: no-store` para `/painel-leads/*` e
+  `/painel-geral/*`; `robots.txt` bloqueia as duas rotas. Os HTMLs também têm
+  `<meta name="robots">` próprio.
+
 
 ---
 
